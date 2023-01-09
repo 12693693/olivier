@@ -3,22 +3,22 @@ class battery():
     self.capacity = capacity
     self.position = position
     self.output = 0
- 
+
   def add_house(self, x, y, maxoutput):
     # check of de output niet teveel wordt voor de batterij bij het toevoegen van een huis
     self.output += maxoutput
-    
+
     if self.output < self.capacity:
       # lijntje trekken
-     
+
 class house():
   def init(self, x, y, maxoutput):
     self.position = x,y
     self.maxoutput = maxoutput
-   
+
  def closest_battery(self, batteries):
     for battery in batteries:
       distance = compute_distance(self.position, battery)
-      
+      # extra
       if distance < smallest_distance:
         smallest_distance = distance
