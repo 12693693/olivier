@@ -22,3 +22,5 @@ class house():
       # extra
       if distance < smallest_distance:
         smallest_distance = distance
+
+        # extra
