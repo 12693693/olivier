@@ -1,3 +1,6 @@
+import argparse
+
+
 class battery():
     def init(self, capacity, position):
         self.capacity = capacity
@@ -28,3 +31,18 @@ class house():
             smallest_distance = distance
 
         # blablabla
+if __name__ == "__main__":
+    # Set-up parsing command line arguments
+    parser = argparse.ArgumentParser(description = "extract top N movies from IMDB")
+
+    # Adding arguments
+    parser.add_argument("output", help = "output file (csv)")
+    parser.add_argument("-s", "--start_year", type=int, default = 1930, help="starting year (default: 1930)")
+    parser.add_argument("-e", "--end_year",   type=int, default = 2020, help="starting year (default: 2020)")
+    parser.add_argument("-m", "--amount_movies", type=int, default = 5)
+
+    # Read arguments from command line
+    args = parser.parse_args()
+
+    # Run main with provide arguments
+    main(args.output, args.start_year, args.end_year, args.amount_movies)
