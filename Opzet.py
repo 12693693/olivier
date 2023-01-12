@@ -8,17 +8,32 @@ class Experiment():
         self.add_batteries(batteries_df)
         self.add_houses(houses_df)
         self.draw_plot()
+        self.houses_list_per_batterie = []
+        self.battery_dict = {}
 
 
     def add_batteries(self, batteries_df):
+        self.battery_list = []
+        self.battery_dict = {}
+
         for index, row in batteries_df.iterrows():
             battery = Batteries(row[0], row[1], row[2])
             self.houses_and_batteries.append(battery)
+            self.battery_list.append(battery)
+
+
+
+        # maak key van battery in die dict
 
     def add_houses(self, houses_df):
+        self.house_list = []
+
         for index, row in houses_df.iterrows():
             house = Houses(row[0], row[1], row[2])
             self.houses_and_batteries.append(house)
+            self.house_list.append(house)
+
+            # maak dictionary per house aan
 
 
     def draw_plot(self):
@@ -33,6 +48,14 @@ class Experiment():
 
         plt.scatter(pos_x_list, pos_y_list, color=color_list)
         plt.show()
+
+    def assign_house(self):
+
+        for house in self.house_list:
+            assigned_battery = random.choice(self.battery_list)
+
+
+
 
 
 class Batteries():
@@ -126,7 +149,13 @@ if __name__ == "__main__":
 
 cables_list = []
 house_dict = {} # location, output and cables of each house
-houses_list_per_batterie = [] # the houses that are connected to that battery
+houses_list_per_battery = [] # the houses that are connected to that battery
 battery_dict = {} #location, capacity and houses that are connected
 district_cost_dict = {} # what district and cost
 main_list = [] #battery_dict and district_cost_dict
+
+
+# x positie en y positie matchen
+    # eerst x positie
+    # dan y positie
+    # wss absoluut getal erbij optellen/aftrekken
