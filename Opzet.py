@@ -79,14 +79,14 @@ class Houses():
 
 
 def load_df(houses_csv, batteries_csv):
-    df_houses1 = pd.read_csv(houses_csv)
-    df_batteries1 = pd.read_csv(batteries_csv)
+    df_houses = pd.read_csv(houses_csv)
+    df_batteries = pd.read_csv(batteries_csv)
 
     # create and fill lists of seperate coordinates for the batteries
     x_list = []
     y_list = []
 
-    for index, row in df_batteries1.iterrows():
+    for index, row in df_batteries.iterrows():
         x = row[0].split(',')[0]
         y = row[0].split(',')[1]
 
@@ -94,12 +94,12 @@ def load_df(houses_csv, batteries_csv):
         y_list.append(int(y))
 
     # modify the dataframe to add the lists and remove unnecessary columns
-    df_batteries1['x'] = x_list
-    df_batteries1['y'] = y_list
-    df_batteries1 = df_batteries1.drop('positie', axis=1)
+    df_batteries['x'] = x_list
+    df_batteries['y'] = y_list
+    df_batteries = df_batteries.drop('positie', axis=1)
 
 
-    return df_houses1, df_batteries1
+    return df_houses, df_batteries
 
 
 
@@ -117,29 +117,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Run main with provide arguments
-    df_houses1, df_batteries1 = load_df(args.input_houses, args.input_batteries)
+    df_houses, df_batteries = load_df(args.input_houses, args.input_batteries)
 
-    my_experiment = Experiment(df_batteries1, df_houses1)
+    my_experiment = Experiment(df_batteries, df_houses)
 
-# houses_list1 = []
-# for index, row in df_houses1.iterrows():
-#     house = Houses(row[0], row[1], row[2])
-#     houses_list1.append(house)
-#     house.plot_houses()
-#
-#
-# batteries_list1 = []
-# for index, row in df_batteries1.iterrows():
-#     battery = Batteries(row[0], row[1], row[2])
-#     batteries_list1.append(battery)
-#     battery.plot_batteries()
 
-# plt.xlim(0, 55)
-# plt.ylim(0, 55)
-# plt.show()
-#
-# print('aantal huizen', len(houses_list1))
-# print('aantal batterijen', len(batteries_list1))
 
 
 cables_list = []
