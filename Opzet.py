@@ -1,15 +1,17 @@
 import argparse
 import pandas as pd
 import matplotlib.pyplot as plt
+import random
 
 class Experiment():
     def __init__(self, batteries_df, houses_df):
         self.houses_and_batteries = []
         self.add_batteries(batteries_df)
         self.add_houses(houses_df)
-        self.draw_plot()
+        #self.draw_plot()
         self.houses_list_per_batterie = []
         self.battery_dict = {}
+        self.assign_house()
 
 
     def add_batteries(self, batteries_df):
@@ -53,8 +55,14 @@ class Experiment():
 
         for house in self.house_list:
             assigned_battery = random.choice(self.battery_list)
+            #print(assigned_battery.x, assigned_battery.y)
+            assigned_battery.capacity -= house.maxoutput
 
+            if house.maxoutput > assigned_battery.capacity:
+                print('hoi')
 
+                # choose another battery
+                assigned_battery = random.choice()
 
 
 
