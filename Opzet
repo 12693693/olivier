@@ -43,6 +43,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Run main with provide arguments
-    visualize_actors(args.input, args.output)
-
-pd.read_csv('')
+    main(args.output, args.start_year, args.end_year, args.amount_movies)
