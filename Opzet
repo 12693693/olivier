@@ -1,3 +1,6 @@
+import pandas as pd
+import argparse
+
 class battery():
     def init(self, capacity, position):
         self.capacity = capacity
@@ -9,7 +12,6 @@ class battery():
         self.output += maxoutput
         if self.output < self.capacity:
           # lijntje trekken
-
 
 class house():
     def init(self, x, y, maxoutput):
@@ -28,3 +30,19 @@ class house():
             smallest_distance = distance
 
         # blablabla
+
+# create input arguments
+if __name__ == "__main__":
+    # Set-up parsing command line arguments
+    parser = argparse.ArgumentParser(description = "connect houses to batteries")
+
+    # Adding arguments
+    parser.add_argument("input", help = "input file location")
+
+    # Read arguments from command line
+    args = parser.parse_args()
+
+    # Run main with provide arguments
+    visualize_actors(args.input, args.output)
+
+pd.read_csv('')
