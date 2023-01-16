@@ -193,6 +193,9 @@ class Experiment():
         for battery in self.battery_list:
             self.combined_list.append(battery.dict)
 
+
+        return self.combined_list
+
 def load_df(houses_csv, batteries_csv):
     """
     This function loads the villages and saves them as dataframes

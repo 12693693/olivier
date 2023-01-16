@@ -190,6 +190,8 @@ class Experiment():
         for battery in self.battery_list:
             self.combined_list.append(battery.dict)
 
+        return self.combined_list
+
 class Batteries():
     def __init__(self, capacity, x, y):
         self.capacity = capacity
