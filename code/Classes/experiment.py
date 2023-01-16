@@ -190,23 +190,6 @@ class Experiment():
         for battery in self.battery_list:
             self.combined_list.append(battery.dict)
 
-class Batteries():
-    def __init__(self, capacity, x, y):
-        self.capacity = capacity
-        self.x = x
-        self.y = y
-        self.output = 0
-        self.color = 'blue'
-        self.dict = {'battery location': [self.x, self.y], 'battery capacity': self.capacity, 'connected houses': []}
-
-class Houses():
-    def __init__(self, x, y, maxoutput):
-        self.x = x
-        self.y = y
-        self.maxoutput = maxoutput
-        self.color = 'red'
-        self.dict = {'house location': [self.x, self.y], 'house output': self.maxoutput, 'grid': []}
-
 def load_df(houses_csv, batteries_csv):
     """
     This function loads the villages and saves them as dataframes
