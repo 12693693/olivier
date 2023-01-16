@@ -3,8 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import random
 import copy
-from houses import Houses
-from battery import Batteries
 
 class Experiment():
     def __init__(self, batteries_df, houses_df):
@@ -22,6 +20,34 @@ class Experiment():
         self.create_district_dict()
         self.draw_plot()
         self.make_output()
+
+    @classmethod
+    def from_file(cls, houses_csv, batteries_csv):
+        """
+        This function loads the villages and saves them as dataframes
+        """
+        print('hoi')
+
+        df_houses = pd.read_csv(houses_csv)
+        df_batteries = pd.read_csv(batteries_csv)
+
+        # create and fill lists of seperate coordinates for the batteries
+        x_list = []
+        y_list = []
+
+        for index, row in df_batteries.iterrows():
+            x = row[0].split(',')[0]
+            y = row[0].split(',')[1]
+
+            x_list.append(int(x))
+            y_list.append(int(y))
+
+        # modify the dataframe to add the lists and remove unnecessary columns
+        df_batteries['x'] = x_list
+        df_batteries['y'] = y_list
+        df_batteries = df_batteries.drop('positie', axis=1)
+
+        return cls(df_houses, df_batteries)
 
 
     def add_batteries(self, batteries_df):
@@ -193,31 +219,48 @@ class Experiment():
         for battery in self.battery_list:
             self.combined_list.append(battery.dict)
 
-def load_df(houses_csv, batteries_csv):
-    """
-    This function loads the villages and saves them as dataframes
-    """
-    df_houses = pd.read_csv(houses_csv)
-    df_batteries = pd.read_csv(batteries_csv)
+class Batteries():
+    def __init__(self, capacity, x, y):
+        self.capacity = capacity
+        self.x = x
+        self.y = y
+        self.output = 0
+        self.color = 'blue'
+        self.dict = {'battery location': [self.x, self.y], 'battery capacity': self.capacity, 'connected houses': []}
 
-    # create and fill lists of seperate coordinates for the batteries
-    x_list = []
-    y_list = []
+class Houses():
+    def __init__(self, x, y, maxoutput):
+        self.x = x
+        self.y = y
+        self.maxoutput = maxoutput
+        self.color = 'red'
+        self.dict = {'house location': [self.x, self.y], 'house output': self.maxoutput, 'grid': []}
 
-    for index, row in df_batteries.iterrows():
-        x = row[0].split(',')[0]
-        y = row[0].split(',')[1]
-
-        x_list.append(int(x))
-        y_list.append(int(y))
-
-    # modify the dataframe to add the lists and remove unnecessary columns
-    df_batteries['x'] = x_list
-    df_batteries['y'] = y_list
-    df_batteries = df_batteries.drop('positie', axis=1)
-
-
-    return df_houses, df_batteries
+# def load_df(houses_csv, batteries_csv):
+#     """
+#     This function loads the villages and saves them as dataframes
+#     """
+#     df_houses = pd.read_csv(houses_csv)
+#     df_batteries = pd.read_csv(batteries_csv)
+#
+#     # create and fill lists of seperate coordinates for the batteries
+#     x_list = []
+#     y_list = []
+#
+#     for index, row in df_batteries.iterrows():
+#         x = row[0].split(',')[0]
+#         y = row[0].split(',')[1]
+#
+#         x_list.append(int(x))
+#         y_list.append(int(y))
+#
+#     # modify the dataframe to add the lists and remove unnecessary columns
+#     df_batteries['x'] = x_list
+#     df_batteries['y'] = y_list
+#     df_batteries = df_batteries.drop('positie', axis=1)
+#
+#
+#     return df_houses, df_batteries
 
 if __name__ == "__main__":
     # Set-up parsing command line arguments
@@ -232,11 +275,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Run main with provide arguments
-    df_houses, df_batteries = load_df(args.input_houses, args.input_batteries)
+    #df_houses, df_batteries = load_df(args.input_houses, args.input_batteries)
 
-    #my_experment = Experiment.from_file(args.input_houses, args.input_batteries)
+    #my_experiment = Experiment(df_batteries, df_houses)
 
-    my_experiment = Experiment(df_batteries, df_houses)
+    my_experiment = Experiment.from_file(args.input_houses, args.input_batteries)
 
 
 cables_list = [] # CHECK!!!
@@ -245,5 +288,3 @@ houses_list_per_battery = [] # the houses that are connected to that battery CHE
 battery_dict = {} #location, capacity and houses that are connected CHECK!!
 district_cost_dict = {} # what district and cost
 main_list = [] #battery_dict and district_cost_dict
-
-# experiment = Experiment.from_file(file)
