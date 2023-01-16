@@ -7,13 +7,19 @@ import copy
 class Experiment():
     def __init__(self, batteries_df, houses_df):
         self.houses_and_batteries = []
-        self.add_batteries(batteries_df)
-        self.add_houses(houses_df)
         self.houses_list_per_batterie = []
         self.battery_dict = {}
+        self.district_cost_dict = {}
+        self.combined_list = []
+        self.add_batteries(batteries_df)
+        self.add_houses(houses_df)
         self.assign_house_random()
         self.make_cables()
+        self.costs()
+        self.district_name()
+        self.create_district_dict()
         self.draw_plot()
+        self.make_output()
 
     def add_batteries(self, batteries_df):
         """
@@ -102,6 +108,7 @@ class Experiment():
         the individual steps within the grid. It then saves the individual
         coordinates in a new list.
         """
+        self.steps_count = 0
         # loop over batteries and the houses that are connected to that battery
         for battery in self.battery_list:
             for house_dict in battery.dict['connected houses']:
@@ -126,24 +133,59 @@ class Experiment():
                 distance_y = location_house_y - location_battery_y
 
                 # take steps until the correct x coordinate is reached
+                # and keep track of the steps
                 while x_loc != location_battery_x:
                     if distance_x > 0:
                         x_loc -= 1
                     else:
                         x_loc += 1
+                    self.steps_count += 1
 
                     # save the individual steps in the grid list in the dictionary of the house
                     house_dict['grid'].append(f'{x_loc}, {y_loc}')
 
                 # take steps until the correct y coordinate is reached
+                # and keep track of the grid line
                 while y_loc != location_battery_y:
                     if distance_y > 0:
                         y_loc -= 1
                     else:
                         y_loc += 1
+                    self.steps_count += 1
 
                     # save the individual steps in the grid list in the dictionary of the house
                     house_dict['grid'].append(f'{x_loc}, {y_loc}')
+
+    def costs(self):
+        '''
+        This function computes the total cost for the district.
+        '''
+
+        battery_costs = len(self.battery_list) * 5000
+        cable_costs = self.steps_count * 9
+
+        self.total_cost = battery_costs + cable_costs
+
+    def district_name(self):
+        '''
+        This function takes a users input as name for the district.
+        '''
+
+        self.district_name = input("What district are you using?: ")
+
+    def create_district_dict(self):
+        '''
+        This function combines the district name and costs in one dictionary.
+        '''
+
+        self.district_cost_dict['district'] = self.district_name
+        self.district_cost_dict['costs shared'] = self.total_cost
+
+    def make_output(self):
+        self.combined_list.append(self.district_cost_dict)
+
+        for battery in self.battery_list:
+            self.combined_list.append(battery.dict)
 
 class Batteries():
     def __init__(self, capacity, x, y):
@@ -154,7 +196,6 @@ class Batteries():
         self.color = 'blue'
         self.dict = {'battery location': [self.x, self.y], 'battery capacity': self.capacity, 'connected houses': []}
 
-
 class Houses():
     def __init__(self, x, y, maxoutput):
         self.x = x
@@ -162,7 +203,6 @@ class Houses():
         self.maxoutput = maxoutput
         self.color = 'red'
         self.dict = {'house location': [self.x, self.y], 'house output': self.maxoutput, 'grid': []}
-
 
 def load_df(houses_csv, batteries_csv):
     """
