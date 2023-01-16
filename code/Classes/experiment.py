@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import random
 import copy
+from houses import Houses
+from battery import Batteries
 
 class Experiment():
     def __init__(self, batteries_df, houses_df):
@@ -20,6 +22,7 @@ class Experiment():
         self.create_district_dict()
         self.draw_plot()
         self.make_output()
+
 
     def add_batteries(self, batteries_df):
         """
@@ -190,23 +193,6 @@ class Experiment():
         for battery in self.battery_list:
             self.combined_list.append(battery.dict)
 
-class Batteries():
-    def __init__(self, capacity, x, y):
-        self.capacity = capacity
-        self.x = x
-        self.y = y
-        self.output = 0
-        self.color = 'blue'
-        self.dict = {'battery location': [self.x, self.y], 'battery capacity': self.capacity, 'connected houses': []}
-
-class Houses():
-    def __init__(self, x, y, maxoutput):
-        self.x = x
-        self.y = y
-        self.maxoutput = maxoutput
-        self.color = 'red'
-        self.dict = {'house location': [self.x, self.y], 'house output': self.maxoutput, 'grid': []}
-
 def load_df(houses_csv, batteries_csv):
     """
     This function loads the villages and saves them as dataframes
@@ -248,6 +234,8 @@ if __name__ == "__main__":
     # Run main with provide arguments
     df_houses, df_batteries = load_df(args.input_houses, args.input_batteries)
 
+    #my_experment = Experiment.from_file(args.input_houses, args.input_batteries)
+
     my_experiment = Experiment(df_batteries, df_houses)
 
 
@@ -257,3 +245,5 @@ houses_list_per_battery = [] # the houses that are connected to that battery CHE
 battery_dict = {} #location, capacity and houses that are connected CHECK!!
 district_cost_dict = {} # what district and cost
 main_list = [] #battery_dict and district_cost_dict
+
+# experiment = Experiment.from_file(file)
