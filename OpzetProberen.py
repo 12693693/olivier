@@ -13,41 +13,43 @@ class Experiment():
         self.combined_list = []
         self.add_batteries(batteries_df)
         self.add_houses(houses_df)
+
         self.assign_house_random()
         self.make_cables()
+        self.count_cables()
         self.costs()
         self.district_name()
         self.create_district_dict()
         self.draw_plot()
         self.make_output()
 
-    @classmethod
-    def from_file(cls, houses_csv, batteries_csv):
-        """
-        This function loads the villages and saves them as dataframes
-        """
-        print('in classmethod')
-
-        df_houses = pd.read_csv(houses_csv)
-        df_batteries = pd.read_csv(batteries_csv)
-
-        # create and fill lists of seperate coordinates for the batteries
-        x_list = []
-        y_list = []
-
-        for index, row in df_batteries.iterrows():
-            x = row[0].split(',')[0]
-            y = row[0].split(',')[1]
-
-            x_list.append(int(x))
-            y_list.append(int(y))
-
-        # modify the dataframe to add the lists and remove unnecessary columns
-        df_batteries['x'] = x_list
-        df_batteries['y'] = y_list
-        df_batteries = df_batteries.drop('positie', axis=1)
-
-        return cls(df_houses, df_batteries)
+    # @classmethod
+    # def from_file(cls, houses_csv, batteries_csv):
+    #     """
+    #     This function loads the villages and saves them as dataframes
+    #     """
+    #     print('in classmethod')
+    #
+    #     df_houses = pd.read_csv(houses_csv)
+    #     df_batteries = pd.read_csv(batteries_csv)
+    #
+    #     # create and fill lists of seperate coordinates for the batteries
+    #     x_list = []
+    #     y_list = []
+    #
+    #     for index, row in df_batteries.iterrows():
+    #         x = row[0].split(',')[0]
+    #         y = row[0].split(',')[1]
+    #
+    #         x_list.append(int(x))
+    #         y_list.append(int(y))
+    #
+    #     # modify the dataframe to add the lists and remove unnecessary columns
+    #     df_batteries['x'] = x_list
+    #     df_batteries['y'] = y_list
+    #     df_batteries = df_batteries.drop('positie', axis=1)
+    #
+    #     return cls(df_houses, df_batteries)
 
 
     def add_batteries(self, batteries_df):
@@ -152,38 +154,49 @@ class Experiment():
                 y_list = [location_house_y, location_house_y, location_battery_y]
                 plt.plot(x_list, y_list, 'k--')
 
-                # create starting point for creating the grid line
-                x_loc = location_house_x
-                y_loc = location_house_y
+                cable_amount = count_cables(location_house_x, location_house_y, location_battery_x, location_battery_y)
 
-                # compute distance to use as a constraint for choosing which way
-                # to move on the grid line
-                distance_x = location_house_x - location_battery_x
-                distance_y = location_house_y - location_battery_y
+    # Dit werkt nog niet maar kunnen we wel later uitwerken
 
-                # take steps until the correct x coordinate is reached
-                # and keep track of the steps
-                while x_loc != location_battery_x:
-                    if distance_x > 0:
-                        x_loc -= 1
-                    else:
-                        x_loc += 1
-                    self.steps_count += 1
 
-                    # save the individual steps in the grid list in the dictionary of the house
-                    house_dict['grid'].append(f'{x_loc}, {y_loc}')
+    def count_and_add_cables(self, house_location_x, house_location_y, battery_location_x, battery_location_y):
+        """
+        This function saves the individual coordinates in a new list and keeps
+        track of how many steps is takes
+        """
 
-                # take steps until the correct y coordinate is reached
-                # and keep track of the grid line
-                while y_loc != location_battery_y:
-                    if distance_y > 0:
-                        y_loc -= 1
-                    else:
-                        y_loc += 1
-                    self.steps_count += 1
+        # create starting point for creating the grid line
+        x_loc = self.location_house_x
+        y_loc = self.location_house_y
 
-                    # save the individual steps in the grid list in the dictionary of the house
-                    house_dict['grid'].append(f'{x_loc}, {y_loc}')
+        # compute distance to use as a constraint for choosing which way
+        # to move on the grid line
+        distance_x = self.location_house_x - self.location_battery_x
+        distance_y = self.location_house_y - self.location_battery_y
+
+        # take steps until the correct x coordinate is reached
+        # and keep track of the steps
+        while x_loc != self.location_battery_x:
+            if distance_x > 0:
+                x_loc -= 1
+            else:
+                x_loc += 1
+            self.steps_count += 1
+
+            # save the individual steps in the grid list in the dictionary of the house
+            house_dict['grid'].append(f'{x_loc}, {y_loc}')
+
+        # take steps until the correct y coordinate is reached
+        # and keep track of the grid line
+        while y_loc != self.location_battery_y:
+            if distance_y > 0:
+                y_loc -= 1
+            else:
+                y_loc += 1
+            self.steps_count += 1
+
+            # save the individual steps in the grid list in the dictionary of the house
+            house_dict['grid'].append(f'{x_loc}, {y_loc}')
 
     def costs(self):
         '''
@@ -236,31 +249,31 @@ class Houses():
         self.color = 'red'
         self.dict = {'house location': [self.x, self.y], 'house output': self.maxoutput, 'grid': []}
 
-# def load_df(houses_csv, batteries_csv):
-#     """
-#     This function loads the villages and saves them as dataframes
-#     """
-#     df_houses = pd.read_csv(houses_csv)
-#     df_batteries = pd.read_csv(batteries_csv)
-#
-#     # create and fill lists of seperate coordinates for the batteries
-#     x_list = []
-#     y_list = []
-#
-#     for index, row in df_batteries.iterrows():
-#         x = row[0].split(',')[0]
-#         y = row[0].split(',')[1]
-#
-#         x_list.append(int(x))
-#         y_list.append(int(y))
-#
-#     # modify the dataframe to add the lists and remove unnecessary columns
-#     df_batteries['x'] = x_list
-#     df_batteries['y'] = y_list
-#     df_batteries = df_batteries.drop('positie', axis=1)
-#
-#
-#     return df_houses, df_batteries
+def load_df(houses_csv, batteries_csv):
+    """
+    This function loads the villages and saves them as dataframes
+    """
+    df_houses = pd.read_csv(houses_csv)
+    df_batteries = pd.read_csv(batteries_csv)
+
+    # create and fill lists of seperate coordinates for the batteries
+    x_list = []
+    y_list = []
+
+    for index, row in df_batteries.iterrows():
+        x = row[0].split(',')[0]
+        y = row[0].split(',')[1]
+
+        x_list.append(int(x))
+        y_list.append(int(y))
+
+    # modify the dataframe to add the lists and remove unnecessary columns
+    df_batteries['x'] = x_list
+    df_batteries['y'] = y_list
+    df_batteries = df_batteries.drop('positie', axis=1)
+
+
+    return df_houses, df_batteries
 
 if __name__ == "__main__":
     # Set-up parsing command line arguments
@@ -275,11 +288,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Run main with provide arguments
-    #df_houses, df_batteries = load_df(args.input_houses, args.input_batteries)
+    df_houses, df_batteries = load_df(args.input_houses, args.input_batteries)
 
-    #my_experiment = Experiment(df_batteries, df_houses)
+    my_experiment = Experiment(df_batteries, df_houses)
 
-    my_experiment = Experiment.from_file(args.input_houses, args.input_batteries)
+    #my_experiment = Experiment.from_file(args.input_houses, args.input_batteries)
 
 
 cables_list = [] # CHECK!!!
