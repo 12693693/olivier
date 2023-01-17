@@ -26,7 +26,7 @@ class Experiment():
         """
         This function loads the villages and saves them as dataframes
         """
-        print('hoi')
+        print('in classmethod')
 
         df_houses = pd.read_csv(houses_csv)
         df_batteries = pd.read_csv(batteries_csv)
