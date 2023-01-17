@@ -6,7 +6,7 @@ import copy
 from houses import Houses
 from battery import Batteries
 
-class Experiment():
+class Smartgrid():
     def __init__(self, batteries_df, houses_df):
         self.houses_and_batteries = []
         self.houses_list_per_batterie = []
@@ -96,7 +96,7 @@ class Experiment():
                     # choose another battery
                     assigned_battery = random.choice(new_battery_list)
                 else:
-                    print('list is empty')
+                    print('no battery left')
                     break
 
             # adjust the capacity of the battery
@@ -237,9 +237,9 @@ if __name__ == "__main__":
     # Run main with provide arguments
     df_houses, df_batteries = load_df(args.input_houses, args.input_batteries)
 
-    #my_experment = Experiment.from_file(args.input_houses, args.input_batteries)
+    #my_smartgrid = Smartgrid.from_file(args.input_houses, args.input_batteries)
 
-    my_experiment = Experiment(df_batteries, df_houses)
+    my_smartgrid = Smartgrid(df_batteries, df_houses)
 
 
 cables_list = [] # CHECK!!!
@@ -248,5 +248,3 @@ houses_list_per_battery = [] # the houses that are connected to that battery CHE
 battery_dict = {} #location, capacity and houses that are connected CHECK!!
 district_cost_dict = {} # what district and cost
 main_list = [] #battery_dict and district_cost_dict
-
-# experiment = Experiment.from_file(file)
