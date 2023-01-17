@@ -166,7 +166,7 @@ class Experiment():
         """
 
         # create starting point for creating the grid line
-        x_loc = self.location_house_x
+        x_loc = house_location_x
         y_loc = self.location_house_y
 
         # compute distance to use as a constraint for choosing which way
