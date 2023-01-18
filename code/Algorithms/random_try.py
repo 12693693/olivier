@@ -1,4 +1,5 @@
 import random
+
 class Cables():
     def random_try(self, list_with_houses, list_with_batteries):
         '''

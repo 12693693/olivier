@@ -4,7 +4,7 @@ import random
 import copy
 from code.Classes.smartgrid import Smartgrid
 from code.Algorithms.randomize import Randomize
-#from code.Algorithms.cable_90_degree import Cables
+from code.Algorithms.cable_90_degree import Cables
 #
 # dit moet eigenlijk in classmethod
 def load_df(houses_csv, batteries_csv):
@@ -57,6 +57,9 @@ if __name__ == "__main__":
     # ----------------- random -----------------------
     random_algo = Randomize()
     random_algo.assign_house_random(houses, batteries)
+
+    cable_90 = Cables()
+    cable_90.make_90_degrees_cables(houses, batteries)
 
     # for battery in batteries:
     #     print(battery.dict)
