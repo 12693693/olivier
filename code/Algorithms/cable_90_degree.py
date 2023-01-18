@@ -1,4 +1,4 @@
-
+import matplotlib.pyplot as plt
 class Cables():
     def make_90_degrees_cables(self, list_with_houses, list_with_batteries):
         """
@@ -6,7 +6,7 @@ class Cables():
         the individual steps within the grid. It then saves the individual
         coordinates in a new list.
         """
-        self.steps_count = 0
+        steps_count = 0
 
         # loop over batteries and the houses that are connected to that battery
         for battery in list_with_batteries:
@@ -38,7 +38,7 @@ class Cables():
                         x_loc -= 1
                     else:
                         x_loc += 1
-                    self.steps_count += 1
+                    steps_count += 1
 
                     # save the individual steps in the grid list in the dictionary of the house
                     house_dict['grid'].append(f'{x_loc}, {y_loc}')
@@ -50,7 +50,10 @@ class Cables():
                         y_loc -= 1
                     else:
                         y_loc += 1
-                    self.steps_count += 1
+                    steps_count += 1
 
                     # save the individual steps in the grid list in the dictionary of the house
                     house_dict['grid'].append(f'{x_loc}, {y_loc}')
+
+        #plt.show()
+        return steps_count

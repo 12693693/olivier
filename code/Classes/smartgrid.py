@@ -146,10 +146,10 @@ class Smartgrid():
         plt.scatter(pos_x_list, pos_y_list, color=color_list, marker='s', s=40)
         plt.show()
 
-
-    def assign_house(self):
-        for house in self.house_list:
-            assign_house_not_random()
+    #
+    # def assign_house(self):
+    #     for house in self.house_list:
+    #         assign_house_not_random()
 
 
     # def assign_house_random(self):
@@ -237,13 +237,13 @@ class Smartgrid():
     #                 # save the individual steps in the grid list in the dictionary of the house
     #                 house_dict['grid'].append(f'{x_loc}, {y_loc}')
 
-    def costs(self):
+    def costs(self, steps_count):
         '''
         This function computes the total cost for the district.
         '''
 
         battery_costs = len(self.battery_list) * 5000
-        cable_costs = self.steps_count * 9
+        cable_costs = steps_count * 9
 
         self.total_cost = battery_costs + cable_costs
 
