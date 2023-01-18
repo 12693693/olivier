@@ -7,46 +7,48 @@ class Randomize():
         """
         This function assigns the houses to a randomly selected battery.
         """
+
+        # set valid_option to False so it will enter the while loop
         valid_option = False
 
+        # make a copy of the list with batteries to save the capacities
         batteries_copy = copy.deepcopy(list_with_batteries)
-        #
+
+        # assign all of the houses to a battery
+        # do this untill every house is assigned to a battery that has enough capacity
         while valid_option == False:
 
-
+            # reset the capacities of the batteries
             for i in range(len(list_with_batteries)):
                 list_with_batteries[i].capacity = batteries_copy[i].capacity
-                #print(batteries_copy[i].capacity, list_with_batteries[i].capacity)
 
+            # set valid_option to true so if all houses are assigned to a battery
+            # that has enough capacity it will leave the while loop
             valid_option = True
-            print('run')
+
             # randomly assign a battery to each house
             for house in list_with_houses:
-                print('house')
 
-
+                # choose a battery of the list_with_batteries
                 assigned_battery = random.choice(list_with_batteries)
 
                 # create copy of the battery list for later
                 remaining_batteries = copy.copy(list_with_batteries)
-                print(len(list_with_batteries))
 
                 # if the house doesn't fit the battery anymore, choose another battery
                 while house.maxoutput > assigned_battery.capacity:
 
-                    # make copy of battery_list and remove the full battery
-                    # remaining_batteries = copy.copy(remaining_batteries)
+                    # remove the full battery of the remaining_batteries
                     remaining_batteries.remove(assigned_battery)
-                    print(len(remaining_batteries))
 
                     if len(remaining_batteries) > 0:
-                        # choose another battery
+                        # choose another battery if there are any still availeble
                         assigned_battery = random.choice(remaining_batteries)
-                        #print('batteries left')
                     else:
+                        # go further with the previous assigned battery that is
+                        # already full, but set the valid option to false so it
+                        # will run through the while loop again
                         valid_option = False
-                        print('no battery left')
-
                         break
 
                 # adjust the capacity of the battery
@@ -54,7 +56,3 @@ class Randomize():
 
                 # save the dictionary of the house in the list of houses for that battery
                 assigned_battery.dict['connected houses'].append(house.dict)
-
-            # if validation == 'valid':
-            #     valid_option = True
-            #     print('valid_option = True')
