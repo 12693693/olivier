@@ -32,13 +32,61 @@ class Cables():
                         x_loc -= 1
 
                         # compute new distance between the new point and the battery
-                        new_distance = abs((location_battery_x - x_loc))
+                        new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+
+                        # if the new point is closer to the battery location, take the step
+                        if new_distance < distance:
+                            distance = new_distance
+
+                        # if the new point is not closer to the battery location,
+                        # reset the step
+                        else:
+                            x_loc += 1
 
                     # take a step right
                     elif choice == 2:
+                        x_loc += 1
 
+                        # compute new distance between the new point and the battery
+                        new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+
+                        # if the new point is closer to the battery location, take the step
+                        if new_distance < distance:
+                            distance = new_distance
+
+                        # if the new point is not closer to the battery location,
+                        # reset the step
+                        else:
+                            x_loc -= 1
+                        
                     # take a step up
                     elif choice == 3:
+                        y_loc += 1
+
+                        # compute new distance between the new point and the battery
+                        new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+
+                        # if the new point is closer to the battery location, take the step
+                        if new_distance < distance:
+                            distance = new_distance
+
+                        # if the new point is not closer to the battery location,
+                        # reset the step
+                        else:
+                            y_loc -= 1
 
                     # take a step down
                     else:
+                        y_loc -= 1
+
+                        # compute new distance between the new point and the battery
+                        new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+
+                        # if the new point is closer to the battery location, take the step
+                        if new_distance < distance:
+                            distance = new_distance
+
+                        # if the new point is not closer to the battery location,
+                        # reset the step
+                        else:
+                            y_loc += 1
