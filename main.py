@@ -4,7 +4,11 @@ import random
 import copy
 from code.Classes.smartgrid import Smartgrid
 from code.Algorithms.randomize import Randomize
+<<<<<<< HEAD
 #from code.Algorithms.cable_90_degree import Cables
+=======
+#from code.Algorithms.cables import Cables
+>>>>>>> 22b4b47ae7f0ba38b55ac88a4b6b1c037426cb2e
 #
 # dit moet eigenlijk in classmethod
 def load_df(houses_csv, batteries_csv):
@@ -51,12 +55,11 @@ if __name__ == "__main__":
 
     #my_smartgrid = Smartgrid.from_file(args.input_houses, args.input_batteries)
 
-    #houses, batteries = my_smartgrid.add_houses_and_batteries(houses_df, batteries_df)
+    houses, batteries = my_smartgrid.add_houses_and_batteries(houses_df, batteries_df)
     #print(houses, batteries)
 
     # ----------------- random -----------------------
     random_algo = Randomize()
-
     random_algo.assign_house_random(houses, batteries)
 
     for battery in batteries:

@@ -26,7 +26,7 @@ class Smartgrid():
         # self.make_output()
         #
         #
-        # #self.assign_house_random()
+        # #self.assign_house_random() # CHECK
         # #self.make_cables()
         #
         #
