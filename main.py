@@ -47,17 +47,17 @@ if __name__ == "__main__":
 
     # Run main with provide arguments
     df_houses, df_batteries = load_df(args.input_houses, args.input_batteries)
-    my_smartgrid = Smartgrid(df_batteries, df_houses)
+    my_smartgrid = Smartgrid(df_houses, df_batteries)
 
     #my_smartgrid = Smartgrid.from_file(args.input_houses, args.input_batteries)
 
-    houses, batteries = my_smartgrid.add_houses_and_batteries(houses_df, batteries_df)
+    houses, batteries = my_smartgrid.add_houses_and_batteries(df_houses, df_batteries)
     #print(houses, batteries)
 
     # ----------------- random -----------------------
     random_algo = Randomize()
     random_algo.assign_house_random(houses, batteries)
 
-    for battery in batteries:
-        print(battery.dict)
+    # for battery in batteries:
+    #     print(battery.dict)
     #my_smartgrid.make_90_degrees_cables(houses, batteries)
