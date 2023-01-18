@@ -7,7 +7,7 @@ class Cables():
         by taking a random step, evaluating if this step is closer to the battery
         and repeating the process
         '''
-
+        self.steps_count = 0
         for battery in list_with_batteries:
             for house_dict in battery.dict['connected houses']:
 
@@ -37,6 +37,10 @@ class Cables():
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
                             distance = new_distance
+                            self.steps_count += 1
+
+                            # save the individual steps in the grid list in the dictionary of the house
+                            house_dict['grid'].append(f'{x_loc}, {y_loc}')
 
                         # if the new point is not closer to the battery location,
                         # reset the step
@@ -53,12 +57,16 @@ class Cables():
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
                             distance = new_distance
+                            self.steps_count += 1
+
+                            # save the individual steps in the grid list in the dictionary of the house
+                            house_dict['grid'].append(f'{x_loc}, {y_loc}')
 
                         # if the new point is not closer to the battery location,
                         # reset the step
                         else:
                             x_loc -= 1
-                        
+
                     # take a step up
                     elif choice == 3:
                         y_loc += 1
@@ -69,6 +77,10 @@ class Cables():
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
                             distance = new_distance
+                            self.steps_count += 1
+
+                            # save the individual steps in the grid list in the dictionary of the house
+                            house_dict['grid'].append(f'{x_loc}, {y_loc}')
 
                         # if the new point is not closer to the battery location,
                         # reset the step
@@ -85,6 +97,10 @@ class Cables():
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
                             distance = new_distance
+                            self.steps_count += 1
+
+                            # save the individual steps in the grid list in the dictionary of the house
+                            house_dict['grid'].append(f'{x_loc}, {y_loc}')
 
                         # if the new point is not closer to the battery location,
                         # reset the step
