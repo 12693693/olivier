@@ -22,9 +22,12 @@ class Cables():
 
                 # set starting point to the location of the house
                 x_loc = location_house_x
-                y_loc = loctation_house_y
+                y_loc = location_house_y
 
-                while x_loc != location_battery_x or y_loc != location_battery_y:
+                #while x_loc != location_battery_x and y_loc != location_battery_y:
+                while distance != 0:
+                    print(x_loc)
+                    print(y_loc)
                     choice = random.randint(1, 4)
 
                     # take a step left
@@ -33,6 +36,7 @@ class Cables():
 
                         # compute new distance between the new point and the battery
                         new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+                        print('links')
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -53,6 +57,7 @@ class Cables():
 
                         # compute new distance between the new point and the battery
                         new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+                        print('rechts')
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -73,6 +78,7 @@ class Cables():
 
                         # compute new distance between the new point and the battery
                         new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+                        print('omhoog', y_loc)
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -93,6 +99,7 @@ class Cables():
 
                         # compute new distance between the new point and the battery
                         new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+                        print('omlaag')
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
