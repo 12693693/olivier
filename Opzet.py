@@ -100,36 +100,90 @@ class Experiment():
         plt.scatter(pos_x_list, pos_y_list, color=color_list, marker='s', s=40)
         plt.show()
 
+    # def assign_house_random(self):
+    #     """
+    #     This function assigns the houses to a randomly selected battery.
+    #     """
+    #     # randomly assign a battery to each house
+    #     for house in self.house_list:
+    #         assigned_battery = random.choice(self.battery_list)
+    #
+    #         # create copy of the battery list for later
+    #         new_battery_list = copy.copy(self.battery_list)
+    #
+    #         # if the house doesn't fit the battery anymore, choose another battery
+    #         while house.maxoutput > assigned_battery.capacity:
+    #
+    #             # make copy of battery_list and remove the full battery
+    #             new_battery_list = copy.copy(new_battery_list)
+    #             new_battery_list.remove(assigned_battery)
+    #
+    #             if len(new_battery_list) > 0:
+    #                 # choose another battery
+    #                 assigned_battery = random.choice(new_battery_list)
+    #             else:
+    #                 print('list is empty')
+    #                 break
+    #
+    #         # adjust the capacity of the battery
+    #         assigned_battery.capacity -= house.maxoutput
+    #
+    #         # save the dictionary of the house in the list of houses for that battery
+    #         assigned_battery.dict['connected houses'].append(house.dict)
+
     def assign_house_random(self):
         """
         This function assigns the houses to a randomly selected battery.
         """
-        # randomly assign a battery to each house
-        for house in self.house_list:
-            assigned_battery = random.choice(self.battery_list)
+        valid_option = False
 
-            # create copy of the battery list for later
-            new_battery_list = copy.copy(self.battery_list)
+        # make a copy to save the capacity
+        batteries_copy = copy.deepcopy(self.battery_list)
 
-            # if the house doesn't fit the battery anymore, choose another battery
-            while house.maxoutput > assigned_battery.capacity:
+        while valid_option == False:
 
-                # make copy of battery_list and remove the full battery
-                new_battery_list = copy.copy(new_battery_list)
-                new_battery_list.remove(assigned_battery)
+            # reset the capacities from battery_list using the copy made
+            for i in range(len(self.battery_list)):
+                self.battery_list[i].capacity = batteries_copy[i].capacity
+                print(batteries_copy[i].capacity, self.battery_list[i].capacity)
 
-                if len(new_battery_list) > 0:
-                    # choose another battery
-                    assigned_battery = random.choice(new_battery_list)
-                else:
-                    print('list is empty')
-                    break
+            valid_option = True
+            print('run')
+            # randomly assign a battery to each house
+            for house in self.house_list:
+                #print('house')
 
-            # adjust the capacity of the battery
-            assigned_battery.capacity -= house.maxoutput
 
-            # save the dictionary of the house in the list of houses for that battery
-            assigned_battery.dict['connected houses'].append(house.dict)
+                assigned_battery = random.choice(self.battery_list)
+
+                # create copy of the battery list for later
+                remaining_batteries = copy.copy(self.battery_list)
+                #print(len(list_with_batteries))
+
+                # if the house doesn't fit the battery anymore, choose another battery
+                while house.maxoutput > assigned_battery.capacity:
+
+                    # make copy of battery_list and remove the full battery
+                    # remaining_batteries = copy.copy(remaining_batteries)
+                    remaining_batteries.remove(assigned_battery)
+                    #print(len(remaining_batteries))
+
+                    if len(remaining_batteries) > 0:
+                        # choose another battery
+                        assigned_battery = random.choice(remaining_batteries)
+                        #print('batteries left')
+                    else:
+                        valid_option = False
+                        print('no battery left')
+
+                        break
+
+                # adjust the capacity of the battery
+                assigned_battery.capacity -= house.maxoutput
+
+                # save the dictionary of the house in the list of houses for that battery
+                assigned_battery.dict['connected houses'].append(house.dict)
+
 
     def make_cables(self):
         """
