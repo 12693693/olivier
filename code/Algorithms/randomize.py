@@ -3,7 +3,6 @@ import random
 import copy
 
 class Randomize():
-
     def assign_house_random(self, list_with_houses, list_with_batteries):
         """
         This function assigns the houses to a randomly selected battery.

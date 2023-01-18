@@ -1,6 +1,5 @@
 
 class Cables():
-
     def make_90_degrees_cables(self, list_with_houses, list_with_batteries):
         """
         This function computes and plots the grid lines. It also keeps track of
