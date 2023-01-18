@@ -61,7 +61,6 @@ class Cables():
 
                         # compute new distance between the new point and the battery
                         new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
-                        print('rechts')
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -85,7 +84,6 @@ class Cables():
 
                         # compute new distance between the new point and the battery
                         new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
-                        print('omhoog', y_loc)
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -109,7 +107,6 @@ class Cables():
 
                         # compute new distance between the new point and the battery
                         new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
-                        print('omlaag')
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -127,5 +124,6 @@ class Cables():
                         else:
                             y_loc += 1
 
-                    plt.plot(x_list, y_list, 'k--')
+
+                plt.plot(x_list, y_list, 'k--')
         return self.steps_count
