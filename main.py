@@ -4,11 +4,7 @@ import random
 import copy
 from code.Classes.smartgrid import Smartgrid
 from code.Algorithms.randomize import Randomize
-<<<<<<< HEAD
 #from code.Algorithms.cable_90_degree import Cables
-=======
-#from code.Algorithms.cables import Cables
->>>>>>> 22b4b47ae7f0ba38b55ac88a4b6b1c037426cb2e
 #
 # dit moet eigenlijk in classmethod
 def load_df(houses_csv, batteries_csv):
