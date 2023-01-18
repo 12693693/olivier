@@ -113,3 +113,4 @@ class Cables():
                         # reset the step
                         else:
                             y_loc += 1
+        return self.steps_count
