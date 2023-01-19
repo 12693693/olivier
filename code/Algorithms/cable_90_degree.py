@@ -7,14 +7,10 @@ class Cables():
         coordinates in a new list.
         """
         steps_count = 0
-        count = 0
-        count_battery = 0
 
         # loop over batteries and the houses that are connected to that battery
         for battery in list_with_batteries:
-            count_battery +=1
             for house_dict in battery.dict['connected houses']:
-                count += 1
 
                 # find x and y coordinates for the battery and connected house
                 location_house_x = house_dict['house location'][0]
@@ -67,6 +63,4 @@ class Cables():
                     house_dict['grid'].append(f'{x_loc}, {y_loc}')
 
         #plt.show()
-        print('count house dict', count)
-        print('count battery', count_battery)
         return steps_count
