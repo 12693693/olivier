@@ -2,9 +2,9 @@ import random
 import matplotlib.pyplot as plt
 
 class Cables():
-    def random_try(self, list_with_houses, list_with_batteries):
+    def get_location(self, list_with_houses, list_with_batteries):
         '''
-        this function is an algorithm that connects the houses to the batteries
+        This function is an algorithm that connects the houses to the batteries
         by taking a random step, evaluating if this step is closer to the battery
         and repeating the process
         '''
@@ -27,6 +27,7 @@ class Cables():
 
                 x_list = [x_loc]
                 y_list = [y_loc]
+
 
                 #while x_loc != location_battery_x and y_loc != location_battery_y:
                 while distance != 0:

@@ -1,16 +1,23 @@
+import random
+import matplotlib.pyplot as plt
 
-class Cables():
+class Search_Cables():
+    def search_cables(self, list_with_houses, list_with_batteries):
+        '''
+        This function uses the previously defined cables function to connect the
+        to the houses. It adds in a new condition which ensures that if there is
+        a choice between cables with the same distance to the house that it choses
+        the path along the cable which is already there. This would optimize the
+        distance as well as the cost for the cables.
+        '''
 
-    def make_90_degrees_cables(self, list_with_houses, list_with_batteries):
-        """
-        This function computes and plots the grid lines. It also keeps track of
-        the individual steps within the grid. It then saves the individual
-        coordinates in a new list.
-        """
+        existing_cable_dict = {}
         self.steps_count = 0
 
         # loop over batteries and the houses that are connected to that battery
         for battery in list_with_batteries:
+            existing_cable_list = []
+
             for house_dict in battery.dict['connected houses']:
 
                 # find x and y coordinates for the battery and connected house
@@ -26,7 +33,7 @@ class Cables():
                 # create starting point for creating the grid line
                 x_loc = location_house_x
                 y_loc = location_house_y
-#--------------------------------------------
+
                 # compute distance to use as a constraint for choosing which way
                 # to move on the grid line
                 distance_x = location_house_x - location_battery_x
@@ -35,6 +42,8 @@ class Cables():
                 # take steps until the correct x coordinate is reached
                 # and keep track of the steps
                 while x_loc != location_battery_x:
+
+                    #for point in existing_cables_list:
                     if distance_x > 0:
                         x_loc -= 1
                     else:
@@ -43,6 +52,10 @@ class Cables():
 
                     # save the individual steps in the grid list in the dictionary of the house
                     house_dict['grid'].append(f'{x_loc}, {y_loc}')
+
+                #save the coordinate from the start point
+                #existing_cable_list.append(f'{x_loc}, {y_loc}')
+
 
                 # take steps until the correct y coordinate is reached
                 # and keep track of the grid line
@@ -55,3 +68,14 @@ class Cables():
 
                     # save the individual steps in the grid list in the dictionary of the house
                     house_dict['grid'].append(f'{x_loc}, {y_loc}')
+
+                #save the coordinate from the end point
+                existing_cable_list.append(f'{x_loc}, {y_loc}')
+
+                # add these list with coordinate to a dictionary
+                point = str(existing_cable_list)
+                existing_cable_dict[point] = 'point'
+
+                print(existing_cable_dict)
+
+        return self.steps_count
