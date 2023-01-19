@@ -15,13 +15,8 @@ class Cables():
                 # find x and y coordinates for the battery and connected house
                 location_house_x = house_dict['house location'][0]
                 location_house_y = house_dict['house location'][1]
-
-                location_battery_x = battery.x
-
-
                 location_battery_x = battery.dict['battery location'][0]
                 location_battery_y = battery.dict['battery location'][1]
-                print(location_house_x, location_house_y)
 
                 x_list = [location_house_x, location_battery_x, location_battery_x]
                 y_list = [location_house_y, location_house_y, location_battery_y]
