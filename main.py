@@ -5,7 +5,8 @@ import copy
 from code.Classes.smartgrid import Smartgrid
 from code.Algorithms.randomize import Randomize
 from code.Algorithms.cable_90_degree import Cables
-from code.Algorithms.random_try import Cables
+# hoi
+#from code.Algorithms.random_try import Cables
 #
 # dit moet eigenlijk in classmethod
 def load_df(houses_csv, batteries_csv):
@@ -56,11 +57,25 @@ if __name__ == "__main__":
     #print(houses, batteries)
 
     # ----------------- random -----------------------
+    random_algo = Randomize()
+    random_algo.assign_house_random(houses, batteries)
+
+    cable_90_degree = Cables()
+    step_count = cable_90_degree.make_90_degrees_cables(houses, batteries)
+
+    my_smartgrid.draw_plot()
+    my_smartgrid.costs(step_count)
+    my_smartgrid.district_name()
+    my_smartgrid.create_district_dict()
+    list = my_smartgrid.make_output()
+    #print(list)
+    print('costs', list[0]['costs shared'])
+
     # random_algo = Randomize()
     # random_algo.assign_house_random(houses, batteries)
     #
-    # cable_90_degree = Cables()
-    # step_count = cable_90_degree.make_90_degrees_cables(houses, batteries)
+    # cable_random = Cables()
+    # step_count = cable_random.random_try(houses, batteries)
     #
     # my_smartgrid.draw_plot()
     # my_smartgrid.costs(step_count)
@@ -68,19 +83,6 @@ if __name__ == "__main__":
     # my_smartgrid.create_district_dict()
     # list = my_smartgrid.make_output()
     # print(list)
-
-    random_algo = Randomize()
-    random_algo.assign_house_random(houses, batteries)
-
-    cable_random = Cables()
-    step_count = cable_random.random_try(houses, batteries)
-
-    my_smartgrid.draw_plot()
-    my_smartgrid.costs(step_count)
-    my_smartgrid.district_name()
-    my_smartgrid.create_district_dict()
-    list = my_smartgrid.make_output()
-    print(list)
 
 
 
