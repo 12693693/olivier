@@ -7,24 +7,35 @@ class Cables():
         coordinates in a new list.
         """
         steps_count = 0
+        count = 0
+        count_battery = 0
 
         # loop over batteries and the houses that are connected to that battery
         for battery in list_with_batteries:
+            count_battery +=1
             for house_dict in battery.dict['connected houses']:
+                count += 1
 
                 # find x and y coordinates for the battery and connected house
                 location_house_x = house_dict['house location'][0]
                 location_house_y = house_dict['house location'][1]
+
+                location_battery_x = battery.x
+
+
                 location_battery_x = battery.dict['battery location'][0]
                 location_battery_y = battery.dict['battery location'][1]
+                print(location_house_x, location_house_y)
 
                 x_list = [location_house_x, location_battery_x, location_battery_x]
                 y_list = [location_house_y, location_house_y, location_battery_y]
                 plt.plot(x_list, y_list, 'k--')
 
                 # create starting point for creating the grid line
+                # and add the starting point to the grid dictionary
                 x_loc = location_house_x
                 y_loc = location_house_y
+                house_dict['grid'].append(f'{x_loc}, {y_loc}')
 
                 # compute distance to use as a constraint for choosing which way
                 # to move on the grid line
@@ -56,4 +67,6 @@ class Cables():
                     house_dict['grid'].append(f'{x_loc}, {y_loc}')
 
         #plt.show()
+        print('count house dict', count)
+        print('count battery', count_battery)
         return steps_count

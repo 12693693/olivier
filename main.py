@@ -68,8 +68,8 @@ if __name__ == "__main__":
     my_smartgrid.district_name()
     my_smartgrid.create_district_dict()
     list = my_smartgrid.make_output()
-    print(list)
-    # print('costs', list[0]['costs shared'])
+    # print(list)
+    print('costs', list[0]['costs shared'])
 
 
     # ------------------ random houses and cables -------------
