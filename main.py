@@ -70,7 +70,7 @@ if __name__ == "__main__":
     my_smartgrid.district_name()
     my_smartgrid.create_district_dict()
     list = my_smartgrid.make_output()
-    # print(list)
+    print(list)
     print('costs', list[0]['costs shared'])
 
     # random_algo = Randomize()
@@ -119,14 +119,14 @@ if __name__ == "__main__":
     # #print(list)
     # print('costs', list[0]['costs shared'])
 
-    my_smartgrid.draw_plot()
-    my_smartgrid.costs(step_count)
-    my_smartgrid.district_name()
-    my_smartgrid.create_district_dict()
-    list = my_smartgrid.make_output()
-    #print(list)
-    print('costs', list[0]['costs shared'])
-    print(existing_cable_dict)
+    # my_smartgrid.draw_plot()
+    # my_smartgrid.costs(step_count)
+    # my_smartgrid.district_name()
+    # my_smartgrid.create_district_dict()
+    # list = my_smartgrid.make_output()
+    # #print(list)
+    # print('costs', list[0]['costs shared'])
+    # print(existing_cable_dict)
     #self.assign_house_random() # CHECK
     #self.make_cables()
 
