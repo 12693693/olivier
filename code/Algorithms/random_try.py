@@ -1,4 +1,5 @@
 import random
+import matplotlib.pyplot as plt
 
 class Cables():
     def random_try(self, list_with_houses, list_with_batteries):
@@ -24,10 +25,11 @@ class Cables():
                 x_loc = location_house_x
                 y_loc = location_house_y
 
+                x_list = [x_loc]
+                y_list = [y_loc]
+
                 #while x_loc != location_battery_x and y_loc != location_battery_y:
                 while distance != 0:
-                    print(x_loc)
-                    print(y_loc)
                     choice = random.randint(1, 4)
 
                     # take a step left
@@ -36,7 +38,6 @@ class Cables():
 
                         # compute new distance between the new point and the battery
                         new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
-                        print('links')
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -45,6 +46,9 @@ class Cables():
 
                             # save the individual steps in the grid list in the dictionary of the house
                             house_dict['grid'].append(f'{x_loc}, {y_loc}')
+
+                            x_list.append(x_loc)
+                            y_list.append(y_loc)
 
                         # if the new point is not closer to the battery location,
                         # reset the step
@@ -57,7 +61,6 @@ class Cables():
 
                         # compute new distance between the new point and the battery
                         new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
-                        print('rechts')
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -66,6 +69,9 @@ class Cables():
 
                             # save the individual steps in the grid list in the dictionary of the house
                             house_dict['grid'].append(f'{x_loc}, {y_loc}')
+
+                            x_list.append(x_loc)
+                            y_list.append(y_loc)
 
                         # if the new point is not closer to the battery location,
                         # reset the step
@@ -78,7 +84,6 @@ class Cables():
 
                         # compute new distance between the new point and the battery
                         new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
-                        print('omhoog', y_loc)
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -87,6 +92,9 @@ class Cables():
 
                             # save the individual steps in the grid list in the dictionary of the house
                             house_dict['grid'].append(f'{x_loc}, {y_loc}')
+
+                            x_list.append(x_loc)
+                            y_list.append(y_loc)
 
                         # if the new point is not closer to the battery location,
                         # reset the step
@@ -99,7 +107,6 @@ class Cables():
 
                         # compute new distance between the new point and the battery
                         new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
-                        print('omlaag')
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -109,8 +116,14 @@ class Cables():
                             # save the individual steps in the grid list in the dictionary of the house
                             house_dict['grid'].append(f'{x_loc}, {y_loc}')
 
+                            x_list.append(x_loc)
+                            y_list.append(y_loc)
+
                         # if the new point is not closer to the battery location,
                         # reset the step
                         else:
                             y_loc += 1
+
+
+                plt.plot(x_list, y_list, 'k--')
         return self.steps_count
