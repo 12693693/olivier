@@ -5,8 +5,8 @@ import copy
 from code.Classes.smartgrid import Smartgrid
 from code.Algorithms.randomize import Randomize
 from code.Algorithms.cable_90_degree import Cables
-# hoi
 #from code.Algorithms.random_try import Cables
+from code.Algorithms.greedy import Greedy
 #
 # dit moet eigenlijk in classmethod
 def load_df(houses_csv, batteries_csv):
@@ -56,20 +56,23 @@ if __name__ == "__main__":
     houses, batteries = my_smartgrid.add_houses_and_batteries(df_houses, df_batteries)
     #print(houses, batteries)
 
-    # ----------------- random -----------------------
-    random_algo = Randomize()
-    random_algo.assign_house_random(houses, batteries)
+    # ----------------- random houses and 90 degrees cables-----------------------
+    # random_algo = Randomize()
+    # random_algo.assign_house_random(houses, batteries)
+    #
+    # cable_90_degree = Cables()
+    # step_count = cable_90_degree.make_90_degrees_cables(houses, batteries)
+    #
+    # my_smartgrid.draw_plot()
+    # my_smartgrid.costs(step_count)
+    # my_smartgrid.district_name()
+    # my_smartgrid.create_district_dict()
+    # list = my_smartgrid.make_output()
+    # #print(list)
+    # print('costs', list[0]['costs shared'])
 
-    cable_90_degree = Cables()
-    step_count = cable_90_degree.make_90_degrees_cables(houses, batteries)
 
-    my_smartgrid.draw_plot()
-    my_smartgrid.costs(step_count)
-    my_smartgrid.district_name()
-    my_smartgrid.create_district_dict()
-    list = my_smartgrid.make_output()
-    #print(list)
-    print('costs', list[0]['costs shared'])
+    # ------------------ random houses and cables -------------
 
     # random_algo = Randomize()
     # random_algo.assign_house_random(houses, batteries)
@@ -84,17 +87,23 @@ if __name__ == "__main__":
     # list = my_smartgrid.make_output()
     # print(list)
 
+    # ------------------- greedy houses and cables 90 ------------
 
+    greedy_algo = Greedy()
+    greedy_algo.assign_closest_battery(houses, batteries)
+
+    cable_90_degree = Cables()
+    step_count = cable_90_degree.make_90_degrees_cables(houses, batteries)
+
+    my_smartgrid.draw_plot()
+    my_smartgrid.costs(step_count)
+    my_smartgrid.district_name()
+    my_smartgrid.create_district_dict()
+    list = my_smartgrid.make_output()
+    #print(list)
+    print('costs', list[0]['costs shared'])
 
 
 
     #self.assign_house_random() # CHECK
     #self.make_cables()
-
-
-
-
-
-
-    # for battery in batteries:
-    #     print(battery.dict)
