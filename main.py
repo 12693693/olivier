@@ -57,18 +57,18 @@ if __name__ == "__main__":
     #print(houses, batteries)
 
     # ----------------- random houses and 90 degrees cables-----------------------
-    # random_algo = Randomize()
-    # random_algo.assign_house_random(houses, batteries)
-    #
-    # cable_90_degree = Cables()
-    # step_count = cable_90_degree.make_90_degrees_cables(houses, batteries)
-    #
-    # my_smartgrid.draw_plot()
-    # my_smartgrid.costs(step_count)
-    # my_smartgrid.district_name()
-    # my_smartgrid.create_district_dict()
-    # list = my_smartgrid.make_output()
-    # #print(list)
+    random_algo = Randomize()
+    random_algo.assign_house_random(houses, batteries)
+
+    cable_90_degree = Cables()
+    step_count = cable_90_degree.make_90_degrees_cables(houses, batteries)
+
+    my_smartgrid.draw_plot()
+    my_smartgrid.costs(step_count)
+    my_smartgrid.district_name()
+    my_smartgrid.create_district_dict()
+    list = my_smartgrid.make_output()
+    print(list)
     # print('costs', list[0]['costs shared'])
 
 
@@ -89,19 +89,19 @@ if __name__ == "__main__":
 
     # ------------------- greedy houses and cables 90 ------------
 
-    greedy_algo = Greedy()
-    greedy_algo.assign_closest_battery(houses, batteries)
-
-    cable_90_degree = Cables()
-    step_count = cable_90_degree.make_90_degrees_cables(houses, batteries)
-
-    my_smartgrid.draw_plot()
-    my_smartgrid.costs(step_count)
-    my_smartgrid.district_name()
-    my_smartgrid.create_district_dict()
-    list = my_smartgrid.make_output()
-    #print(list)
-    print('costs', list[0]['costs shared'])
+    # greedy_algo = Greedy()
+    # greedy_algo.assign_closest_battery(houses, batteries)
+    #
+    # cable_90_degree = Cables()
+    # step_count = cable_90_degree.make_90_degrees_cables(houses, batteries)
+    #
+    # my_smartgrid.draw_plot()
+    # my_smartgrid.costs(step_count)
+    # my_smartgrid.district_name()
+    # my_smartgrid.create_district_dict()
+    # list = my_smartgrid.make_output()
+    # #print(list)
+    # print('costs', list[0]['costs shared'])
 
 
 
