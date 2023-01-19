@@ -5,6 +5,7 @@ import copy
 from code.Classes.smartgrid import Smartgrid
 from code.Algorithms.randomize import Randomize
 from code.Algorithms.cable_90_degree import Cables
+from code.Algorithms.search_cables import Search_Cables
 # hoi
 #from code.Algorithms.random_try import Cables
 #
@@ -57,19 +58,19 @@ if __name__ == "__main__":
     #print(houses, batteries)
 
     # ----------------- random -----------------------
-    random_algo = Randomize()
-    random_algo.assign_house_random(houses, batteries)
-
-    cable_90_degree = Cables()
-    step_count = cable_90_degree.make_90_degrees_cables(houses, batteries)
-
-    my_smartgrid.draw_plot()
-    my_smartgrid.costs(step_count)
-    my_smartgrid.district_name()
-    my_smartgrid.create_district_dict()
-    list = my_smartgrid.make_output()
-    #print(list)
-    print('costs', list[0]['costs shared'])
+    # random_algo = Randomize()
+    # random_algo.assign_house_random(houses, batteries)
+    #
+    # cable_90_degree = Cables()
+    # step_count = cable_90_degree.make_90_degrees_cables(houses, batteries)
+    #
+    # my_smartgrid.draw_plot()
+    # my_smartgrid.costs(step_count)
+    # my_smartgrid.district_name()
+    # my_smartgrid.create_district_dict()
+    # list = my_smartgrid.make_output()
+    # #print(list)
+    # print('costs', list[0]['costs shared'])
 
     # random_algo = Randomize()
     # random_algo.assign_house_random(houses, batteries)
@@ -85,9 +86,21 @@ if __name__ == "__main__":
     # print(list)
 
 
+# ------------------ search cables -----------
+    random_algo = Randomize()
+    random_algo.assign_house_random(houses, batteries)
 
+    search_existing_cables = Search_Cables()
+    step_count = search_existing_cables.search_cables(houses, batteries)
 
-
+    my_smartgrid.draw_plot()
+    my_smartgrid.costs(step_count)
+    my_smartgrid.district_name()
+    my_smartgrid.create_district_dict()
+    list = my_smartgrid.make_output()
+    #print(list)
+    print('costs', list[0]['costs shared'])
+    print(existing_cable_dict)
     #self.assign_house_random() # CHECK
     #self.make_cables()
 

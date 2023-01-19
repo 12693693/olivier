@@ -26,7 +26,7 @@ class Cables():
                 # create starting point for creating the grid line
                 x_loc = location_house_x
                 y_loc = location_house_y
-
+#--------------------------------------------
                 # compute distance to use as a constraint for choosing which way
                 # to move on the grid line
                 distance_x = location_house_x - location_battery_x
