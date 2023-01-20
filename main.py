@@ -5,13 +5,9 @@ import copy
 from code.Classes.smartgrid import Smartgrid
 from code.Algorithms.randomize import Randomize
 from code.Algorithms.cable_90_degree import Cables
-<<<<<<< HEAD
-from code.Algorithms.search_cables import Search_Cables
-# hoi
-=======
->>>>>>> a590a256469e1bbbf15148b6c38ea41f78794d66
 #from code.Algorithms.random_try import Cables
 from code.Algorithms.greedy import Greedy
+from code.Algorithms.search_cables import Search_Cables
 #
 # dit moet eigenlijk in classmethod
 def load_df(houses_csv, batteries_csv):
@@ -61,11 +57,7 @@ if __name__ == "__main__":
     houses, batteries = my_smartgrid.add_houses_and_batteries(df_houses, df_batteries)
     #print(houses, batteries)
 
-<<<<<<< HEAD
-    # ----------------- random -----------------------
-=======
     # ----------------- random houses and 90 degrees cables-----------------------
->>>>>>> a590a256469e1bbbf15148b6c38ea41f78794d66
     # random_algo = Randomize()
     # random_algo.assign_house_random(houses, batteries)
     #
@@ -79,12 +71,6 @@ if __name__ == "__main__":
     # list = my_smartgrid.make_output()
     # #print(list)
     # print('costs', list[0]['costs shared'])
-<<<<<<< HEAD
-=======
-
-
-    # ------------------ random houses and cables -------------
->>>>>>> a590a256469e1bbbf15148b6c38ea41f78794d66
 
     # random_algo = Randomize()
     # random_algo.assign_house_random(houses, batteries)
@@ -101,20 +87,29 @@ if __name__ == "__main__":
 
     # ------------------- greedy houses and cables 90 ------------
 
-<<<<<<< HEAD
-# ------------------ search cables -----------
+    # greedy_algo = Greedy()
+    # greedy_algo.assign_closest_battery(houses, batteries)
+    #
+    # cable_90_degree = Cables()
+    # step_count, house_dict = cable_90_degree.make_90_degrees_cables(houses, batteries)
+    #
+    # my_smartgrid.draw_plot()
+    # my_smartgrid.costs(step_count)
+    # my_smartgrid.district_name()
+    # my_smartgrid.create_district_dict()
+    # list = my_smartgrid.make_output()
+    # #print(list)
+    # #print('costs', list[0]['costs shared'])
+    #self.assign_house_random() # CHECK
+    #self.make_cables()
+
+#------------------------- search cables --------------------------
+
     random_algo = Randomize()
     random_algo.assign_house_random(houses, batteries)
 
-    search_existing_cables = Search_Cables()
-    step_count = search_existing_cables.search_cables(houses, batteries)
-=======
-    greedy_algo = Greedy()
-    greedy_algo.assign_closest_battery(houses, batteries)
-
-    cable_90_degree = Cables()
-    step_count = cable_90_degree.make_90_degrees_cables(houses, batteries)
->>>>>>> a590a256469e1bbbf15148b6c38ea41f78794d66
+    cable_search = Search_Cables()
+    step_count, house_dict = cable_search.search_cables(houses, batteries)
 
     my_smartgrid.draw_plot()
     my_smartgrid.costs(step_count)
@@ -123,15 +118,7 @@ if __name__ == "__main__":
     list = my_smartgrid.make_output()
     #print(list)
     print('costs', list[0]['costs shared'])
-<<<<<<< HEAD
-    print(existing_cable_dict)
-    #self.assign_house_random() # CHECK
-    #self.make_cables()
-
-
-
-=======
->>>>>>> a590a256469e1bbbf15148b6c38ea41f78794d66
+    print(house_dict['grid'])
 
 
 

@@ -40,9 +40,8 @@ class Search_Cables():
                 distance_y = location_house_y - location_battery_y
 
                 # take steps until the correct x coordinate is reached
-                # and keep track of the steps
+                # and keep track of the steps count
                 while x_loc != location_battery_x:
-
                     #for point in existing_cables_list:
                     if distance_x > 0:
                         x_loc -= 1
@@ -52,10 +51,6 @@ class Search_Cables():
 
                     # save the individual steps in the grid list in the dictionary of the house
                     house_dict['grid'].append(f'{x_loc}, {y_loc}')
-
-                #save the coordinate from the start point
-                #existing_cable_list.append(f'{x_loc}, {y_loc}')
-
 
                 # take steps until the correct y coordinate is reached
                 # and keep track of the grid line
@@ -69,13 +64,7 @@ class Search_Cables():
                     # save the individual steps in the grid list in the dictionary of the house
                     house_dict['grid'].append(f'{x_loc}, {y_loc}')
 
-                #save the coordinate from the end point
-                existing_cable_list.append(f'{x_loc}, {y_loc}')
+            # for start_point in house_dict['grid']:
+            #     existing_cable_dict[start_point] = house_dict['grid'][start_point + 1]
 
-                # add these list with coordinate to a dictionary
-                point = str(existing_cable_list)
-                existing_cable_dict[point] = 'point'
-
-                print(existing_cable_dict)
-
-        return self.steps_count
+        return self.steps_count, house_dict
