@@ -23,8 +23,10 @@ class Cables():
                 plt.plot(x_list, y_list, 'k--')
 
                 # create starting point for creating the grid line
+                # and add the starting point to the grid dictionary
                 x_loc = location_house_x
                 y_loc = location_house_y
+                house_dict['grid'].append(f'{x_loc}, {y_loc}')
 
                 # compute distance to use as a constraint for choosing which way
                 # to move on the grid line
