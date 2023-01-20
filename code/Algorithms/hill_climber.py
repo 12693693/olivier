@@ -17,9 +17,11 @@ class Hill_Climber():
         battery_1 = random.choice(list_with_batteries)
         battery_2 = random.choice(list_with_batteries)
 
-        # choose two houses that were assigned to the batteries
+        # choose two houses that were assigned to the batteries and remove them
         house_1 = random.choice(battery_1.dict['connected houses'])
         house_2 = random.choice(battery_2.dict['connected houses'])
+        battery_1.dict['connected houses'].remove(house_1)
+        battery_2.dict['connected houses'].remove(house_2)
 
         # reset the grid
         house_1['grid'] = []
