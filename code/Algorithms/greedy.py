@@ -10,7 +10,7 @@ class Greedy():
     def assign_closest_battery(self, list_with_houses, list_with_batteries):
         """
         This function assign a house to the closest battery that still has capacity
-        """"
+        """
 
         # sort the houses based on the maximum capacity
         list_with_houses_sorted = sort_houses(list_with_houses)
