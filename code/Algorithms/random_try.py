@@ -13,23 +13,30 @@ class Cables():
             for house_dict in battery.dict['connected houses']:
 
                 # find x and y coordinates for the battery and connected house
+<<<<<<< HEAD
                 location_house_x = house_dict['house location'][0]
                 location_house_y = house_dict['house location'][1]
                 # location_battery_x = battery.dict['battery location'][0]
                 # location_battery_y = battery.dict['battery location'][1]
+=======
+                x_loc = house_dict['house location'][0]
+                y_loc = house_dict['house location'][1]
+                # location_battery_x = battery.x
+                # location_battery_y = battery.y
+>>>>>>> ae323da872fdd2e84e36db0e2887fa4d6b31c1bd
 
                 # compute distance between the battery and the assigned house
-                distance = abs((location_battery_x - location_house_x) + (location_battery_y - location_house_y))
+                distance = abs((battery.x - x_loc) + (battery.y - y_loc))
 
-                # set starting point to the location of the house
-                x_loc = location_house_x
-                y_loc = location_house_y
+                # save starting point for the grid line
+                house_dict['grid'].append(f'{x_loc}, {y_loc}')
 
+                # create list with x and y coordinates of the grid line
                 x_list = [x_loc]
                 y_list = [y_loc]
 
-
-                #while x_loc != location_battery_x and y_loc != location_battery_y:
+                # keep taking steps until the distance between x and y loc and battery location
+                # is 0
                 while distance != 0:
                     choice = random.randint(1, 4)
 
@@ -38,7 +45,7 @@ class Cables():
                         x_loc -= 1
 
                         # compute new distance between the new point and the battery
-                        new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+                        new_distance = abs((battery.x - x_loc) + (battery.y - y_loc))
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -61,7 +68,7 @@ class Cables():
                         x_loc += 1
 
                         # compute new distance between the new point and the battery
-                        new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+                        new_distance = abs((battery.x - x_loc) + (battery.y - y_loc))
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -84,7 +91,7 @@ class Cables():
                         y_loc += 1
 
                         # compute new distance between the new point and the battery
-                        new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+                        new_distance = abs((battery.x - x_loc) + (battery.y - y_loc))
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -107,7 +114,7 @@ class Cables():
                         y_loc -= 1
 
                         # compute new distance between the new point and the battery
-                        new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+                        new_distance = abs((battery.x - x_loc) + (battery.y - y_loc))
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -124,7 +131,6 @@ class Cables():
                         # reset the step
                         else:
                             y_loc += 1
-
 
                 plt.plot(x_list, y_list, 'k--')
         return self.steps_count
