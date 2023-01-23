@@ -140,3 +140,22 @@ if __name__ == "__main__":
 
     #self.assign_house_random() # CHECK
     #self.make_cables()
+
+
+    #---------------- hill climber ---------------------------------------------
+    random_algo = Randomize()
+    random_algo.assign_house_random(houses, batteries)
+
+    cable_90_degree = Cables()
+    step_count = cable_90_degree.make_90_degrees_cables(houses, batteries)
+
+    my_smartgrid.draw_plot()
+    my_smartgrid.costs(step_count)
+    my_smartgrid.district_name()
+    my_smartgrid.create_district_dict()
+    list = my_smartgrid.make_output()
+    #print(list)
+    print('costs', list[0]['costs shared'])
+
+    random_hill_climber = Hill_Climber(my_smartgrid)
+    random_hill_climber.mutate_two_cables(batteries)
