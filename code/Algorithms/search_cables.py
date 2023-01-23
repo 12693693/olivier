@@ -22,8 +22,10 @@ class Search_Cables():
                 location_battery_x = battery.dict['battery location'][0]
                 location_battery_y = battery.dict['battery location'][1]
 
+
+
                 # compute distance between the battery and the assigned house
-                distance = abs((location_battery_x - location_house_x) + (location_battery_y - location_house_y))
+                distance = abs((battery.x - location_house_x) + (battery.y - location_house_y))
 
                 # set starting point to the location of the house
                 x_loc = location_house_x
@@ -44,38 +46,43 @@ class Search_Cables():
 
                     # take a step left
                     if choice == 1:
-                        x_loc -= 1
+                        step = (f'{x_loc - 1}, {x_loc}, {y_loc}, {y_loc})
+                        if step is in existing_cable_dict:
+                            x_loc -= 1
 
-                        # compute new distance between the new point and the battery
-                        new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
-
-                        # if the new point is closer to the battery location, take the step
-                        if new_distance < distance:
-                            distance = new_distance
-                            self.steps_count += 1
-
-                            # save the individual steps in the grid list in the dictionary of the house
-                            house_dict['grid'].append(f'{x_loc}, {y_loc}')
-
-                            x_list.append(x_loc)
-                            y_list.append(y_loc)
-
-                            #save the final point of the cable in list
-                            # self.cable_list.append(x_loc)
-                            # self.cable_list.append(y_loc)
-                        # if the new point is not closer to the battery location,
-                        # reset the step
                         else:
-                            x_loc += 1
-                            # self.cable_list.append(x_loc)
-                            # self.cable_list.append(y_loc)
+                            x_loc -= 1
+
+                            # compute new distance between the new point and the battery
+                            new_distance = abs((battery.x - x_loc) + (battery.y - y_loc))
+
+                            # if the new point is closer to the battery location, take the step
+                            if new_distance < distance:
+                                distance = new_distance
+                                self.steps_count += 1
+
+                                # save the individual steps in the grid list in the dictionary of the house
+                                house_dict['grid'].append(f'{x_loc}, {y_loc}')
+
+                                x_list.append(x_loc)
+                                y_list.append(y_loc)
+
+                                #save the final point of the cable in list
+                                # self.cable_list.append(x_loc)
+                                # self.cable_list.append(y_loc)
+                            # if the new point is not closer to the battery location,
+                            # reset the step
+                            else:
+                                x_loc += 1
+                                # self.cable_list.append(x_loc)
+                                # self.cable_list.append(y_loc)
 
                     # take a step right
                     elif choice == 2:
                         x_loc += 1
 
                         # compute new distance between the new point and the battery
-                        new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+                        new_distance = abs((battery.x - x_loc) + (battery.y - y_loc))
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -102,7 +109,7 @@ class Search_Cables():
                         y_loc += 1
 
                         # compute new distance between the new point and the battery
-                        new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+                        new_distance = abs((battery.x - x_loc) + (battery.y - y_loc))
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -130,7 +137,7 @@ class Search_Cables():
                         y_loc -= 1
 
                         # compute new distance between the new point and the battery
-                        new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+                        new_distance = abs((battery.x - x_loc) + (battery.y - y_loc))
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -159,6 +166,7 @@ class Search_Cables():
                             cable_key = f'{self.cable_list}'
 
                             self.existing_cable_dict[cable_key] = 1
+
 
                 plt.plot(x_list, y_list, 'k--')
 
