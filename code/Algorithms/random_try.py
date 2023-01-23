@@ -13,17 +13,8 @@ class Cables():
             for house_dict in battery.dict['connected houses']:
 
                 # find x and y coordinates for the battery and connected house
-
                 x_loc = house_dict['house location'][0]
                 y_loc = house_dict['house location'][1]
-                # location_battery_x = battery.dict['battery location'][0]
-                # location_battery_y = battery.dict['battery location'][1]
-
-                # x_loc = house_dict['house location'][0]
-                # y_loc = house_dict['house location'][1]
-                # location_battery_x = battery.x
-                # location_battery_y = battery.y
-
 
                 # compute distance between the battery and the assigned house
                 distance = abs(battery.x - x_loc) + abs(battery.y - y_loc)
@@ -37,10 +28,7 @@ class Cables():
 
                 # keep taking steps until the distance between x and y loc and battery location
                 # is 0
-                print('new')
                 while distance != 0:
-
-                    print(battery.x, battery.y, x_loc, y_loc)
                     choice = random.randint(1, 4)
 
                     # take a step left
