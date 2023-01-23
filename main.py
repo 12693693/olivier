@@ -155,8 +155,19 @@ if __name__ == "__main__":
     my_smartgrid.create_district_dict()
     list = my_smartgrid.make_output()
     #print(list)
+<<<<<<< HEAD
     print('costs', list[0]['costs shared'])
     #print('kosten', my_smartgrid.total_cost())
+=======
+# print('costs', list[0]['costs shared'])
+    #print(existing_cable_dict)
+    print(cable_list)
+
+
+    #self.assign_house_random() # CHECK
+    #self.make_cables()
+
+>>>>>>> e480d9e3578c00a327bcac001c82acc09d3491e7
 
     random_hill_climber = Hill_Climber(my_smartgrid)
     random_hill_climber.run(1000)
