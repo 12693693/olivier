@@ -6,14 +6,10 @@ from code.Classes.smartgrid import Smartgrid
 from code.Algorithms.randomize import Randomize
 from code.Algorithms.cable_90_degree import Cables
 from code.Algorithms.search_cables import Search_Cables
-<<<<<<< HEAD
-# hoi
-=======
->>>>>>> 48dc38a156b7a2b752f6d1ac36b3a20c94b13dbb
 #from code.Algorithms.random_try import Cables
 from code.Algorithms.greedy import Greedy
 from code.Algorithms.search_cables import Search_Cables
-from code.Algorithms.hill_climber import Hill_Climber
+#from code.Algorithms.hill_climber import Hill_Climber
 #
 # dit moet eigenlijk in classmethod
 def load_df(houses_csv, batteries_csv):
@@ -63,7 +59,6 @@ if __name__ == "__main__":
     houses, batteries = my_smartgrid.add_houses_and_batteries(df_houses, df_batteries)
     #print(houses, batteries)
 
-<<<<<<< HEAD
     # # ----------------- random houses and 90 degrees cables-----------------------
     # random_algo = Randomize()
     # random_algo.assign_house_random(houses, batteries)
@@ -79,9 +74,6 @@ if __name__ == "__main__":
     # print(list)
     # print('costs', list[0]['costs shared'])
 
-=======
-    # ----------------- random houses and 90 degrees cables-----------------------
->>>>>>> 48dc38a156b7a2b752f6d1ac36b3a20c94b13dbb
     # random_algo = Randomize()
     # random_algo.assign_house_random(houses, batteries)
     #
@@ -95,13 +87,6 @@ if __name__ == "__main__":
     # list = my_smartgrid.make_output()
     # print(list)
     # print('costs', list[0]['costs shared'])
-<<<<<<< HEAD
-=======
-
-
-
-    # ------------------ random houses and cables -------------
->>>>>>> 48dc38a156b7a2b752f6d1ac36b3a20c94b13dbb
 
     # random_algo = Randomize()
     # random_algo.assign_house_random(houses, batteries)
@@ -122,11 +107,7 @@ if __name__ == "__main__":
     # greedy_algo.assign_closest_battery(houses, batteries)
     #
     # cable_90_degree = Cables()
-<<<<<<< HEAD
-    # step_count, house_dict = cable_90_degree.make_90_degrees_cables(houses, batteries)
-=======
     # step_count = cable_90_degree.make_90_degrees_cables(houses, batteries)
->>>>>>> 48dc38a156b7a2b752f6d1ac36b3a20c94b13dbb
     #
     # my_smartgrid.draw_plot()
     # my_smartgrid.costs(step_count)
@@ -139,7 +120,6 @@ if __name__ == "__main__":
     #self.make_cables()
 
 #------------------------- search cables --------------------------
-<<<<<<< HEAD
 
     random_algo = Randomize()
     random_algo.assign_house_random(houses, batteries)
@@ -155,55 +135,6 @@ if __name__ == "__main__":
     #print(list)
 # print('costs', list[0]['costs shared'])
     print(existing_cable_dict)
-=======
-    #
-    # random_algo = Randomize()
-    # random_algo.assign_house_random(houses, batteries)
-    #
-    # cable_search = Search_Cables()
-    # step_count, house_dict = cable_search.search_cables(houses, batteries)
-    #
-    # my_smartgrid.draw_plot()
-    # my_smartgrid.costs(step_count)
-    # my_smartgrid.district_name()
-    # my_smartgrid.create_district_dict()
-    # list = my_smartgrid.make_output()
-    # #print(list)
-    # print('costs', list[0]['costs shared'])
-    # print(house_dict['grid'])
-    # print('costs', list[0]['costs shared'])
-
-    # my_smartgrid.draw_plot()
-    # my_smartgrid.costs(step_count)
-    # my_smartgrid.district_name()
-    # my_smartgrid.create_district_dict()
-    # list = my_smartgrid.make_output()
-    # #print(list)
-    # print('costs', list[0]['costs shared'])
-    # print(existing_cable_dict)
-    #self.assign_house_random() # CHECK
-    #self.make_cables()
-
-# ---------------------------- hill climber -----------------------
-random_algo = Randomize()
-random_algo.assign_house_random(houses, batteries)
-
-cable_90_degree = Cables()
-step_count = cable_90_degree.make_90_degrees_cables(houses, batteries)
-
-my_smartgrid.draw_plot()
-my_smartgrid.costs(step_count)
-my_smartgrid.district_name()
-my_smartgrid.create_district_dict()
-list = my_smartgrid.make_output()
-#print(list)
-print('costs', list[0]['costs shared'])
-
-random_hill_climber = Hill_Climber(my_smartgrid)
-random_hill_climber.mutate_two_cables(batteries)
-
-
->>>>>>> 48dc38a156b7a2b752f6d1ac36b3a20c94b13dbb
 
 
 
