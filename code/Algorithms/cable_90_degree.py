@@ -11,6 +11,7 @@ class Cables():
         plt.plot(x_list, y_list, 'k--')
 
     def make_lines_90(self, dictionary_of_house, battery):
+        step_count = 0
 
         # create starting point for creating the grid line
         # and add the starting point to the grid dictionary
@@ -30,7 +31,7 @@ class Cables():
                 x_loc -= 1
             else:
                 x_loc += 1
-            self.steps_count += 1
+            step_count += 1
 
             # save the individual steps in the grid list in the dictionary of the house
             dictionary_of_house['grid'].append(f'{x_loc}, {y_loc}')
@@ -42,15 +43,19 @@ class Cables():
                 y_loc -= 1
             else:
                 y_loc += 1
-            self.steps_count += 1
+            step_count += 1
 
             # save the individual steps in the grid list in the dictionary of the house
             dictionary_of_house['grid'].append(f'{x_loc}, {y_loc}')
 
+        return step_count
+
     def make_90_degrees_cable(self, dictionary_of_house, battery):
         self.get_location(dictionary_of_house)
         self.plot_cable_90(self.location_house_x, self.location_house_y, battery)
-        self.make_lines(dictionary_of_house, battery)
+        step_count = self.make_lines_90(dictionary_of_house, battery)
+
+        return step_count
 
 
     def make_90_degrees_cables(self, list_with_houses, list_with_batteries):
@@ -59,12 +64,13 @@ class Cables():
         the individual steps within the grid. It then saves the individual
         coordinates in a new list.
         """
-        self.steps_count = 0
+        steps_count = 0
 
         # loop over batteries and the houses that are connected to that battery
         for battery in list_with_batteries:
             for house_dict in battery.dict['connected houses']:
-                self.make_90_degrees_cable(house_dict, battery)
+                steps_count += self.make_90_degrees_cable(house_dict, battery)
+
 
 
 
@@ -121,4 +127,4 @@ class Cables():
                 #     house_dict['grid'].append(f'{x_loc}, {y_loc}')
 
         #plt.show()
-        return self.steps_count
+        return steps_count
