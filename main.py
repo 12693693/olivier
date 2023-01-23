@@ -5,11 +5,11 @@ import copy
 from code.Classes.smartgrid import Smartgrid
 from code.Algorithms.randomize import Randomize
 from code.Algorithms.cable_90_degree import Cables
-from code.Algorithms.search_cables import Search_Cables
+#from code.Algorithms.search_cables import Search_Cables
 #from code.Algorithms.random_try import Cables
 from code.Algorithms.greedy import Greedy
-from code.Algorithms.search_cables import Search_Cables
-#from code.Algorithms.hill_climber import Hill_Climber
+#from code.Algorithms.search_cables import Search_Cables
+from code.Algorithms.hill_climber import Hill_Climber
 #
 # dit moet eigenlijk in classmethod
 def load_df(houses_csv, batteries_csv):
@@ -121,20 +121,20 @@ if __name__ == "__main__":
 
 #------------------------- search cables --------------------------
 
-    random_algo = Randomize()
-    random_algo.assign_house_random(houses, batteries)
-
-    cable_search = Search_Cables()
-    step_count, cable_list, existing_cable_dict= cable_search.search_cables(houses, batteries)
-
-    my_smartgrid.draw_plot()
-    my_smartgrid.costs(step_count)
-    my_smartgrid.district_name()
-    my_smartgrid.create_district_dict()
-    list = my_smartgrid.make_output()
-    #print(list)
-# print('costs', list[0]['costs shared'])
-    print(existing_cable_dict)
+#     random_algo = Randomize()
+#     random_algo.assign_house_random(houses, batteries)
+#
+#     cable_search = Search_Cables()
+#     step_count, cable_list, existing_cable_dict= cable_search.search_cables(houses, batteries)
+#
+#     my_smartgrid.draw_plot()
+#     my_smartgrid.costs(step_count)
+#     my_smartgrid.district_name()
+#     my_smartgrid.create_district_dict()
+#     list = my_smartgrid.make_output()
+#     #print(list)
+# # print('costs', list[0]['costs shared'])
+#     print(existing_cable_dict)
 
 
 
@@ -143,19 +143,20 @@ if __name__ == "__main__":
 
 
     #---------------- hill climber ---------------------------------------------
-    # random_algo = Randomize()
-    # random_algo.assign_house_random(houses, batteries)
-    #
-    # cable_90_degree = Cables()
-    # step_count = cable_90_degree.make_90_degrees_cables(houses, batteries)
-    #
-    # my_smartgrid.draw_plot()
-    # my_smartgrid.costs(step_count)
-    # my_smartgrid.district_name()
-    # my_smartgrid.create_district_dict()
-    # list = my_smartgrid.make_output()
-    # #print(list)
-    # print('costs', list[0]['costs shared'])
-    #
-    # random_hill_climber = Hill_Climber(my_smartgrid)
-    # random_hill_climber.mutate_two_cables(batteries)
+    random_algo = Randomize()
+    random_algo.assign_house_random(houses, batteries)
+
+    cable_90_degree = Cables()
+    step_count = cable_90_degree.make_90_degrees_cables(houses, batteries)
+
+    my_smartgrid.draw_plot()
+    my_smartgrid.costs(step_count)
+    my_smartgrid.district_name()
+    my_smartgrid.create_district_dict()
+    list = my_smartgrid.make_output()
+    #print(list)
+    print('costs', list[0]['costs shared'])
+    #print('kosten', my_smartgrid.total_cost())
+
+    random_hill_climber = Hill_Climber(my_smartgrid)
+    random_hill_climber.run(1000)
