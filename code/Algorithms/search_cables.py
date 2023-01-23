@@ -22,8 +22,10 @@ class Search_Cables():
                 location_battery_x = battery.dict['battery location'][0]
                 location_battery_y = battery.dict['battery location'][1]
 
+
+
                 # compute distance between the battery and the assigned house
-                distance = abs((location_battery_x - location_house_x) + (location_battery_y - location_house_y))
+                distance = abs(battery.x - location_house_x) + (battery.y - location_house_y))
 
                 # set starting point to the location of the house
                 x_loc = location_house_x
@@ -47,7 +49,7 @@ class Search_Cables():
                         x_loc -= 1
 
                         # compute new distance between the new point and the battery
-                        new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+                        new_distance = abs((battery.x - x_loc) + (battery.y - y_loc))
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -75,7 +77,7 @@ class Search_Cables():
                         x_loc += 1
 
                         # compute new distance between the new point and the battery
-                        new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+                        new_distance = abs((battery.x - x_loc) + (battery.y - y_loc))
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -102,7 +104,7 @@ class Search_Cables():
                         y_loc += 1
 
                         # compute new distance between the new point and the battery
-                        new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+                        new_distance = abs((battery.x - x_loc) + (battery.y - y_loc))
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
@@ -130,7 +132,7 @@ class Search_Cables():
                         y_loc -= 1
 
                         # compute new distance between the new point and the battery
-                        new_distance = abs((location_battery_x - x_loc) + (location_battery_y - y_loc))
+                        new_distance = abs((battery.x - x_loc) + (battery.y - y_loc))
 
                         # if the new point is closer to the battery location, take the step
                         if new_distance < distance:
