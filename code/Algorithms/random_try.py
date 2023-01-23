@@ -13,17 +13,10 @@ class Cables():
             for house_dict in battery.dict['connected houses']:
 
                 # find x and y coordinates for the battery and connected house
-<<<<<<< HEAD
-                location_house_x = house_dict['house location'][0]
-                location_house_y = house_dict['house location'][1]
-                # location_battery_x = battery.dict['battery location'][0]
-                # location_battery_y = battery.dict['battery location'][1]
-=======
                 x_loc = house_dict['house location'][0]
                 y_loc = house_dict['house location'][1]
                 # location_battery_x = battery.x
                 # location_battery_y = battery.y
->>>>>>> ae323da872fdd2e84e36db0e2887fa4d6b31c1bd
 
                 # compute distance between the battery and the assigned house
                 distance = abs((battery.x - x_loc) + (battery.y - y_loc))
