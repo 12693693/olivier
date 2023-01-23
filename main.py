@@ -134,8 +134,8 @@ if __name__ == "__main__":
     list = my_smartgrid.make_output()
     #print(list)
 # print('costs', list[0]['costs shared'])
-    print(existing_cable_dict)
-
+    #print(existing_cable_dict)
+    print(cable_list)
 
 
     #self.assign_house_random() # CHECK

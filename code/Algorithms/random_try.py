@@ -23,6 +23,7 @@ class Cables():
         while distance != 0:
             choice = random.randint(1, 4)
 
+
             # take a step left
             if choice == 1:
                 x_loc -= 1
