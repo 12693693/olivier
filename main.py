@@ -2,6 +2,8 @@ import argparse
 import pandas as pd
 import random
 import copy
+import seaborn as sns
+import matplotlib.pyplot as plt
 from code.Classes.smartgrid import Smartgrid
 from code.Algorithms.randomize import Randomize
 from code.Algorithms.cable_90_degree import Cables
@@ -61,35 +63,126 @@ if __name__ == "__main__":
 
     # # ----------------- random houses and 90 degrees cables-----------------------
     random_algo = Randomize()
+    greedy_algo = Greedy()
     cable_90_degree = Cables()
+
+
     list_with_costs= []
     my_smartgrid.district_name()
 
     # batteries_filled = copy.deepcopy(batteries)
     # houses_filled = copy.deepcopy(houses)
 
-    for i in range(1000):
+    # -------------------- loop with random and 90 degrees ----------
+    #
+    # for i in range(500):
+    #
+    #     batteries_filled = copy.deepcopy(batteries)
+    #     houses_filled = copy.deepcopy(houses)
+    #
+    #     random_algo.assign_house_random(houses_filled, batteries_filled)
+    #
+    #     step_count = cable_90_degree.make_90_degrees_cables(houses_filled, batteries_filled)
+    #
+    #     # print('step_count', step_count)
+    #     # my_smartgrid.draw_plot()
+    #     my_smartgrid.costs(step_count)
+    #     my_smartgrid.create_district_dict()
+    #     list = my_smartgrid.make_output()
+    #     list_with_costs.append(list[0]['costs shared'])
+    # # print(list)
+    #     print('costs', list[0]['costs shared'])
+    #     print(f'{i}/1000')
+    #
+    #
+    # series_with_costs = pd.Series(list_with_costs)
+    # print(series_with_costs)
+    # sns.histplot(data=series_with_costs, )
+    # plt.show()
 
-        batteries_filled = copy.deepcopy(batteries)
-        houses_filled = copy.deepcopy(houses)
 
-        random_algo.assign_house_random(houses_filled, batteries_filled)
+#----------------------------loop with greedy and 90 degrees -------------------
+    # for i in range(500):
+    #
+    #     batteries_filled = copy.deepcopy(batteries)
+    #     houses_filled = copy.deepcopy(houses)
+    #
+    #     greedy_algo.assign_closest_battery(houses_filled, batteries_filled)
+    #
+    #     step_count = cable_90_degree.make_90_degrees_cables(houses_filled, batteries_filled)
+    #
+    #     # print('step_count', step_count)
+    #     # my_smartgrid.draw_plot()
+    #     my_smartgrid.costs(step_count)
+    #     my_smartgrid.create_district_dict()
+    #     list = my_smartgrid.make_output()
+    #     list_with_costs.append(list[0]['costs shared'])
+    # # print(list)
+    #     print('costs', list[0]['costs shared'])
+    #     print(f'{i}/1000')
+    #
+    #
+    # series_with_costs = pd.Series(list_with_costs)
+    # print(series_with_costs)
+    # sns.histplot(data=series_with_costs)
+    # plt.show()
 
-        step_count = cable_90_degree.make_90_degrees_cables(houses_filled, batteries_filled)
+#------------------------- loop with hillclimber and 90 degrees ----------------
 
+    for i in range(500):
+
+
+        my_smartgrid_filled = copy.deepcopy(my_smartgrid)
+
+        my_smartgrid_filled.battery_list = copy.deepcopy(batteries)
+        my_smartgrid_filled.house_list = copy.deepcopy(houses)
+
+
+
+        random_algo.assign_house_random(my_smartgrid_filled.house_list, my_smartgrid_filled.battery_list)
+
+        step_count = cable_90_degree.make_90_degrees_cables(my_smartgrid_filled.house_list, my_smartgrid_filled.battery_list)
+
+        my_smartgrid_filled.costs(step_count)
+
+        # for battery in batteries_filled:
+        #     print(battery.dict['connected houses'])
+
+        # print(my_smartgrid_filled.total_cost, 'nieuwe')
+        # for battery in my_smartgrid.battery_list:
+        #     print(battery.dict['connected houses'])
+        # print(my_smartgrid_filled.battery_list)
+
+        random_hill_climber = Hill_Climber(my_smartgrid_filled)
+        random_hill_climber.run(1000)
         # print('step_count', step_count)
         # my_smartgrid.draw_plot()
-        my_smartgrid.costs(step_count)
-        my_smartgrid.create_district_dict()
-        list = my_smartgrid.make_output()
-        list_with_costs.append(list[0]['costs shared'])
+
+
+
+
+
+
+        my_smartgrid_filled.create_district_dict()
+        list = my_smartgrid_filled.make_output()
+
+
+
+
+
+
     # print(list)
         print('costs', list[0]['costs shared'])
         print(f'{i}/1000')
 
 
+    series_with_costs = pd.Series(list_with_costs)
+    print(series_with_costs)
+    sns.histplot(data=series_with_costs)
+    plt.show()
 
 
+# -----------------------------------------------------------------------------
 
     # random_algo = Randomize()
     # random_algo.assign_house_random(houses, batteries)
