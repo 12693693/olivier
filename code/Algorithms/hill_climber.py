@@ -26,13 +26,13 @@ class Hill_Climber():
         battery_1 = random.choice(list_with_batteries)
         battery_2 = random.choice(list_with_batteries)
 
+        while battery_1 == battery_2:
+            battery_2 = random.choice(list_with_batteries)    
+
         # choose two houses that were assigned to the batteries and remove them
         # and the steps count from the costs
         house_1 = random.choice(battery_1.dict['connected houses'])
         house_2 = random.choice(battery_2.dict['connected houses'])
-
-        while house_1 == house_2:
-            house_2 = random.choice(battery_2.dict['connected houses'])
 
         battery_1.dict['connected houses'].remove(house_1)
         battery_2.dict['connected houses'].remove(house_2)
