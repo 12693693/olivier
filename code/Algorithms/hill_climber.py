@@ -21,16 +21,19 @@ class Hill_Climber():
 
     def switch_two_houses(self, new_smartgrid):
         list_with_batteries = new_smartgrid.battery_list
+        #print(len(list_with_batteries))
 
         # choose two random batteries
         battery_1 = random.choice(list_with_batteries)
         battery_2 = random.choice(list_with_batteries)
 
         while battery_1 == battery_2:
-            battery_2 = random.choice(list_with_batteries)    
+            battery_2 = random.choice(list_with_batteries)
 
         # choose two houses that were assigned to the batteries and remove them
         # and the steps count from the costs
+
+        #print(battery_1.dict['connected houses'])
         house_1 = random.choice(battery_1.dict['connected houses'])
         house_2 = random.choice(battery_2.dict['connected houses'])
 
@@ -77,6 +80,7 @@ class Hill_Climber():
             new_smartgrid = copy.deepcopy(self.smartgrid)
 
             self.switch_two_houses(new_smartgrid)
+            #print('na switchen')
 
             # Accept it if it is better
             self.check_solution(new_smartgrid)
