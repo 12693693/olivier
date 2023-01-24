@@ -65,13 +65,21 @@ class Cables():
         coordinates in a new list.
         """
         steps_count = 0
+        #print('in functie')
+
+        # for house in list_with_houses:
+        #     house.dict['grid'] = []
 
         # loop over batteries and the houses that are connected to that battery
         for battery in list_with_batteries:
+            #print('in batteries')
+            #print(battery.dict['connected houses'])
             for house_dict in battery.dict['connected houses']:
+                #print('in houses')
                 steps_count += self.make_90_degrees_cable(house_dict, battery)
+                #print('hoi', steps_count)
 
-
+        return steps_count
 
 
                 # # find x and y coordinates for the battery and connected house
@@ -127,4 +135,3 @@ class Cables():
                 #     house_dict['grid'].append(f'{x_loc}, {y_loc}')
 
         #plt.show()
-        return steps_count
