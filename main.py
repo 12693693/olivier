@@ -105,34 +105,34 @@ if __name__ == "__main__":
 
 
 #----------------------------loop with greedy and 90 degrees -------------------
-    # list_with_costs_greedy_90 = []
-    #
-    # for i in range(500):
-    #
-    #     batteries_filled = copy.deepcopy(batteries)
-    #     houses_filled = copy.deepcopy(houses)
-    #
-    #     greedy_algo.assign_closest_battery(houses_filled, batteries_filled)
-    #
-    #     step_count = cable_90_degree.make_90_degrees_cables(houses_filled, batteries_filled)
-    #
-    #     # print('step_count', step_count)
-    #     # my_smartgrid.draw_plot()
-    #     my_smartgrid.costs(step_count)
-    #     my_smartgrid.create_district_dict()
-    #     list = my_smartgrid.make_output()
-    #     list_with_costs.append(list[0]['costs shared'])
-    # # print(list)
-    #     print('costs', list[0]['costs shared'])
-    #     print(f'{i}/1000')
-    #
-    #
-    # series_with_costs_greedy_90 = pd.Series(ist_with_costs_greedy_90)
-    # print(series_with_costs_greedy_90)
-    # plt.clf()
-    # plt.title('houses assigned with greedy and 90 degree cables')
-    # sns.barplot(data=series_with_costs_greedy_90)
-    # plt.show()
+    list_with_costs_greedy_90 = []
+
+    for i in range(500):
+
+        my_smartgrid.battery_list = copy.deepcopy(batteries)
+        my_smartgrid.houses_list = copy.deepcopy(houses)
+
+        greedy_algo.assign_closest_battery(my_smartgrid.houses_list, my_smartgrid.battery_list)
+
+        step_count = cable_90_degree.make_90_degrees_cables(my_smartgrid.houses_list, my_smartgrid.battery_list)
+
+        # print('step_count', step_count)
+        # my_smartgrid.draw_plot()
+        my_smartgrid.costs_own(step_count)
+        my_smartgrid.create_district_dict()
+        list = my_smartgrid.make_output()
+        list_with_costs_greedy_90.append(list[0]['costs shared'])
+    # print(list)
+        print('costs', list[0]['costs shared'])
+        print(f'{i}/1000')
+
+
+    series_with_costs_greedy_90 = pd.Series(list_with_costs_greedy_90)
+    print(series_with_costs_greedy_90)
+    plt.clf()
+    plt.title('houses assigned with greedy and 90 degree cables')
+    sns.barplot(data=series_with_costs_greedy_90)
+    plt.show()
 
 #------------------------- loop with hillclimber and 90 degrees ----------------
 
