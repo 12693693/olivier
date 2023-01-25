@@ -273,6 +273,16 @@ print(series_with_costs_greedy_90.describe())
 print(series_with_costs_random_90.describe())
 # print(series_with_costs_hillclimber_90.describe())
 print(series_with_costs_greedy_random_try.describe())
+
+mean_greedy_90 = series_with_costs_greedy_90.mean()
+mean_random_90 = series_with_costs_random_90.mean()
+mean_greedy_random_try = series_with_costs_greedy_random_try.mean()
+
+dict_means = {'algorithm':['greedy, 90 degrees', 'random, 90 degrees', 'greedy, random try'], 'means':[mean_greedy_90, mean_random_90, mean_greedy_random_try]}
+df_means = pd.DataFrame(dict_means)
+plt.clf()
+df_means.plot.bar(x='algorithm', y='means')
+plt.show()
 #------------------------- search cables --------------------------
 
 #     random_algo = Randomize()
