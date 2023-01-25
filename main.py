@@ -108,6 +108,7 @@ if __name__ == "__main__":
 
     for i in range(500):
 
+<<<<<<< HEAD
         batteries_filled = copy.deepcopy(batteries)
         houses_filled = copy.deepcopy(houses)
 
@@ -117,6 +118,18 @@ if __name__ == "__main__":
 
         # my_smartgrid.draw_plot()
         my_smartgrid.costs(step_count)
+=======
+        my_smartgrid.battery_list = copy.deepcopy(batteries)
+        my_smartgrid.houses_list = copy.deepcopy(houses)
+
+        greedy_algo.assign_closest_battery(my_smartgrid.houses_list, my_smartgrid.battery_list)
+
+        step_count = cable_90_degree.make_90_degrees_cables(my_smartgrid.houses_list, my_smartgrid.battery_list)
+
+        # print('step_count', step_count)
+        # my_smartgrid.draw_plot()
+        my_smartgrid.costs_own(step_count)
+>>>>>>> 44e728abbd4e12d52afe794b58fe8bd0230b6304
         my_smartgrid.create_district_dict()
         list = my_smartgrid.make_output()
         list_with_costs_greedy_90.append(list[0]['costs shared'])
