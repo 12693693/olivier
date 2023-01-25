@@ -277,7 +277,6 @@ if __name__ == "__main__":
     #print(list)
 # print('costs', list[0]['costs shared'])
     print(cable_list)
-    print(costs)
 
     self.assign_house_random() # CHECK
     self.make_cables()

@@ -60,10 +60,7 @@ class Search_Cables():
                                 step_score_1 = 1
                             else:
                                 step_score_1 = 0
-                            # if new_distance_1 > distance and step_1_hash not in self.existing_cable_dict:
-                            #     step_score_1 = 0
-                            # if new_distance_1 > distance and step_1_hash in self.existing_cable_dict:
-                            #     step_score_1 = 0
+
 
                             self.step_score_list.append(step_score_1)
                             self.step_list.append(step_1)
@@ -83,10 +80,7 @@ class Search_Cables():
                                 step_score_2 = 1
                             else:
                                 step_score_2 = 0
-                            # if new_distance_2 > distance and step_2_hash not in self.existing_cable_dict:
-                            #     step_score_2 = 0
-                            # if new_distance_2 > distance and step_2_hash in self.existing_cable_dict:
-                            #     step_score_2 = 0
+
 
                             self.step_score_list.append(step_score_2)
                             self.step_list.append(step_2)
@@ -106,10 +100,6 @@ class Search_Cables():
                                 step_score_3 = 1
                             else:
                                 step_score_3 = 0
-                            # if new_distance_3 > distance and step_3_hash not in self.existing_cable_dict:
-                            #     step_score_3 = 0
-                            # if new_distance_3 > distance and step_3_hash in self.existing_cable_dict:
-                            #     step_score_3 = 0
 
                             self.step_score_list.append(step_score_3)
                             self.step_list.append(step_3)
@@ -130,48 +120,40 @@ class Search_Cables():
                                 step_score_4 = 1
                             else:
                                 step_score_4 = 0
-                            # if new_distance_4 > distance and step_4_hash not in self.existing_cable_dict:
-                            #     step_score_4 = 0
-                            # if new_distance_4 > distance and step_4_hash in self.existing_cable_dict:
-                            #     step_score_4 = 0
 
                             self.step_score_list.append(step_score_4)
                             self.step_list.append(step_4)
                             self.distance_list.append(new_distance_4)
 
-                            # find step with highest score
-                            highest_index = self.step_score_list.index(max(self.step_score_list))
+                        # find step with highest score
+                        highest_index = self.step_score_list.index(max(self.step_score_list))
 
-                            # find the step which belongs with the highest score
-                            for index, highest in enumerate(self.step_score_list):
-                                cable_key = tuple(self.step_list[highest_index])
+                        # find the step which belongs with the highest score
+                        for index, highest in enumerate(self.step_score_list):
+                            cable_key = tuple(self.step_list[highest_index])
 
-                                #find the new distance which belongs with the highest score
-                                for index, distance in enumerate(self.step_score_list):
-                                    new_distance = self.distance_list[highest_index]
+                            #find the new distance which belongs with the highest score
+                        for index, distance in enumerate(self.step_score_list):
+                            new_distance = self.distance_list[highest_index]
 
-                distance = new_distance
+                    distance = new_distance
 
-                    #print(ideal_step)
-                    # use this score to find the best step.
-                    # ideal_step_index = self.step_list.index(highest_score)
-                    # ideal_step = self.step_list[ideal_step_index]
+                    x_loc = cable_key[2]
+                    y_loc = cable_key[3]
 
-                self.steps_count += 1
+                    x_list.append(x_loc)
+                    y_list.append(y_loc)
+                    # house_dict['grid'].append(f'{x_loc}, {y_loc}')
+                    # print(house_dict['grid'])
 
-                x_loc = cable_key[2]
-                y_loc = cable_key[3]
+                    # Add this list to the dictionary
+                    if cable_key not in self.existing_cable_dict:
+                        self.existing_cable_dict[cable_key] = 1
+                        self.steps_count += 1
+
+                    self.costs = (self.steps_count * 9) + 2500
+
                 house_dict['grid'].append(f'{x_loc}, {y_loc}')
-
-                # Add this list to the dictionary
-                if cable_key not in self.existing_cable_dict:
-                    self.existing_cable_dict[cable_key] = 1
-                    self.steps_count += 1
-
-                self.costs = (self.steps_count * 9) + 2500
-
-                # print(self.existing_cable_dict)
-                    #self.cable_list.append(y_loc)
 
             plt.plot(x_list, y_list, 'k--')
 
