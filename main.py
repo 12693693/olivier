@@ -10,7 +10,7 @@ from code.Algorithms.cable_90_degree import Cables
 #from code.Algorithms.search_cables import Search_Cables
 from code.Algorithms.random_try import Cables
 from code.Algorithms.greedy import Greedy
-#from code.Algorithms.search_cables import Search_Cables
+from code.Algorithms.search_cables import Search_Cables
 from code.Algorithms.hill_climber import Hill_Climber
 #
 # dit moet eigenlijk in classmethod
@@ -204,29 +204,29 @@ if __name__ == "__main__":
 
 # ------------------------greedy & random-try ---------------------------------
 
-    greedy_algo.assign_closest_battery(houses, batteries)
-
-    for i in range(50):
-        batteries_filled = copy.deepcopy(batteries)
-        houses_filled = copy.deepcopy(houses)
-
-        greedy_algo.assign_closest_battery(houses_filled, batteries_filled)
-        step_count = cable_random.random_try(houses_filled, batteries_filled)
-
-    # my_smartgrid.draw_plot()
-        my_smartgrid.costs(step_count)
-        my_smartgrid.create_district_dict()
-        list = my_smartgrid.make_output()
-        list_with_costs.append(list[0]['costs shared'])
-
-        print('costs', list[0]['costs shared'])
-        print(f'{i}/500')
-
-    series_with_costs = pd.Series(list_with_costs)
-    print(series_with_costs.describe())
-    plt.clf()
-    sns.histplot(data=series_with_costs)
-    plt.show()
+    # greedy_algo.assign_closest_battery(houses, batteries)
+    #
+    # for i in range(50):
+    #     batteries_filled = copy.deepcopy(batteries)
+    #     houses_filled = copy.deepcopy(houses)
+    #
+    #     greedy_algo.assign_closest_battery(houses_filled, batteries_filled)
+    #     step_count = cable_random.random_try(houses_filled, batteries_filled)
+    #
+    # # my_smartgrid.draw_plot()
+    #     my_smartgrid.costs(step_count)
+    #     my_smartgrid.create_district_dict()
+    #     list = my_smartgrid.make_output()
+    #     list_with_costs.append(list[0]['costs shared'])
+    #
+    #     print('costs', list[0]['costs shared'])
+    #     print(f'{i}/500')
+    #
+    # series_with_costs = pd.Series(list_with_costs)
+    # print(series_with_costs.describe())
+    # plt.clf()
+    # sns.histplot(data=series_with_costs)
+    # plt.show()
 
     # ------------------- greedy houses and cables 90 ------------
     #
@@ -263,25 +263,24 @@ if __name__ == "__main__":
 
 #------------------------- search cables --------------------------
 
-#     random_algo = Randomize()
-#     random_algo.assign_house_random(houses, batteries)
-#
-#     cable_search = Search_Cables()
-#     step_count, cable_list, existing_cable_dict= cable_search.search_cables(houses, batteries)
-#
-#     my_smartgrid.draw_plot()
-#     my_smartgrid.costs(step_count)
-#     my_smartgrid.district_name()
-#     my_smartgrid.create_district_dict()
-#     list = my_smartgrid.make_output()
-#     #print(list)
-# # print('costs', list[0]['costs shared'])
-#     print(existing_cable_dict)
+    random_algo = Randomize()
+    random_algo.assign_house_random(houses, batteries)
 
+    cable_search = Search_Cables()
+    step_count, cable_list, existing_cable_dict, costs = cable_search.search_cables(houses, batteries)
 
+    my_smartgrid.draw_plot()
+    my_smartgrid.costs(step_count)
+    my_smartgrid.district_name()
+    my_smartgrid.create_district_dict()
+    list = my_smartgrid.make_output()
+    #print(list)
+# print('costs', list[0]['costs shared'])
+    print(cable_list)
+    print(costs)
 
-    #self.assign_house_random() # CHECK
-    #self.make_cables()
+    self.assign_house_random() # CHECK
+    self.make_cables()
 
 
     #---------------- hill climber ---------------------------------------------

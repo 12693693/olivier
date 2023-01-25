@@ -17,13 +17,13 @@ class Search_Cables():
             for house_dict in battery.dict['connected houses']:
 
                 self.cable_list = []
-                # find x and y coordinates for the battery and connected house
+                # set starting point to the location of the house
                 location_house_x = house_dict['house location'][0]
                 location_house_y = house_dict['house location'][1]
 
                 # compute distance between the battery and the assigned house
                 distance = abs(battery.x - location_house_x) + abs(battery.y - location_house_y)
-
+                #
                 # set starting point to the location of the house
                 x_loc = location_house_x
                 y_loc = location_house_y
@@ -39,12 +39,12 @@ class Search_Cables():
 
                 self.step_score_list = []
                 self.step_list = []
-
+                self.distance_list = []
 
                 #while x_loc != location_battery_x and y_loc != location_battery_y:
                 while distance != 0:
                     #choice = random.randint(1, 4)
-
+                    print('hello')
                     for choice in range(1,5):
                         if choice == 1:
                             step_score_1 = 0
@@ -52,19 +52,22 @@ class Search_Cables():
                             step_1_hash = tuple(step_1)
 
                             #compute the potential new distance with this stap
-                            new_distance = abs(battery.x - (x_loc - 1)) + abs(battery.y - y_loc)
+                            new_distance_1 = abs(battery.x - (x_loc - 1)) + abs(battery.y - y_loc)
 
-                            if new_distance < distance and step_1_hash in self.existing_cable_dict:
+                            if new_distance_1 < distance and step_1_hash in self.existing_cable_dict:
                                 step_score_1 = 2
-                            if new_distance < distance and step_1_hash not in self.existing_cable_dict:
+                            if new_distance_1 < distance and step_1_hash not in self.existing_cable_dict:
                                 step_score_1 = 1
-                            if new_distance > distance and step_1_hash not in self.existing_cable_dict:
+                            else:
                                 step_score_1 = 0
-                            if new_distance > distance and step_1_hash in self.existing_cable_dict:
-                                step_score_1 = 0
+                            # if new_distance_1 > distance and step_1_hash not in self.existing_cable_dict:
+                            #     step_score_1 = 0
+                            # if new_distance_1 > distance and step_1_hash in self.existing_cable_dict:
+                            #     step_score_1 = 0
 
                             self.step_score_list.append(step_score_1)
                             self.step_list.append(step_1)
+                            self.distance_list.append(new_distance_1)
 
                         if choice == 2:
                             step_score_2 = 0
@@ -72,18 +75,22 @@ class Search_Cables():
                             step_2_hash = tuple(step_2)
 
                             #compute the potential new distance with this stap
-                            new_distance = abs(battery.x - (x_loc + 1)) + abs(battery.y - y_loc)
+                            new_distance_2 = abs(battery.x - (x_loc + 1)) + abs(battery.y - y_loc)
 
-                            if new_distance < distance and step_2_hash in self.existing_cable_dict:
+                            if new_distance_2 < distance and step_2_hash in self.existing_cable_dict:
                                 step_score_2 = 2
-                            if new_distance < distance and step_2_hash not in self.existing_cable_dict:
+                            if new_distance_2 < distance and step_2_hash not in self.existing_cable_dict:
                                 step_score_2 = 1
-                            if new_distance > distance and step_2_hash not in self.existing_cable_dict:
+                            else:
                                 step_score_2 = 0
-                            if new_distance > distance and step_2_hash in self.existing_cable_dict:
-                                step_score_2 = 0
+                            # if new_distance_2 > distance and step_2_hash not in self.existing_cable_dict:
+                            #     step_score_2 = 0
+                            # if new_distance_2 > distance and step_2_hash in self.existing_cable_dict:
+                            #     step_score_2 = 0
+
                             self.step_score_list.append(step_score_2)
                             self.step_list.append(step_2)
+                            self.distance_list.append(new_distance_2)
 
                         if choice == 3:
                             step_score_3 = 0
@@ -91,18 +98,22 @@ class Search_Cables():
                             step_3_hash = tuple(step_3)
 
                             #compute the potential new distance with this stap
-                            new_distance = abs(battery.x - x_loc) + abs(battery.y - (y_loc + 1))
+                            new_distance_3 = abs(battery.x - x_loc) + abs(battery.y - (y_loc + 1))
 
-                            if new_distance < distance and step_3_hash in self.existing_cable_dict:
+                            if new_distance_3 < distance and step_3_hash in self.existing_cable_dict:
                                 step_score_3 = 2
-                            if new_distance < distance and step_3_hash not in self.existing_cable_dict:
+                            if new_distance_3 < distance and step_3_hash not in self.existing_cable_dict:
                                 step_score_3 = 1
-                            if new_distance > distance and step_3_hash not in self.existing_cable_dict:
+                            else:
                                 step_score_3 = 0
-                            if new_distance > distance and step_3_hash in self.existing_cable_dict:
-                                step_score_3 = 0
+                            # if new_distance_3 > distance and step_3_hash not in self.existing_cable_dict:
+                            #     step_score_3 = 0
+                            # if new_distance_3 > distance and step_3_hash in self.existing_cable_dict:
+                            #     step_score_3 = 0
+
                             self.step_score_list.append(step_score_3)
                             self.step_list.append(step_3)
+                            self.distance_list.append(new_distance_3)
 
                         if choice == 4:
                             step_score_4 = 0
@@ -110,56 +121,61 @@ class Search_Cables():
                             step_4_hash = tuple(step_4)
 
                             #compute the potential new distance with this stap
-                            new_distance = abs(battery.x - x_loc) + abs(battery.y - (y_loc - 1))
+                            new_distance_4 = abs(battery.x - x_loc) + abs(battery.y - (y_loc - 1))
 
                             # Add score to each step based on it's characteristics
-                            if new_distance < distance and step_4_hash in self.existing_cable_dict:
+                            if new_distance_4 < distance and step_4_hash in self.existing_cable_dict:
                                 step_score_4 = 2
-                            if new_distance < distance and step_4_hash not in self.existing_cable_dict:
+                            if new_distance_4 < distance and step_4_hash not in self.existing_cable_dict:
                                 step_score_4 = 1
-                            if new_distance > distance and step_4_hash not in self.existing_cable_dict:
+                            else:
                                 step_score_4 = 0
-                            if new_distance > distance and step_4_hash in self.existing_cable_dict:
-                                step_score_4 = 0
+                            # if new_distance_4 > distance and step_4_hash not in self.existing_cable_dict:
+                            #     step_score_4 = 0
+                            # if new_distance_4 > distance and step_4_hash in self.existing_cable_dict:
+                            #     step_score_4 = 0
 
                             self.step_score_list.append(step_score_4)
                             self.step_list.append(step_4)
+                            self.distance_list.append(new_distance_4)
 
-                    # find step with highest score
-                    highest_index = self.step_score_list.index(max(self.step_score_list))
-                    #print(self.step_score_list[highest_index])
-                    #print('nieuw')
+                            # find step with highest score
+                            highest_index = self.step_score_list.index(max(self.step_score_list))
 
-                    for index, highest in enumerate(self.step_score_list):
-                        cable_key = tuple(self.step_list[highest_index])
+                            # find the step which belongs with the highest score
+                            for index, highest in enumerate(self.step_score_list):
+                                cable_key = tuple(self.step_list[highest_index])
+
+                                #find the new distance which belongs with the highest score
+                                for index, distance in enumerate(self.step_score_list):
+                                    new_distance = self.distance_list[highest_index]
+
+                distance = new_distance
 
                     #print(ideal_step)
                     # use this score to find the best step.
                     # ideal_step_index = self.step_list.index(highest_score)
                     # ideal_step = self.step_list[ideal_step_index]
 
+                self.steps_count += 1
+
+                x_loc = cable_key[2]
+                y_loc = cable_key[3]
+                house_dict['grid'].append(f'{x_loc}, {y_loc}')
+
+                # Add this list to the dictionary
+                if cable_key not in self.existing_cable_dict:
+                    self.existing_cable_dict[cable_key] = 1
                     self.steps_count += 1
 
-                    x_loc = cable_key[2]
-                    y_loc = cable_key[3]
-                    house_dict['grid'].append(f'{x_loc}, {y_loc}')
+                self.costs = (self.steps_count * 9) + 2500
 
-                    # self.cable_list.append(ideal_step)
-                    # cable_key = (f'{self.cable_list}')
-
-                    # Add this list to the dictionary
-                    if cable_key not in self.existing_cable_dict:
-                        self.existing_cable_dict[cable_key] = 1
-
-                print(self.existing_cable_dict)
-
-                distance = new_distance
-
+                # print(self.existing_cable_dict)
                     #self.cable_list.append(y_loc)
 
             plt.plot(x_list, y_list, 'k--')
 
-        return self.steps_count, self.cable_list, self.existing_cable_dict
+        return self.steps_count, self.cable_list, self.existing_cable_dict, self.costs
 
 
 
