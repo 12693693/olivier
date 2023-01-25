@@ -13,7 +13,7 @@ class Cables():
         distance = abs(x_battery - x_loc) + abs(y_battery - y_loc)
 
         return distance
-<<<<<<< HEAD
+
 
     def random_try(self, list_with_houses, list_with_batteries):
         '''
@@ -30,7 +30,7 @@ class Cables():
                 y_loc = house_dict['house location'][1]
                 # location_battery_x = battery.x
                 # location_battery_y = battery.y
-=======
+
 
     def try_steps(self, x_battery, y_battery, x_loc, y_loc, distance, house_dict):
         ''' this function takes a starting point and a battery location, and repeatedly
@@ -40,7 +40,7 @@ class Cables():
         # distance = self.compute_distance(x_battery, y_battery, x_loc, y_loc)
         while distance != 0:
             choice = random.randint(1, 4)
->>>>>>> 893361783a8cadf75c20ad5969ee64ed5079c94b
+
 
 
             # take a step left
