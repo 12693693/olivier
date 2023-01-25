@@ -270,7 +270,7 @@ class Smartgrid():
                     old_location = house_dict['grid'][i]
                     new_location = house_dict['grid'][i + 1]
                     step = f'{old_location}, {new_location}'
-                    print(step)
+
 
                     if step in steps_set:
                         self.total_cost -= 9
