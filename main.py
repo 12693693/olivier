@@ -8,7 +8,7 @@ from code.Classes.smartgrid import Smartgrid
 from code.Algorithms.randomize import Randomize
 from code.Algorithms.cable_90_degree import Cables
 #from code.Algorithms.search_cables import Search_Cables
-from code.Algorithms.random_try import Cables
+#from code.Algorithms.random_try import Cables
 from code.Algorithms.greedy import Greedy
 #from code.Algorithms.search_cables import Search_Cables
 from code.Algorithms.hill_climber import Hill_Climber
@@ -68,15 +68,16 @@ if __name__ == "__main__":
     cable_random = Cables()
 
 
-    list_with_costs= []
+    list_with_costs_random_90= []
     my_smartgrid.district_name()
 
     # batteries_filled = copy.deepcopy(batteries)
     # houses_filled = copy.deepcopy(houses)
 
     # -------------------- loop with random and 90 degrees ----------
+    # list_with_costs_random_90= []
     #
-    # for i in range(500):
+    # for i in range(1000):
     #
     #     batteries_filled = copy.deepcopy(batteries)
     #     houses_filled = copy.deepcopy(houses)
@@ -91,47 +92,51 @@ if __name__ == "__main__":
     #     my_smartgrid.create_district_dict()
     #     list = my_smartgrid.make_output()
     #     list_with_costs.append(list[0]['costs shared'])
-    # # print(list)
     #     print('costs', list[0]['costs shared'])
     #     print(f'{i}/1000')
     #
     #
-    # series_with_costs = pd.Series(list_with_costs)
-    # print(series_with_costs)
+    # series_with_costs_random_90 = pd.Series(list_with_costs_random_90)
+    # print(series_with_costs_random_90)
     # plt.clf()
-    # sns.histplot(data=series_with_costs)
+    # plt.title('houses random assigned with 90 degree cables')
+    # sns.histplot(data=series_with_costs_random_90)
     # plt.show()
 
 
 #----------------------------loop with greedy and 90 degrees -------------------
-    # for i in range(500):
-    #
-    #     batteries_filled = copy.deepcopy(batteries)
-    #     houses_filled = copy.deepcopy(houses)
-    #
-    #     greedy_algo.assign_closest_battery(houses_filled, batteries_filled)
-    #
-    #     step_count = cable_90_degree.make_90_degrees_cables(houses_filled, batteries_filled)
-    #
-    #     # print('step_count', step_count)
-    #     # my_smartgrid.draw_plot()
-    #     my_smartgrid.costs(step_count)
-    #     my_smartgrid.create_district_dict()
-    #     list = my_smartgrid.make_output()
-    #     list_with_costs.append(list[0]['costs shared'])
-    # # print(list)
-    #     print('costs', list[0]['costs shared'])
-    #     print(f'{i}/1000')
-    #
-    #
-    # series_with_costs = pd.Series(list_with_costs)
-    # print(series_with_costs)
-    # plt.clf()
-    # sns.histplot(data=series_with_costs)
-    # plt.show()
+    list_with_costs_greedy_90 = []
+
+    for i in range(500):
+
+        batteries_filled = copy.deepcopy(batteries)
+        houses_filled = copy.deepcopy(houses)
+
+        greedy_algo.assign_closest_battery(houses_filled, batteries_filled)
+
+        step_count = cable_90_degree.make_90_degrees_cables(houses_filled, batteries_filled)
+
+        # print('step_count', step_count)
+        # my_smartgrid.draw_plot()
+        my_smartgrid.costs(step_count)
+        my_smartgrid.create_district_dict()
+        list = my_smartgrid.make_output()
+        list_with_costs.append(list[0]['costs shared'])
+    # print(list)
+        print('costs', list[0]['costs shared'])
+        print(f'{i}/1000')
+
+
+    series_with_costs_greedy_90 = pd.Series(ist_with_costs_greedy_90)
+    print(series_with_costs_greedy_90)
+    plt.clf()
+    plt.title('houses assigned with greedy and 90 degree cables')
+    sns.barplot(data=series_with_costs_greedy_90)
+    plt.show()
 
 #------------------------- loop with hillclimber and 90 degrees ----------------
 
+    # list_with_costs_hillclimber_90 = []
     # for i in range(500):
     #
     #
@@ -179,10 +184,10 @@ if __name__ == "__main__":
     #     print(f'{i}/1000')
     #
     #
-    # series_with_costs = pd.Series(list_with_costs)
-    # print(series_with_costs)
+    # series_with_costs_hillclimber_90 = pd.Series(list_with_costs_hillclimber_90)
+    # print(series_with_costs_hillclimber_90)
     # plt.clf()
-    # sns.histplot(data=series_with_costs)
+    # sns.histplot(data=series_with_costs_hillclimber_90)
     # plt.show()
 
 
@@ -204,29 +209,29 @@ if __name__ == "__main__":
 
 # ------------------------greedy & random-try ---------------------------------
 
-    greedy_algo.assign_closest_battery(houses, batteries)
-
-    for i in range(50):
-        batteries_filled = copy.deepcopy(batteries)
-        houses_filled = copy.deepcopy(houses)
-
-        greedy_algo.assign_closest_battery(houses_filled, batteries_filled)
-        step_count = cable_random.random_try(houses_filled, batteries_filled)
-
-    # my_smartgrid.draw_plot()
-        my_smartgrid.costs(step_count)
-        my_smartgrid.create_district_dict()
-        list = my_smartgrid.make_output()
-        list_with_costs.append(list[0]['costs shared'])
-
-        print('costs', list[0]['costs shared'])
-        print(f'{i}/500')
-
-    series_with_costs = pd.Series(list_with_costs)
-    print(series_with_costs.describe())
-    plt.clf()
-    sns.histplot(data=series_with_costs)
-    plt.show()
+    # greedy_algo.assign_closest_battery(houses, batteries)
+    #
+    # for i in range(50):
+    #     batteries_filled = copy.deepcopy(batteries)
+    #     houses_filled = copy.deepcopy(houses)
+    #
+    #     greedy_algo.assign_closest_battery(houses_filled, batteries_filled)
+    #     step_count = cable_random.random_try(houses_filled, batteries_filled)
+    #
+    # # my_smartgrid.draw_plot()
+    #     my_smartgrid.costs(step_count)
+    #     my_smartgrid.create_district_dict()
+    #     list = my_smartgrid.make_output()
+    #     list_with_costs.append(list[0]['costs shared'])
+    #
+    #     print('costs', list[0]['costs shared'])
+    #     print(f'{i}/500')
+    #
+    # series_with_costs = pd.Series(list_with_costs)
+    # print(series_with_costs.describe())
+    # plt.clf()
+    # sns.histplot(data=series_with_costs)
+    # plt.show()
 
     # ------------------- greedy houses and cables 90 ------------
     #
