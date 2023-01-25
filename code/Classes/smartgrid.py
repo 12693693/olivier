@@ -256,7 +256,26 @@ class Smartgrid():
         print(self.total_cost, 'aangemaakte costs')
 
     def costs_shared(self):
+        '''
+        This function computes the total cost for the district if the cables are
+        shared.
+        '''
         steps_set = set()
+
+        self.costs_own(10)
+
+        for battery in self.battery_list:
+            for house_dict in battery.dict['connected houses']:
+                for i in range(len(house_dict['grid']) - 1):
+                    old_location = house_dict['grid'][i]
+                    new_location = house_dict['grid'][i + 1]
+                    step = f'{old_location}, {new_location}'
+                    print(step)
+
+                    if step in steps_set:
+                        self.total_cost -= 9
+                    else:
+                        steps_set.add(step)
 
 
 
