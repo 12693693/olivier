@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-class Cables():
+class Cables_90():
 
     def get_location(self, dictionary_of_house):
         self.location_house_x = dictionary_of_house['house location'][0]

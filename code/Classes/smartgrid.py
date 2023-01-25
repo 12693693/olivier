@@ -237,16 +237,47 @@ class Smartgrid():
     #                 # save the individual steps in the grid list in the dictionary of the house
     #                 house_dict['grid'].append(f'{x_loc}, {y_loc}')
 
-    def costs(self, steps_count):
+    def costs_own(self, steps_count):
         '''
-        This function computes the total cost for the district.
+        This function computes the total cost for the district if the cables are
+        not shared.
         '''
 
         battery_costs = len(self.battery_list) * 5000
-        cable_costs = steps_count * 9
+        cable_costs = 0
+
+        for battery in self.battery_list:
+            for house_dict in battery.dict['connected houses']:
+                cable_costs += (len(house_dict['grid']) - 1) * 9
+
+        # cable_costs = steps_count * 9
 
         self.total_cost = battery_costs + cable_costs
         print(self.total_cost, 'aangemaakte costs')
+
+    def costs_shared(self):
+        '''
+        This function computes the total cost for the district if the cables are
+        shared.
+        '''
+        steps_set = set()
+
+        self.costs_own(10)
+
+        for battery in self.battery_list:
+            for house_dict in battery.dict['connected houses']:
+                for i in range(len(house_dict['grid']) - 1):
+                    old_location = house_dict['grid'][i]
+                    new_location = house_dict['grid'][i + 1]
+                    step = f'{old_location}, {new_location}'
+
+
+                    if step in steps_set:
+                        self.total_cost -= 9
+                    else:
+                        steps_set.add(step)
+
+
 
     def district_name(self):
         '''

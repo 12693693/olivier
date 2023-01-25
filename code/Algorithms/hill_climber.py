@@ -1,10 +1,10 @@
 from .randomize import Randomize
-from .cable_90_degree import Cables
+from .cable_90_degree import Cables_90
 from ..Classes.smartgrid import Smartgrid
 import random
 import copy
 
-make_cables = Cables()
+make_cables = Cables_90()
 #my_smartgrid = Smartgrid()
 
 

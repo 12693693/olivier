@@ -13,6 +13,27 @@ class Cables():
         distance = abs(x_battery - x_loc) + abs(y_battery - y_loc)
 
         return distance
+<<<<<<< HEAD
+=======
+
+
+    def random_try(self, list_with_houses, list_with_batteries):
+        '''
+        This function is an algorithm that connects the houses to the batteries
+        by taking a random step, evaluating if this step is closer to the battery
+        and repeating the process
+        '''
+        self.steps_count = 0
+        for battery in list_with_batteries:
+            for house_dict in battery.dict['connected houses']:
+
+                # find x and y coordinates for the battery and connected house
+                x_loc = house_dict['house location'][0]
+                y_loc = house_dict['house location'][1]
+                # location_battery_x = battery.x
+                # location_battery_y = battery.y
+
+>>>>>>> a84f23104c8dbcfa26bb80bc378479488aa82b9b
 
     def try_steps(self, x_battery, y_battery, x_loc, y_loc, distance, house_dict):
         ''' this function takes a starting point and a battery location, and repeatedly
@@ -22,6 +43,10 @@ class Cables():
         # distance = self.compute_distance(x_battery, y_battery, x_loc, y_loc)
         while distance != 0:
             choice = random.randint(1, 4)
+<<<<<<< HEAD
+=======
+
+>>>>>>> a84f23104c8dbcfa26bb80bc378479488aa82b9b
 
 
             # take a step left
