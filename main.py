@@ -75,33 +75,32 @@ if __name__ == "__main__":
     # houses_filled = copy.deepcopy(houses)
 
     # -------------------- loop with random and 90 degrees ----------
-    # list_with_costs_random_90= []
-    #
-    # for i in range(1000):
-    #
-    #     batteries_filled = copy.deepcopy(batteries)
-    #     houses_filled = copy.deepcopy(houses)
-    #
-    #     random_algo.assign_house_random(houses_filled, batteries_filled)
-    #
-    #     step_count = cable_90_degree.make_90_degrees_cables(houses_filled, batteries_filled)
-    #
-    #     # print('step_count', step_count)
-    #     # my_smartgrid.draw_plot()
-    #     my_smartgrid.costs(step_count)
-    #     my_smartgrid.create_district_dict()
-    #     list = my_smartgrid.make_output()
-    #     list_with_costs.append(list[0]['costs shared'])
-    #     print('costs', list[0]['costs shared'])
-    #     print(f'{i}/1000')
-    #
-    #
-    # series_with_costs_random_90 = pd.Series(list_with_costs_random_90)
-    # print(series_with_costs_random_90)
-    # plt.clf()
-    # plt.title('houses random assigned with 90 degree cables')
-    # sns.histplot(data=series_with_costs_random_90)
-    # plt.show()
+    list_with_costs_random_90 = []
+
+    for i in range(1000):
+
+        batteries_filled = copy.deepcopy(batteries)
+        houses_filled = copy.deepcopy(houses)
+
+        random_algo.assign_house_random(houses_filled, batteries_filled)
+
+        step_count = cable_90_degree.make_90_degrees_cables(houses_filled, batteries_filled)
+
+        # my_smartgrid.draw_plot()
+        my_smartgrid.costs(step_count)
+        my_smartgrid.create_district_dict()
+        list = my_smartgrid.make_output()
+        list_with_costs.append(list[0]['costs shared'])
+        print('costs', list[0]['costs shared'])
+        print(f'{i}/1000')
+
+
+    series_with_costs_random_90 = pd.Series(list_with_costs_random_90)
+    print(series_with_costs_random_90)
+    plt.clf()
+    plt.title('houses random assigned with 90 degree cables')
+    sns.histplot(data=series_with_costs_random_90)
+    plt.show()
 
 
 #----------------------------loop with greedy and 90 degrees -------------------
@@ -136,59 +135,38 @@ if __name__ == "__main__":
 
 #------------------------- loop with hillclimber and 90 degrees ----------------
 
-    # list_with_costs_hillclimber_90 = []
-    # for i in range(500):
-    #
-    #
-    #     my_smartgrid_filled = copy.deepcopy(my_smartgrid)
-    #
-    #     my_smartgrid_filled.battery_list = copy.deepcopy(batteries)
-    #     my_smartgrid_filled.house_list = copy.deepcopy(houses)
-    #
-    #
-    #
-    #     random_algo.assign_house_random(my_smartgrid_filled.house_list, my_smartgrid_filled.battery_list)
-    #
-    #     step_count = cable_90_degree.make_90_degrees_cables(my_smartgrid_filled.house_list, my_smartgrid_filled.battery_list)
-    #
-    #     my_smartgrid_filled.costs(step_count)
-    #
-    #     # for battery in batteries_filled:
-    #     #     print(battery.dict['connected houses'])
-    #
-    #     # print(my_smartgrid_filled.total_cost, 'nieuwe')
-    #     # for battery in my_smartgrid.battery_list:
-    #     #     print(battery.dict['connected houses'])
-    #     # print(my_smartgrid_filled.battery_list)
-    #
-    #     random_hill_climber = Hill_Climber(my_smartgrid_filled)
-    #     random_hill_climber.run(500)
-    #     # print('step_count', step_count)
-    #     # my_smartgrid.draw_plot()
-    #
-    #
-    #
-    #
-    #
-    #
-    #     my_smartgrid_filled.create_district_dict()
-    #     list = my_smartgrid_filled.make_output()
+    list_with_costs_hillclimber_90 = []
+    for i in range(500):
 
+        my_smartgrid_filled = copy.deepcopy(my_smartgrid)
 
+        my_smartgrid_filled.battery_list = copy.deepcopy(batteries)
+        my_smartgrid_filled.house_list = copy.deepcopy(houses)
 
+        random_algo.assign_house_random(my_smartgrid_filled.house_list, my_smartgrid_filled.battery_list)
 
+        step_count = cable_90_degree.make_90_degrees_cables(my_smartgrid_filled.house_list, my_smartgrid_filled.battery_list)
 
-    #
-    # # print(list)
-    #     print('costs', list[0]['costs shared'])
-    #     print(f'{i}/1000')
-    #
-    #
-    # series_with_costs_hillclimber_90 = pd.Series(list_with_costs_hillclimber_90)
-    # print(series_with_costs_hillclimber_90)
-    # plt.clf()
-    # sns.histplot(data=series_with_costs_hillclimber_90)
-    # plt.show()
+        my_smartgrid_filled.costs(step_count)
+
+        random_hill_climber = Hill_Climber(my_smartgrid_filled)
+        random_hill_climber.run(500)
+        # print('step_count', step_count)
+        # my_smartgrid.draw_plot()
+
+        my_smartgrid_filled.create_district_dict()
+        list = my_smartgrid_filled.make_output()
+        list_with_costs_hillclimber_90.append(list[0]['costs shared'])
+
+    # print(list)
+        print('costs', list[0]['costs shared'])
+        print(f'{i}/1000')
+
+    series_with_costs_hillclimber_90 = pd.Series(list_with_costs_hillclimber_90)
+    print(series_with_costs_hillclimber_90)
+    plt.clf()
+    sns.histplot(data=series_with_costs_hillclimber_90)
+    plt.show()
 
 
 # -----------------------------------------------------------------------------
@@ -227,7 +205,7 @@ if __name__ == "__main__":
         print(f'{i}/500')
 
     series_with_costs_greedy_random_try = pd.Series(list_with_costs_greedy_random_try)
-    print(series_with_costs_greedy_random_try.describe())
+    print(series_with_costs_greedy_random_try)
     plt.clf()
     sns.histplot(data=series_with_costs_greedy_random_try)
     plt.show()
