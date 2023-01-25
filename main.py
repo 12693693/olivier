@@ -264,22 +264,22 @@ if __name__ == "__main__":
 #------------------------- search cables --------------------------
 
     random_algo = Randomize()
-    random_algo.assign_house_random(houses, batteries)
+    random_algo.assign_house_random(my_smartgrid.house_list, my_smartgrid.battery_list)
 
     cable_search = Search_Cables()
-    step_count, cable_list, existing_cable_dict, costs = cable_search.search_cables(houses, batteries)
+    step_count, cable_list, existing_cable_dict = cable_search.search_cables(my_smartgrid.house_list, my_smartgrid.battery_list)
 
     my_smartgrid.draw_plot()
     my_smartgrid.costs(step_count)
-    my_smartgrid.district_name()
+    # my_smartgrid.district_name()
     my_smartgrid.create_district_dict()
     list = my_smartgrid.make_output()
     #print(list)
 # print('costs', list[0]['costs shared'])
     print(cable_list)
 
-    self.assign_house_random() # CHECK
-    self.make_cables()
+    # self.assign_house_random() # CHECK
+    # self.make_cables()
 
 
     #---------------- hill climber ---------------------------------------------
