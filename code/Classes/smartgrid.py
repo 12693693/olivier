@@ -246,6 +246,7 @@ class Smartgrid():
         cable_costs = steps_count * 9
 
         self.total_cost = battery_costs + cable_costs
+        print(self.total_cost, 'aangemaakte costs')
 
     def district_name(self):
         '''
