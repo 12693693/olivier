@@ -230,31 +230,6 @@ if __name__ == "__main__":
     # create list in which to store the costs for this combination of algorithms
     list_with_costs_greedy_random_try = []
 
-<<<<<<< HEAD
-    # greedy_algo.assign_closest_battery(houses, batteries)
-    #
-    # for i in range(50):
-    #     batteries_filled = copy.deepcopy(batteries)
-    #     houses_filled = copy.deepcopy(houses)
-    #
-    #     greedy_algo.assign_closest_battery(houses_filled, batteries_filled)
-    #     step_count = cable_random.random_try(houses_filled, batteries_filled)
-    #
-    # # my_smartgrid.draw_plot()
-    #     my_smartgrid.costs(step_count)
-    #     my_smartgrid.create_district_dict()
-    #     list = my_smartgrid.make_output()
-    #     list_with_costs.append(list[0]['costs shared'])
-    #
-    #     print('costs', list[0]['costs shared'])
-    #     print(f'{i}/500')
-    #
-    # series_with_costs = pd.Series(list_with_costs)
-    # print(series_with_costs.describe())
-    # plt.clf()
-    # sns.histplot(data=series_with_costs)
-    # plt.show()
-=======
     for i in range(100):
 
         # create battery and houses list by making a deepcopy
@@ -282,7 +257,6 @@ if __name__ == "__main__":
 
     # draw smartgrid for demonstration
     my_smartgrid.draw_plot()
->>>>>>> a84f23104c8dbcfa26bb80bc378479488aa82b9b
 
     # create series to plot later
     series_with_costs_greedy_random_try = pd.Series(list_with_costs_greedy_random_try)
