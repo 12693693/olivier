@@ -3,9 +3,9 @@ import math
 
 from .hill_climber import Hill_Climber
 
-class SimulatedAnnealing(Hill_Climber):
+class Simulated_Annealing(Hill_Climber):
 
-     def __init__(self, smartgrid_solution, temperature=1):
+    def __init__(self, smartgrid_solution, temperature=1):
         # Use the init of the Hillclimber class
         super().__init__(smartgrid_solution)
 
@@ -14,12 +14,13 @@ class SimulatedAnnealing(Hill_Climber):
         self.T = temperature
 
 
-      def update_temperature(self):
+    def update_temperature(self):
         """
         This function implements a *linear* cooling scheme.
         Temperature will become zero after all iterations passed to the run()
         method have passed.
         """
+
         self.T = self.T - (self.T0 / self.iterations)
 
         # Exponential would look like this:
