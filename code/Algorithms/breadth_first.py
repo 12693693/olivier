@@ -36,7 +36,7 @@ class Breadth_first():
                 x_list = [x_loc]
                 y_list = [y_loc]
 
-                x_distance, y_distance = compute_distance(battery.x, battery.y, x_loc, y_loc)
+                x_distance, y_distance = self.compute_distance(battery.x, battery.y, x_loc, y_loc)
 
                 # create steps list for the steps that should be taken
                 if x_distance < 0:
@@ -52,7 +52,7 @@ class Breadth_first():
                     for i in range(y_distance):
                         steps_list.append('U')
 
-                for i in range(10)
+                for i in range(10):
                     # shuffle the steps in the list randomly
                     random.shuffle(steps_list)
 
