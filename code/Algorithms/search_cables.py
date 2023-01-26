@@ -27,16 +27,12 @@ class Search_Cables():
 
                 # compute distance between the battery and the assigned house
                 distance = abs(battery.x - location_house_x) + abs(battery.y - location_house_y)
-                #
+
                 # set starting point to the location of the house
                 x_loc = location_house_x
                 y_loc = location_house_y
 
                 house_dict['grid'].append(f'{x_loc}, {y_loc}')
-
-                #save the individuap cable step in a list to later add it to a dictionary
-                # self.cable_list.append(x_loc)
-                # self.cable_list.append(y_loc)
 
                 x_list = [x_loc]
                 y_list = [y_loc]
@@ -141,9 +137,9 @@ class Search_Cables():
 
 
 
-                        # find step with highest score
+                    # find step with highest score
                     if self.step_score_list.count(2) > 1:
-                        list_index_2 =  []
+                        list_index_2 = []
 
                         for score in self.step_score_list:
                             # indexen vna de 1
@@ -204,7 +200,7 @@ class Search_Cables():
 
         return self.steps_count, self.cable_list, self.existing_cable_dict
 
-    
+
 
 
 # #-------------------- step left ------------------
