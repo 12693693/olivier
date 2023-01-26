@@ -6,6 +6,7 @@ import copy
 import json
 from .houses import Houses
 from .battery import Batteries
+import os
 
 class Smartgrid():
     def __init__(self, houses_df, batteries_df):
@@ -289,12 +290,23 @@ class Smartgrid():
 
         self.district_name = input("What district are you using?: ")
 
+    def make_f_string(self):
+        for battery in self.battery_list:
+            battery.dict['battery location'] = f'{battery.x}, {battery.y}'
+
+            for house_dict in battery.dict['connected houses']:
+                location_x = house_dict['house location'][0]
+                location_y = house_dict['house location'][1]
+
+                house_dict['house location'] = f'{location_x}, {location_y}'
+                print(house_dict['house location'])
+
     def create_district_dict(self):
         '''
         This function combines the district name and costs in one dictionary.
         '''
 
-        self.district_cost_dict['district'] = self.district_name
+        self.district_cost_dict['district'] = int(self.district_name)
         self.district_cost_dict['costs shared'] = self.total_cost
 
     def make_output(self):
@@ -308,8 +320,9 @@ class Smartgrid():
 
         json_list = json.dumps(self.combined_list)
 
+        cur_path = os.path.dirname(__file__)
 
-        with open('././resultaten/output.json') as outfile:
+        with open(cur_path + '/../../resultaten/output.json', 'w') as outfile:
             outfile.write(json_list)
 
 
