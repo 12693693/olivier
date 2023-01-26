@@ -183,6 +183,7 @@ class Further_Cables():
 
                     x_list.append(x_loc)
                     y_list.append(y_loc)
+                    house_dict['grid'].append(f'{x_loc}, {y_loc}')
                     # house_dict['grid'].append(f'{x_loc}, {y_loc}')
                     # print(house_dict['grid'])
 
@@ -193,9 +194,9 @@ class Further_Cables():
                     #
                     # self.costs = (self.steps_count * 9) + 2500
 
-                house_dict['grid'].append(f'{x_loc}, {y_loc}')
 
                 plt.plot(x_list, y_list, 'k--')
+            
             print(count)
 
         return self.steps_count, self.cable_list, self.existing_cable_dict

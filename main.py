@@ -530,22 +530,63 @@ if __name__ == "__main__":
 
     #---------------- further cables ---------------------------------------------
 
-    random_algo = Randomize()
-    random_algo.assign_house_random(my_smartgrid.house_list, my_smartgrid.battery_list)
+        # random_algo = Randomize()
+        # random_algo.assign_house_random(my_smartgrid.house_list, my_smartgrid.battery_list)
+        #
+        # further_cable_search = Further_Cables()
+        # step_count, cable_list, existing_cable_dict = further_cable_search.further_cables(my_smartgrid.house_list, my_smartgrid.battery_list)
+        #
+        # my_smartgrid.draw_plot()
+        # my_smartgrid.costs_shared()
+        # # my_smartgrid.district_name()
+        # my_smartgrid.create_district_dict()
+        # list = my_smartgrid.make_output()
+        # #print(list)
+        # print('costs', list[0]['costs shared'])
+        # print(cable_list)
+#____________________________________________________________________
 
-    further_cable_search = Further_Cables()
-    step_count, cable_list, existing_cable_dict = further_cable_search.further_cables(my_smartgrid.house_list, my_smartgrid.battery_list)
+# kan voor beide dus!
+    # create list in which to keep track of the costs for this combination of algorithms
+    list_with_costs_further = []
 
+    for i in range(100):
+
+        # create battery and houses list of the smartgrid, by making deepcopies
+        my_smartgrid.battery_list = copy.deepcopy(batteries)
+        my_smartgrid.houses_list = copy.deepcopy(houses)
+
+        # assign the houses with the greedy algorithm
+        greedy_algo.assign_closest_battery(my_smartgrid.houses_list, my_smartgrid.battery_list)
+
+        # lay the cables with the 90 degrees algorithm
+        step_count = further_cables.further_cables(my_smartgrid.houses_list, my_smartgrid.battery_list)
+
+        # calculate the costs
+        my_smartgrid.costs_shared()
+
+        # create output
+        my_smartgrid.create_district_dict()
+        list = my_smartgrid.make_output()
+
+        # append costs to the list of costs for this combination of algorithms
+        list_with_costs_further.append(list[0]['costs shared'])
+
+        print('costs', list[0]['costs shared'])
+        print(f'{i}/1000')
+
+    # create plot of smartgrid for demonstration
     my_smartgrid.draw_plot()
-    my_smartgrid.costs_shared()
-    # my_smartgrid.district_name()
-    my_smartgrid.create_district_dict()
-    list = my_smartgrid.make_output()
-    #print(list)
-    print('costs', list[0]['costs shared'])
-    print(cable_list)
 
+    # make series to plot later
+    series_with_costs_further = pd.Series(list_with_costs_further)
+    print(series_with_costs_further)
 
+    # plot the distribution of costs
+    plt.clf()
+    plt.title('houses assigned with greedy and further search algorithm')
+    sns.histplot(data=series_with_costs_further)
+    plt.show()
     #---------------- hill climber ---------------------------------------------
 #     random_algo = Randomize()
 #     random_algo.assign_house_random(houses, batteries)
