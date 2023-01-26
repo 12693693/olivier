@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 from code.Classes.smartgrid import Smartgrid
 from code.Algorithms.randomize import Randomize
 from code.Algorithms.cable_90_degree import Cables_90
-#from code.Algorithms.search_cables import Search_Cables
 from code.Algorithms.random_try import Cables
 from code.Algorithms.greedy import Greedy
 from code.Algorithms.search_cables import Search_Cables
@@ -208,7 +207,6 @@ if __name__ == "__main__":
     # plt.title('houses assigned with hillclimber and cables 90 degrees')
     # sns.histplot(data=series_with_costs_hillclimber_90)
     # plt.show()
-
 
 # -----------------------------------------------------------------------------
 

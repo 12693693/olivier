@@ -144,6 +144,7 @@ class Cables():
         self.steps_count = 0
 
         for battery in list_with_batteries:
+            color = 
             for house_dict in battery.dict['connected houses']:
 
                 # find x and y coordinates for the battery and connected house
@@ -161,5 +162,5 @@ class Cables():
 
                 self.try_steps(battery.x, battery.y, x_loc, y_loc, distance, house_dict)
 
-                plt.plot(self.x_list, self.y_list, 'k--')
+                plt.plot(self.x_list, self.y_list, color=color, linestyle='dashed')
         return self.steps_count
