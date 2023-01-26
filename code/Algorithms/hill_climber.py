@@ -18,44 +18,61 @@ class Hill_Climber():
         # fill the grid of the newly added houses
         return make_cables.make_90_degrees_cable(house_dict, battery)
 
+    def check_capacity(self, battery_1, battery_2, house_1, house_2):
+        if battery_1.capacity + house_1['house output'] - house_2['house output'] >= 0 and battery_2.capacity + house_2['house output'] - house_1['house output'] >= 0:
 
-    def switch_two_houses(self, new_smartgrid):
-        list_with_batteries = new_smartgrid.battery_list
-        #print(len(list_with_batteries))
+            return True
+
+        else:
+            return False
+
+    def choose_battery_and_houses(self, list_with_batteries):
 
         # choose two random batteries
-        battery_1 = random.choice(list_with_batteries)
-        battery_2 = random.choice(list_with_batteries)
+        self.battery_1 = random.choice(list_with_batteries)
+        self.battery_2 = random.choice(list_with_batteries)
 
-        while battery_1 == battery_2:
-            battery_2 = random.choice(list_with_batteries)
+        while self.battery_1 == self.battery_2:
+            self.battery_2 = random.choice(list_with_batteries)
 
         # choose two houses that were assigned to the batteries and remove them
         # and the steps count from the costs
-
-        #print(battery_1.dict['connected houses'])
-        house_1 = random.choice(battery_1.dict['connected houses'])
-        house_2 = random.choice(battery_2.dict['connected houses'])
-
-        battery_1.dict['connected houses'].remove(house_1)
-        battery_2.dict['connected houses'].remove(house_2)
+        self.house_1 = random.choice(self.battery_1.dict['connected houses'])
+        self.house_2 = random.choice(self.battery_2.dict['connected houses'])
 
 
-        # dit mag nog anders
-        self.new_costs = new_smartgrid.total_cost - (len(house_1['grid']) - 1) - (len(house_2['grid']) - 1)
-        #self.smartgrid.combined_list[0]['costs shared'] - (len(house_1['grid']) - 1) - (len(house_2['grid']) - 1)
+    def switch_two_houses(self, new_smartgrid):
+        list_with_batteries = new_smartgrid.battery_list
 
-        # reset the grid
-        house_1['grid'] = []
-        house_2['grid'] = []
+        self.choose_battery_and_houses(list_with_batteries)
 
-        # fill the grid of the houses
-        self.steps_house_1 = self.fill_new_grid(house_1, battery_2)
-        self.steps_house_2 = self.fill_new_grid(house_2, battery_1)
+        #print(house_1)
+        #print(self.check_capacity(self.battery_1, self.battery_2, self.house_1, self.house_2))
+        while self.check_capacity(self.battery_1, self.battery_2, self.house_1, self.house_2) == False:
+            #print(self.check_capacity(self.battery_1, self.battery_2, self.house_1, self.house_2))
+            self.choose_battery_and_houses(list_with_batteries)
 
-        # switch the houses and add them to a new battery
-        battery_1.dict['connected houses'].append(house_2)
-        battery_2.dict['connected houses'].append(house_1)
+        else:
+            #print(self.check_capacity(self.battery_1, self.battery_2, self.house_1, self.house_2))
+            self.battery_1.dict['connected houses'].remove(self.house_1)
+            self.battery_2.dict['connected houses'].remove(self.house_2)
+
+
+            # dit mag nog anders
+            self.new_costs = new_smartgrid.total_cost - (len(self.house_1['grid']) - 1) - (len(self.house_2['grid']) - 1)
+            #self.smartgrid.combined_list[0]['costs shared'] - (len(house_1['grid']) - 1) - (len(house_2['grid']) - 1)
+
+            # reset the grid
+            self.house_1['grid'] = []
+            self.house_2['grid'] = []
+
+            # fill the grid of the houses
+            self.steps_house_1 = self.fill_new_grid(self.house_1, self.battery_2)
+            self.steps_house_2 = self.fill_new_grid(self.house_2, self.battery_1)
+
+            # switch the houses and add them to a new battery
+            self.battery_1.dict['connected houses'].append(self.house_2)
+            self.battery_2.dict['connected houses'].append(self.house_1)
 
     def check_solution(self, new_smartgrid):
         #print('oud zonder', self.new_costs)
