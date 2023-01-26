@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import random
 import copy
+import json
 from .houses import Houses
 from .battery import Batteries
 
@@ -302,6 +303,12 @@ class Smartgrid():
 
         for battery in self.battery_list:
             self.combined_list.append(battery.dict)
+
+        json_list = json.dumps(self.combined_list)
+
+
+        with open('././resultaten/output.json') as outfile:
+            outfile.write(json_list)
 
 
         return self.combined_list
