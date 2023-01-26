@@ -68,24 +68,24 @@ if __name__ == "__main__":
     greedy_algo = Greedy()
     cable_90_degree = Cables_90()
     cable_random = Cables()
-<<<<<<< HEAD
+
     #cable_breadth = Breadth_first()
-=======
+
     search_cables = Search_Cables()
     cable_breadth = Breadth_first()
->>>>>>> d25937087692b4699c66cc0ccad3de56b61045b0
+
 
     # prompt the user to give the district number
     my_smartgrid.district_name()
 
     # batteries_filled = copy.deepcopy(batteries)
     # houses_filled = copy.deepcopy(houses)
-<<<<<<< HEAD
+
 # ----------------------loop with greedy and breadth
     # list_with_costs_greedy_breadth = []
     #
     # for i in range(100):
-=======
+
 
     # -------------------- loop with random and 90 degrees ----------
     # create list in which to store the costs of this algorithm combination
@@ -93,12 +93,12 @@ if __name__ == "__main__":
     #
     # for i in range(100):
     #
->>>>>>> d25937087692b4699c66cc0ccad3de56b61045b0
+
     #     # create battery and houses list of the smartgrid, by making deepcopies
     #     my_smartgrid.battery_list = copy.deepcopy(batteries)
     #     my_smartgrid.houses_list = copy.deepcopy(houses)
     #
-<<<<<<< HEAD
+
     #     greedy_algo.assign_closest_battery(my_smartgrid.houses_list, my_smartgrid.battery_list)
     #
     #     cable_breadth.breadth(my_smartgrid.houses_list, my_smartgrid.battery_list)
@@ -117,7 +117,7 @@ if __name__ == "__main__":
     # plt.title('houses greedy assigned with breadth first cables')
     # sns.histplot(data=series_with_costs_greedy_breadth)
     # plt.show()
-=======
+
     #     # assign the houses with the random algorithm
     #     random_algo.assign_house_random(my_smartgrid.houses_list, my_smartgrid.battery_list)
     #
@@ -246,7 +246,7 @@ if __name__ == "__main__":
 
 # -----------------------------------------------------------------------------
 list_with_costs_greedy_breadth = []
->>>>>>> d25937087692b4699c66cc0ccad3de56b61045b0
+
 
 for i in range(100):
     # create battery and houses list of the smartgrid, by making deepcopies
