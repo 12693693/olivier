@@ -12,6 +12,7 @@ from code.Algorithms.greedy import Greedy
 from code.Algorithms.search_cables import Search_Cables
 from code.Algorithms.hill_climber import Hill_Climber
 from code.Algorithms.simulated_annealing import Simulated_Annealing
+from code.Algorithms.breadth_first import Breadth_first
 #
 # dit moet eigenlijk in classmethod
 def load_df(houses_csv, batteries_csv):
@@ -67,12 +68,40 @@ if __name__ == "__main__":
     greedy_algo = Greedy()
     cable_90_degree = Cables_90()
     cable_random = Cables()
+    cable_breadth = Breadth_first()
 
     # prompt the user to give the district number
     my_smartgrid.district_name()
 
     # batteries_filled = copy.deepcopy(batteries)
     # houses_filled = copy.deepcopy(houses)
+# ----------------------loop with greedy and breadth
+    list_with_costs_greedy_breadth = []
+
+    for i in range(100):
+        # create battery and houses list of the smartgrid, by making deepcopies
+        my_smartgrid.battery_list = copy.deepcopy(batteries)
+        my_smartgrid.houses_list = copy.deepcopy(houses)
+
+        greedy_algo.assign_closest_battery(my_smartgrid.houses_list, my_smartgrid.battery_list)
+
+        cable_breadth.breadth(my_smartgrid.houses_list, my_smartgrid.battery_list)
+
+        my_smartgrid.costs_shared()
+        my_smartgrid.create_district_dict()
+        list = my_smartgrid.make_output()
+        list_with_costs_greedy_breadth.append(list[0]['costs shared'])
+    my_smartgrid.draw_plot()
+
+    series_with_costs_greedy_breadth = pd.Series(list_with_costs_random_90)
+    print(series_with_costs_greedy_breadth)
+
+    # plot the distribution of costs for this algorithm
+    plt.clf()
+    plt.title('houses greedy assigned with breadth first cables')
+    sns.histplot(data=series_with_costs_greedy_breadth)
+    plt.show()
+
 
     # -------------------- loop with random and 90 degrees ----------
 #     # create list in which to store the costs of this algorithm combination
