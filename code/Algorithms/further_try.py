@@ -1,11 +1,11 @@
 import random
 import matplotlib.pyplot as plt
 
-class Search_Cables():
+class Further_Cables():
     def __init__(self):
         self.existing_cable_dict = {}
 
-    def search_cables(self, house_dict, battery):
+    def further_cables(self, house_dict, battery):
         self.cable_list = []
         # set starting point to the location of the house
         location_house_x = house_dict['house location'][0]
@@ -127,7 +127,6 @@ class Search_Cables():
             # Find the new distance which belongs with the highest score
             for index, distance in enumerate(self.step_score_list):
                 new_distance = self.distance_list[highest_index]
-            print(f'{x_loc}, {y_loc}')
             # Update the new distance
             distance = new_distance
 
@@ -144,7 +143,7 @@ class Search_Cables():
 
         plt.plot(x_list, y_list, 'k--')
 
-    def run_search(self, list_with_houses, list_with_batteries):
+    def run_further(self, list_with_houses, list_with_batteries):
         '''
         This function uses the previously defined cables function to connect
         to the houses. It adds in a new condition which ensures that if there is
@@ -157,7 +156,7 @@ class Search_Cables():
 
         for battery in list_with_batteries:
             for house_dict in battery.dict['connected houses']:
-                self.search_cables(house_dict, battery)
+                self.further_cables(house_dict, battery)
 
 
         return self.steps_count, self.cable_list, self.existing_cable_dict
