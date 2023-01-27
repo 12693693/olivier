@@ -12,12 +12,11 @@ class Smartgrid():
     def __init__(self, houses_df, batteries_df):
 
         self.houses_and_batteries = []
-        self.houses_list_per_batterie = []
-        self.battery_dict = {}
+        # self.houses_list_per_batterie = []
+        # self.battery_dict = {}
         self.district_cost_dict = {}
         self.combined_list = []
         self.add_houses_and_batteries(houses_df, batteries_df)
-
         #self.add_batteries(batteries_df)
         #self.add_houses(houses_df)
 
@@ -255,7 +254,7 @@ class Smartgrid():
         # cable_costs = steps_count * 9
 
         self.total_cost = battery_costs + cable_costs
-        print(self.total_cost, 'aangemaakte costs')
+        #print(self.total_cost, 'aangemaakte costs')
 
     def costs_shared(self):
         '''
@@ -290,27 +289,41 @@ class Smartgrid():
 
     def make_f_string(self):
         for battery in self.battery_list:
-            battery.dict['battery location'] = f'{battery.x}, {battery.y}'
+            battery.dict['battery location'] = f'{int(battery.x)}, {int(battery.y)}'
 
             for house_dict in battery.dict['connected houses']:
                 location_x = house_dict['house location'][0]
                 location_y = house_dict['house location'][1]
 
-                house_dict['house location'] = f'{location_x}, {location_y}'
-                print(house_dict['house location'])
+                house_dict['house location'] = f'{int(location_x)}, {int(location_y)}'
+                #print(house_dict['house location'])
 
-    def create_district_dict(self):
+    def create_district_dict(self, district, shared='yes'):
         '''
         This function combines the district name and costs in one dictionary.
         '''
 
-        self.district_cost_dict['district'] = int(self.district_name)
-        self.district_cost_dict['costs shared'] = self.total_cost
+        self.district_cost_dict['district'] = int(district)
+        if shared == 'yes':
+            self.district_cost_dict['costs-shared'] = self.total_cost
+        else:
+            self.district_cost_dict['costs-own'] = self.total_cost
 
-    def make_output(self):
+    def make_output(self, district, shared):
         '''
         This function creates the final list with all information
         '''
+
+
+        self.make_f_string()
+        if shared == 'yes':
+            self.costs_shared()
+        else:
+            self.costs_own(10)
+        self.create_district_dict(district, shared)
+
+
+
         self.combined_list.append(self.district_cost_dict)
 
         for battery in self.battery_list:
