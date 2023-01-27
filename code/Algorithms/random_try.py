@@ -38,7 +38,7 @@ class Cables():
         distance = new_distance
 
         # save the individual steps in the grid list in the dictionary of the house
-        house_dict['grid'].append(f'{x_loc}, {y_loc}')
+        house_dict['grid'].append(f'{int(x_loc)},{int(y_loc)}')
 
         self.x_list.append(x_loc)
         self.y_list.append(y_loc)
@@ -137,7 +137,7 @@ class Cables():
                 y_loc = house_dict['house location'][1]
 
                 # save starting point for the grid line
-                house_dict['grid'].append(f'{x_loc}, {y_loc}')
+                house_dict['grid'].append(f'{int(x_loc)},{int(y_loc)}')
 
                 # create list with x and y coordinates of the grid line
                 self.x_list = [x_loc]

@@ -292,13 +292,13 @@ class Smartgrid():
 
     def make_f_string(self):
         for battery in self.battery_list:
-            battery.dict['battery location'] = f'{int(battery.x)}, {int(battery.y)}'
+            battery.dict['battery location'] = f'{int(battery.x)},{int(battery.y)}'
 
             for house_dict in battery.dict['connected houses']:
                 location_x = house_dict['house location'][0]
                 location_y = house_dict['house location'][1]
 
-                house_dict['house location'] = f'{int(location_x)}, {int(location_y)}'
+                house_dict['house location'] = f'{int(location_x)},{int(location_y)}'
                 #print(house_dict['house location'])
 
     def create_district_dict(self, district, shared='yes'):
