@@ -1,4 +1,6 @@
 import random
+import math
+import numpy as np
 class Breadth_first():
     def __init__(self):
         self.x_list = []
@@ -21,6 +23,7 @@ class Breadth_first():
         for battery in list_with_batteries:
             # print('battery')
             for house_dict in battery.dict['connected houses']:
+            # house_dict = battery.dict['connected houses'][0]
                 steps_list = []
 
                 # find x and y coordinates for the battery and connected house
@@ -85,9 +88,9 @@ class Breadth_first():
                     distance_to_grid_list = []
                     # print(len(grid))
                     # loop over house_dicts
-                    for house_dict in battery.dict['connected houses']:
-                        x_house = house_dict['house location'][0]
-                        y_house = house_dict['house location'][1]
+                    for house_dict_2 in battery.dict['connected houses']:
+                        x_house = house_dict_2['house location'][0]
+                        y_house = house_dict_2['house location'][1]
 
                         distance = 100
 
@@ -108,18 +111,22 @@ class Breadth_first():
                     list_distances_all_grids.append(distance_to_grid_list)
                     # print('total list of distances all grids')
 
-                lowest_distance = 100
+                lowest_distance = math.inf
                 for index, grid_distance_list in enumerate(list_distances_all_grids):
                     total_distance = sum(grid_distance_list)
                     if total_distance < lowest_distance:
                         best_grid = possible_grids[index]
                         lowest_distance = total_distance
-
-                        house_dict['grid'] = best_grid
-                        print(house_dict['grid'])
+                        house_dict['grid'] = np.array(best_grid)
+                        print(np.array(best_grid))
+                        #y
+                        print(np.array(best_grid)[:,1])
+                        #x
+                        print(np.array(best_grid)[:,0])
+                        exit()
 
             # print(house_dict['grid'])
-            print(battery.dict['connected houses'])
+            print("HELP", battery.dict['connected houses'])
 
 
 
