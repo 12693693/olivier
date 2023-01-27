@@ -60,22 +60,20 @@ class Further_Cables():
 
                             #compute the potential new distance with this stap
                             new_distance_1 = abs(battery.x - (x_loc - 1)) + abs(battery.y - y_loc)
-                            #print(new_distance_1)
 
                             if new_distance_1 < distance and step_1_hash in self.existing_cable_dict:
                                 step_score_1 = 2
                             if new_distance_1 < distance and step_1_hash not in self.existing_cable_dict:
                                 step_score_1 = 1
-                            if new_distance_1 < distance and step_1_hash[2] + 1 in self.existing_cable_dict:
+                            if new_distance_1 < distance and (step_1_hash[2] + 1) in self.existing_cable_dict:
                                 step_score_1 = 2
-
-                            #print(step_score_1)
+                            if new_distance_1 < distance and (step_1_hash[2] + 2) in self.existing_cable_dict:
+                                step_score_1 = 2
                             self.step_score_list.append(step_score_1)
                             self.step_list.append(step_1)
                             self.distance_list.append(new_distance_1)
 
                         if choice == 2:
-                            #print('2')
                             step_score_2 = 0
                             step_2 = [x_loc, y_loc, (x_loc + 1), y_loc]
                             step_2_hash = tuple(step_2)
@@ -88,6 +86,8 @@ class Further_Cables():
                             if new_distance_2 < distance and step_2_hash not in self.existing_cable_dict:
                                 step_score_2 = 1
                             if new_distance_1 < distance and (step_2_hash[2] - 1) in self.existing_cable_dict:
+                                step_score_2 = 2
+                            if new_distance_1 < distance and (step_2_hash[2] - 2) in self.existing_cable_dict:
                                 step_score_2 = 2
 
                             self.step_score_list.append(step_score_2)
@@ -109,6 +109,8 @@ class Further_Cables():
                                 step_score_3 = 1
                             if new_distance_3 < distance and (step_3_hash[3] + 1) in self.existing_cable_dict:
                                 step_score_3 = 2
+                            if new_distance_3 < distance and (step_3_hash[3] + 2) in self.existing_cable_dict:
+                                step_score_3 = 2
 
                             self.step_score_list.append(step_score_3)
                             self.step_list.append(step_3)
@@ -129,6 +131,8 @@ class Further_Cables():
                             if new_distance_4 < distance and step_4_hash not in self.existing_cable_dict:
                                 step_score_4 = 1
                             if new_distance_4 < distance and (step_4_hash[3] - 1) in self.existing_cable_dict:
+                                step_score_4 = 2
+                            if new_distance_4 < distance and (step_4_hash[3] - 2) in self.existing_cable_dict:
                                 step_score_4 = 2
 
                             self.step_score_list.append(step_score_4)
@@ -196,7 +200,7 @@ class Further_Cables():
 
 
                 plt.plot(x_list, y_list, 'k--')
-            
+
             print(count)
 
         return self.steps_count, self.cable_list, self.existing_cable_dict

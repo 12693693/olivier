@@ -147,6 +147,7 @@ class Smartgrid():
         # plot all houses and batteries
         plt.scatter(pos_x_list, pos_y_list, color=color_list, marker='s', s=40)
         plt.show()
+        plt.clf()
 
     #
     # def assign_house(self):
