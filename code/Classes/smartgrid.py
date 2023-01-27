@@ -279,6 +279,8 @@ class Smartgrid():
                     else:
                         steps_set.add(step)
 
+        print(self.total_cost, 'shared costs')
+
 
 
     def district_name(self):
