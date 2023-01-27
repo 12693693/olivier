@@ -12,6 +12,7 @@ from code.Algorithms.greedy import Greedy
 from code.Algorithms.search_cables import Search_Cables
 from code.Algorithms.hill_climber import Hill_Climber
 from code.Algorithms.simulated_annealing import Simulated_Annealing
+from code.Algorithms.further_cables import Further_Cables
 #from code.Algorithms.breadth_first import Breadth_first
 
 # dit moet eigenlijk in classmethod
@@ -71,6 +72,8 @@ if __name__ == "__main__":
     cable_90_degree = Cables_90()
     cable_random = Cables()
     search_cables = Search_Cables()
+    further_cables = Further_Cables()
+
 
 
     #cable_breadth = Breadth_first()
@@ -86,7 +89,7 @@ if __name__ == "__main__":
 
 
     connections_dict = {'random': 'random_algo.assign_house_random(houses, batteries)', 'greedy' : 'greedy_algo.assign_closest_battery(houses, batteries)', 'hillclimber' : 'random_hill_climber', 'simulated annealing': 'random_sa'}
-    cables_dict = {'90 degrees': 'cable_90_degree.make_90_degrees_cables(houses, batteries)', 'random' : 'cable_random.random_try(houses, batteries)', 'search cables' : 'search_cables.search_cables(houses, batteries)'}
+    cables_dict = {'90 degrees': 'cable_90_degree.make_90_degrees_cables(houses, batteries)', 'random' : 'cable_random.random_try(houses, batteries)', 'search cables' : 'search_cables.run_search(houses, batteries)', 'further cables': 'further_cables.run_further(houses, batteries)'}
 
     # eval(connections_dict[connections_input])
     # eval(cables_dict[cables_input])
