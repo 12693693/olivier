@@ -14,7 +14,7 @@ from code.Algorithms.hill_climber import Hill_Climber
 from code.Algorithms.simulated_annealing import Simulated_Annealing
 from code.Algorithms.further_cables import Further_Cables
 
-from code.Visualisation import visualise as vis
+from code.Visualisation import Visualize as vis
 #from code.Algorithms.breadth_first import Breadth_first
 
 # dit moet eigenlijk in classmethod
