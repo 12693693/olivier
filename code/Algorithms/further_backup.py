@@ -16,12 +16,12 @@ class Further_Cables():
         self.steps_count = 0
 
         for battery in list_with_batteries:
-            for house_dict in battery.dict['connected houses']:
+            for house_dict in battery.dict['houses']:
                 self.cable_list = []
 
                 # set starting point to the location of the house
-                location_house_x = house_dict['house location'][0]
-                location_house_y = house_dict['house location'][1]
+                location_house_x = house_dict['location'][0]
+                location_house_y = house_dict['location'][1]
 
                 # compute distance between the battery and the assigned house
                 distance = abs(battery.x - location_house_x) + abs(battery.y - location_house_y)
@@ -30,7 +30,7 @@ class Further_Cables():
                 x_loc = location_house_x
                 y_loc = location_house_y
 
-                house_dict['grid'].append(f'{x_loc}, {y_loc}')
+                house_dict['cables'].append(f'{x_loc}, {y_loc}')
 
                 x_list = [x_loc]
                 y_list = [y_loc]
@@ -161,7 +161,7 @@ class Further_Cables():
 
                     x_list.append(x_loc)
                     y_list.append(y_loc)
-                    house_dict['grid'].append(f'{x_loc}, {y_loc}')
+                    house_dict['cables'].append(f'{x_loc}, {y_loc}')
 
                     # Add this list to the dictionary
                     if cable_key not in self.existing_cable_dict:

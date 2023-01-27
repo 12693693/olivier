@@ -23,7 +23,7 @@ class Hill_Climber():
         return fill_string
 
     def check_capacity(self, battery_1, battery_2, house_1, house_2):
-        if battery_1.capacity + house_1['house output'] - house_2['house output'] >= 0 and battery_2.capacity + house_2['house output'] - house_1['house output'] >= 0:
+        if battery_1.capacity + house_1['output'] - house_2['output'] >= 0 and battery_2.capacity + house_2['output'] - house_1['output'] >= 0:
 
             return True
 
@@ -41,8 +41,8 @@ class Hill_Climber():
 
         # choose two houses that were assigned to the batteries and remove them
         # and the steps count from the costs
-        self.house_1 = random.choice(self.battery_1.dict['connected houses'])
-        self.house_2 = random.choice(self.battery_2.dict['connected houses'])
+        self.house_1 = random.choice(self.battery_1.dict['houses'])
+        self.house_2 = random.choice(self.battery_2.dict['houses'])
 
 
     def switch_two_houses(self, new_smartgrid, function):
@@ -58,8 +58,8 @@ class Hill_Climber():
 
         else:
             #print(self.check_capacity(self.battery_1, self.battery_2, self.house_1, self.house_2))
-            self.battery_1.dict['connected houses'].remove(self.house_1)
-            self.battery_2.dict['connected houses'].remove(self.house_2)
+            self.battery_1.dict['houses'].remove(self.house_1)
+            self.battery_2.dict['houses'].remove(self.house_2)
 
 
             # dit mag nog anders
@@ -77,8 +77,8 @@ class Hill_Climber():
             self.steps_house_2 = eval(string_function_2)
 
             # switch the houses and add them to a new battery
-            self.battery_1.dict['connected houses'].append(self.house_2)
-            self.battery_2.dict['connected houses'].append(self.house_1)
+            self.battery_1.dict['houses'].append(self.house_2)
+            self.battery_2.dict['houses'].append(self.house_1)
 
     def check_solution(self, new_smartgrid):
         #print('oud zonder', self.new_costs)

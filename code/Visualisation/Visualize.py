@@ -38,16 +38,16 @@ def visualise():
     i = 0
 
     for battery in data_list[1:]:
-        position_x_list.append(int(battery['battery location'].split(',')[0]))
-        position_y_list.append(int(battery['battery location'].split(',')[1]))
+        position_x_list.append(int(battery['location'].split(',')[0]))
+        position_y_list.append(int(battery['location'].split(',')[1]))
         color_list.append('blue')
 
         color = grid_color_list[i]
         i += 1
 
-        for house in battery['connected houses']:
-            position_x_list.append(int(house['house location'].split(',')[0]))
-            position_y_list.append(int(house['house location'].split(',')[1]))
+        for house in battery['houses']:
+            position_x_list.append(int(house['location'].split(',')[0]))
+            position_y_list.append(int(house['location'].split(',')[1]))
             color_list.append('red')
 
             cables_x_list = []

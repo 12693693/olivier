@@ -37,11 +37,11 @@ class Breadth_first():
                 steps_list = []
 
                 # find x and y coordinates for the battery and connected house
-                x_loc = house_dict['house location'][0]
-                y_loc = house_dict['house location'][1]
+                x_loc = house_dict['location'][0]
+                y_loc = house_dict['location'][1]
 
                 # save starting point for the grid line
-                house_dict['grid'].append(f'{x_loc}, {y_loc}')
+                house_dict['cables'].append(f'{x_loc}, {y_loc}')
 
                 # create list with x and y coordinates of the grid line
                 x_list = [x_loc]
@@ -99,8 +99,8 @@ class Breadth_first():
                     # print(len(grid))
                     # loop over house_dicts
                     for house_dict_2 in battery.dict['connected houses']:
-                        x_house = house_dict_2['house location'][0]
-                        y_house = house_dict_2['house location'][1]
+                        x_house = house_dict_2['location'][0]
+                        y_house = house_dict_2['location'][1]
 
                         distance = 100
 
@@ -127,7 +127,7 @@ class Breadth_first():
                     if total_distance < lowest_distance:
                         best_grid = possible_grids[index]
                         lowest_distance = total_distance
-                        house_dict['grid'] = np.array(best_grid)
+                        house_dict['cables'] = np.array(best_grid)
                         # print(np.array(best_grid))
                         # #y
                         # print(np.array(best_grid)[:,1])

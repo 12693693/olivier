@@ -4,4 +4,4 @@ class Houses():
         self.x = x
         self.y = y
         self.color = 'red'
-        self.dict = {'house location': [self.x, self.y], 'house output': self.maxoutput, 'grid': []}
+        self.dict = {'location': [self.x, self.y], 'output': self.maxoutput, 'cables': []}
