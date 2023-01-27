@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 class Cables_90():
 
     def get_location(self, dictionary_of_house):
-        self.location_house_x = dictionary_of_house['house location'][0]
-        self.location_house_y = dictionary_of_house['house location'][1]
+        self.location_house_x = dictionary_of_house['location'][0]
+        self.location_house_y = dictionary_of_house['location'][1]
 
     def plot_cable_90(self, loc_house_x, loc_house_y, battery):
         x_list = [loc_house_x, battery.x, battery.x]
@@ -17,7 +17,7 @@ class Cables_90():
         # and add the starting point to the grid dictionary
         x_loc = self.location_house_x
         y_loc = self.location_house_y
-        dictionary_of_house['grid'].append(f'{x_loc}, {y_loc}')
+        dictionary_of_house['cables'].append(f'{x_loc}, {y_loc}')
 
         # compute distance to use as a constraint for choosing which way
         # to move on the grid line
@@ -36,7 +36,7 @@ class Cables_90():
             step_count += 1
 
             # save the individual steps in the grid list in the dictionary of the house
-            dictionary_of_house['grid'].append(f'{x_loc}, {y_loc}')
+            dictionary_of_house['cables'].append(f'{x_loc}, {y_loc}')
 
         # take steps until the correct y coordinate is reached
         # and keep track of the grid line
@@ -48,7 +48,7 @@ class Cables_90():
             step_count += 1
 
             # save the individual steps in the grid list in the dictionary of the house
-            dictionary_of_house['grid'].append(f'{x_loc}, {y_loc}')
+            dictionary_of_house['cables'].append(f'{x_loc}, {y_loc}')
 
         return step_count
 
@@ -71,7 +71,7 @@ class Cables_90():
 
         # loop over batteries and the houses that are connected to that battery
         for battery in list_with_batteries:
-            for house_dict in battery.dict['connected houses']:
+            for house_dict in battery.dict['houses']:
                 steps_count += self.make_90_degrees_cable(house_dict, battery)
 
 
@@ -82,10 +82,10 @@ class Cables_90():
                 # self.plot_cable(self.location_house_x, self.location_house_y, battery)
 
                 # # extra
-                # location_house_x = house_dict['house location'][0]
-                # location_house_y = house_dict['house location'][1]
-                # location_battery_x = battery.dict['battery location'][0]
-                # location_battery_y = battery.dict['battery location'][1]
+                # location_house_x = house_dict['location'][0]
+                # location_house_y = house_dict['location'][1]
+                # location_battery_x = battery.dict['location'][0]
+                # location_battery_y = battery.dict['location'][1]
 
 
                 # x_list = [location_house_x, battery.x, battery.x]

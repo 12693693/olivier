@@ -183,7 +183,7 @@ class Smartgrid():
     #         assigned_battery.capacity -= house.maxoutput
     #
     #         # save the dictionary of the house in the list of houses for that battery
-    #         assigned_battery.dict['connected houses'].append(house.dict)
+    #         assigned_battery.dict['houses'].append(house.dict)
     #
     # def make_cables(self):
     #     """
@@ -194,13 +194,13 @@ class Smartgrid():
     #     self.steps_count = 0
     #     # loop over batteries and the houses that are connected to that battery
     #     for battery in self.battery_list:
-    #         for house_dict in battery.dict['connected houses']:
+    #         for house_dict in battery.dict['houses']:
     #
     #             # find x and y coordinates for the battery and connected house
-    #             location_house_x = house_dict['house location'][0]
-    #             location_house_y = house_dict['house location'][1]
-    #             location_battery_x = battery.dict['battery location'][0]
-    #             location_battery_y = battery.dict['battery location'][1]
+    #             location_house_x = house_dict['location'][0]
+    #             location_house_y = house_dict['location'][1]
+    #             location_battery_x = battery.dict['location'][0]
+    #             location_battery_y = battery.dict['location'][1]
     #
     #             x_list = [location_house_x, location_battery_x, location_battery_x]
     #             y_list = [location_house_y, location_house_y, location_battery_y]
@@ -249,8 +249,8 @@ class Smartgrid():
         cable_costs = 0
 
         for battery in self.battery_list:
-            for house_dict in battery.dict['connected houses']:
-                cable_costs += (len(house_dict['grid']) - 1) * 9
+            for house_dict in battery.dict['houses']:
+                cable_costs += (len(house_dict['cables']) - 1) * 9
 
         # cable_costs = steps_count * 9
 
@@ -267,10 +267,10 @@ class Smartgrid():
         self.costs_own(10)
 
         for battery in self.battery_list:
-            for house_dict in battery.dict['connected houses']:
-                for i in range(len(house_dict['grid']) - 1):
-                    old_location = house_dict['grid'][i]
-                    new_location = house_dict['grid'][i + 1]
+            for house_dict in battery.dict['houses']:
+                for i in range(len(house_dict['cables']) - 1):
+                    old_location = house_dict['cables'][i]
+                    new_location = house_dict['cables'][i + 1]
                     step = f'{old_location}, {new_location}'
 
 
@@ -292,14 +292,14 @@ class Smartgrid():
 
     def make_f_string(self):
         for battery in self.battery_list:
-            battery.dict['battery location'] = f'{int(battery.x)},{int(battery.y)}'
+            battery.dict['location'] = f'{int(battery.x)},{int(battery.y)}'
 
-            for house_dict in battery.dict['connected houses']:
-                location_x = house_dict['house location'][0]
-                location_y = house_dict['house location'][1]
+            for house_dict in battery.dict['houses']:
+                location_x = house_dict['location'][0]
+                location_y = house_dict['location'][1]
 
-                house_dict['house location'] = f'{int(location_x)},{int(location_y)}'
-                #print(house_dict['house location'])
+                house_dict['location'] = f'{int(location_x)},{int(location_y)}'
+                #print(house_dict['location'])
 
     def create_district_dict(self, district, shared='yes'):
         '''

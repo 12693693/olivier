@@ -8,8 +8,8 @@ class Search_Cables():
     def search_cables(self, house_dict, battery):
         self.cable_list = []
         # set starting point to the location of the house
-        location_house_x = house_dict['house location'][0]
-        location_house_y = house_dict['house location'][1]
+        location_house_x = house_dict['location'][0]
+        location_house_y = house_dict['location'][1]
 
         # compute distance between the battery and the assigned house
         distance = abs(battery.x - location_house_x) + abs(battery.y - location_house_y)
@@ -19,7 +19,7 @@ class Search_Cables():
         y_loc = location_house_y
 
         # Add these start points to
-        house_dict['grid'].append(f'{x_loc}, {y_loc}')
+        house_dict['cables'].append(f'{x_loc}, {y_loc}')
 
         x_list = [x_loc]
         y_list = [y_loc]
@@ -136,7 +136,7 @@ class Search_Cables():
 
             x_list.append(x_loc)
             y_list.append(y_loc)
-            house_dict['grid'].append(f'{x_loc}, {y_loc}')
+            house_dict['cables'].append(f'{x_loc}, {y_loc}')
 
             # Add this cable part to the dictionary
             if cable_key not in self.existing_cable_dict:
@@ -156,7 +156,7 @@ class Search_Cables():
         self.steps_count = 0
 
         for battery in list_with_batteries:
-            for house_dict in battery.dict['connected houses']:
+            for house_dict in battery.dict['houses']:
                 self.search_cables(house_dict, battery)
 
 

@@ -19,14 +19,14 @@ class Randomize():
         while valid_option == False:
             #print('in while')
 
-            # reset the capacities and empty the connected houses
+            # reset the capacities and empty the houses
             for i in range(len(list_with_batteries)):
                 list_with_batteries[i].capacity = batteries_copy[i].capacity
-                list_with_batteries[i].dict['connected houses'] = []
+                list_with_batteries[i].dict['houses'] = []
 
             # for i in range(len(list_with_houses)):
             #     list_with_houses[i].dict['grid'] = []
-                #print(list_with_batteries[i].dict['connected houses'])
+                #print(list_with_batteries[i].dict['houses'])
 
             #print('na batteries reset')
 
@@ -66,4 +66,4 @@ class Randomize():
                 assigned_battery.capacity -= house.maxoutput
 
                 # save the dictionary of the house in the list of houses for that battery
-                assigned_battery.dict['connected houses'].append(house.dict)
+                assigned_battery.dict['houses'].append(house.dict)
