@@ -19,9 +19,8 @@ class Hill_Climber():
     def fill_new_grid(self, house_dict, battery, function):
 
         # fill the grid of the newly added houses
-        function_string = f'{function}(house_dict, battery)'
-        function_perform = eval(function_string)
-        return function_perform
+        fill_string =f'{function}({house_dict}, {battery})'
+        return fill_string
 
     def check_capacity(self, battery_1, battery_2, house_1, house_2):
         if battery_1.capacity + house_1['house output'] - house_2['house output'] >= 0 and battery_2.capacity + house_2['house output'] - house_1['house output'] >= 0:
@@ -72,8 +71,10 @@ class Hill_Climber():
             self.house_2['grid'] = []
 
             # fill the grid of the houses
-            self.steps_house_1 = self.fill_new_grid(self.house_1, self.battery_2, function)
-            self.steps_house_2 = self.fill_new_grid(self.house_2, self.battery_1, function)
+            string_function_1 = self.fill_new_grid(self.house_1, self.battery_2, function)
+            self.steps_house_1 = eval(string_function_1)
+            string_function_2 = self.fill_new_grid(self.house_2, self.battery_1, function)
+            self.steps_house_2 = eval(string_function_2)
 
             # switch the houses and add them to a new battery
             self.battery_1.dict['connected houses'].append(self.house_2)
