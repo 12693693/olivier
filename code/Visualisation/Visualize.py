@@ -55,7 +55,7 @@ def visualise():
             for cable in house['grid']:
                 cables_x_list.append(int(cable.split(',')[0]))
                 cables_y_list.append(int(cable.split(',')[1]))
-            plt.plot(cables_x_list, cables_y_list, marker='--', color=color)
+            plt.plot(cables_x_list, cables_y_list, linestyle='dashed', color=color)
 
     plt.clf()
     plt.scatter(position_x_list, position_y_list, color=color_list, marker='s', s=40)
