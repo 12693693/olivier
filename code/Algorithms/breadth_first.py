@@ -1,6 +1,10 @@
 import random
 import math
 import numpy as np
+from .search_cables import Search_Cables
+
+make_rest_of_cables = Search_Cables()
+
 class Breadth_first():
     def __init__(self):
         self.x_list = []
@@ -18,11 +22,17 @@ class Breadth_first():
         return x_distance, y_distance
 
 
-    def breadth(self, list_with_houses, list_with_batteries):
+    def breadth_first_5(self, list_with_houses, list_with_batteries):
+        ''' this function executes breadth first algorithm on the first 5 houses
+        of each battery. It makes 10 random paths from each house to the battery,
+        and then chooses the best path based on the distance from the rest of the
+        connected houses to that battery '''
 
         for battery in list_with_batteries:
             # print('battery')
-            for house_dict in battery.dict['connected houses']:
+            for i in range(5):
+                house_dict = battery.dict['connected houses'][i]
+            # for house_dict in battery.dict['connected houses']:
             # house_dict = battery.dict['connected houses'][0]
                 steps_list = []
 
@@ -118,15 +128,29 @@ class Breadth_first():
                         best_grid = possible_grids[index]
                         lowest_distance = total_distance
                         house_dict['grid'] = np.array(best_grid)
-                        print(np.array(best_grid))
-                        #y
-                        print(np.array(best_grid)[:,1])
-                        #x
-                        print(np.array(best_grid)[:,0])
-                        exit()
+                        # print(np.array(best_grid))
+                        # #y
+                        # print(np.array(best_grid)[:,1])
+                        # #x
+                        # print(np.array(best_grid)[:,0])
+                        # exit()
 
             # print(house_dict['grid'])
-            print("HELP", battery.dict['connected houses'])
+            # print("HELP", battery.dict['connected houses'])
+
+    def run(self, list_with_houses, list_with_batteries):
+
+        self.breadth_first_5(list_with_houses, list_with_batteries)
+
+        for battery in list_with_batteries:
+            for house_dict in battery.dict['connected houses'][5:]:
+                make_rest_of_cables.search_cables(house_dict, battery)
+
+        print(battery.dict['connected houses'])
+
+
+
+
 
 
 
