@@ -1,11 +1,14 @@
 from .randomize import Randomize
 from .cable_90_degree import Cables_90
+from .random_try import Cables
+from .search_cables import Search_Cables
 from ..Classes.smartgrid import Smartgrid
 import random
 import copy
 
-make_cables = Cables_90()
-#my_smartgrid = Smartgrid()
+cable_90_degree = Cables_90()
+cable_random = Cables()
+search_cables = Search_Cables()
 
 
 class Hill_Climber():
@@ -13,13 +16,14 @@ class Hill_Climber():
         self.smartgrid = copy.deepcopy(smartgrid_solution)
         self.costs = self.smartgrid.total_cost
 
-    def fill_new_grid(self, house_dict, battery):
+    def fill_new_grid(self, house_dict, battery, function):
 
         # fill the grid of the newly added houses
-        return make_cables.make_90_degrees_cable(house_dict, battery)
+        fill_string =f'{function}({house_dict}, {battery})'
+        return fill_string
 
     def check_capacity(self, battery_1, battery_2, house_1, house_2):
-        if battery_1.capacity + house_1['house output'] - house_2['house output'] >= 0 and battery_2.capacity + house_2['house output'] - house_1['house output'] >= 0:
+        if battery_1.capacity + house_1['output'] - house_2['output'] >= 0 and battery_2.capacity + house_2['output'] - house_1['output'] >= 0:
 
             return True
 
@@ -37,11 +41,11 @@ class Hill_Climber():
 
         # choose two houses that were assigned to the batteries and remove them
         # and the steps count from the costs
-        self.house_1 = random.choice(self.battery_1.dict['connected houses'])
-        self.house_2 = random.choice(self.battery_2.dict['connected houses'])
+        self.house_1 = random.choice(self.battery_1.dict['houses'])
+        self.house_2 = random.choice(self.battery_2.dict['houses'])
 
 
-    def switch_two_houses(self, new_smartgrid):
+    def switch_two_houses(self, new_smartgrid, function):
         list_with_batteries = new_smartgrid.battery_list
 
         self.choose_battery_and_houses(list_with_batteries)
@@ -54,8 +58,8 @@ class Hill_Climber():
 
         else:
             #print(self.check_capacity(self.battery_1, self.battery_2, self.house_1, self.house_2))
-            self.battery_1.dict['connected houses'].remove(self.house_1)
-            self.battery_2.dict['connected houses'].remove(self.house_2)
+            self.battery_1.dict['houses'].remove(self.house_1)
+            self.battery_2.dict['houses'].remove(self.house_2)
 
 
             # dit mag nog anders
@@ -67,12 +71,14 @@ class Hill_Climber():
             self.house_2['grid'] = []
 
             # fill the grid of the houses
-            self.steps_house_1 = self.fill_new_grid(self.house_1, self.battery_2)
-            self.steps_house_2 = self.fill_new_grid(self.house_2, self.battery_1)
+            string_function_1 = self.fill_new_grid(self.house_1, self.battery_2, function)
+            self.steps_house_1 = eval(string_function_1)
+            string_function_2 = self.fill_new_grid(self.house_2, self.battery_1, function)
+            self.steps_house_2 = eval(string_function_2)
 
             # switch the houses and add them to a new battery
-            self.battery_1.dict['connected houses'].append(self.house_2)
-            self.battery_2.dict['connected houses'].append(self.house_1)
+            self.battery_1.dict['houses'].append(self.house_2)
+            self.battery_2.dict['houses'].append(self.house_1)
 
     def check_solution(self, new_smartgrid):
         #print('oud zonder', self.new_costs)
@@ -83,7 +89,7 @@ class Hill_Climber():
             self.smartgrid = new_smartgrid
             self.costs = self.new_costs
 
-    def run(self, iterations):
+    def run(self, iterations, function):
         """
         Runs the hillclimber algorithm for a specific amount of iterations.
         """
@@ -96,7 +102,7 @@ class Hill_Climber():
             # Create a copy of the graph to simulate the change
             new_smartgrid = copy.deepcopy(self.smartgrid)
 
-            self.switch_two_houses(new_smartgrid)
+            self.switch_two_houses(new_smartgrid, function)
             #print('na switchen')
 
             # Accept it if it is better

@@ -24,11 +24,11 @@ class Cables():
         '''
 
         for battery in list_with_batteries:
-            for house_dict in battery.dict['connected houses']:
+            for house_dict in battery.dict['houses']:
 
                 # find x and y coordinates for the battery and connected house
-                x_loc = house_dict['house location'][0]
-                y_loc = house_dict['house location'][1]
+                x_loc = house_dict['location'][0]
+                y_loc = house_dict['location'][1]
 
     def save_step(self, old_distance, new_distance, house_dict, x_loc, y_loc):
         '''
@@ -38,7 +38,7 @@ class Cables():
         distance = new_distance
 
         # save the individual steps in the grid list in the dictionary of the house
-        house_dict['grid'].append(f'{x_loc}, {y_loc}')
+        house_dict['cables'].append(f'{int(x_loc)},{int(y_loc)}')
 
         self.x_list.append(x_loc)
         self.y_list.append(y_loc)
@@ -130,14 +130,14 @@ class Cables():
         '''
 
         for battery in list_with_batteries:
-            for house_dict in battery.dict['connected houses']:
+            for house_dict in battery.dict['houses']:
 
                 # find x and y coordinates for the battery and connected house
-                x_loc = house_dict['house location'][0]
-                y_loc = house_dict['house location'][1]
+                x_loc = house_dict['location'][0]
+                y_loc = house_dict['location'][1]
 
                 # save starting point for the grid line
-                house_dict['grid'].append(f'{x_loc}, {y_loc}')
+                house_dict['cables'].append(f'{int(x_loc)},{int(y_loc)}')
 
                 # create list with x and y coordinates of the grid line
                 self.x_list = [x_loc]

@@ -38,4 +38,4 @@ class Greedy():
             #print(assigned_battery.x, assigned_battery.capacity)
 
             # save the dictionary of the house in the list of houses for that battery
-            assigned_battery.dict['connected houses'].append(house.dict)
+            assigned_battery.dict['houses'].append(house.dict)

@@ -1,11 +1,11 @@
 import random
 import matplotlib.pyplot as plt
 
-class Search_Cables():
+class Further_Cables():
     def __init__(self):
         self.existing_cable_dict = {}
 
-    def search_cables(self, house_dict, battery):
+    def further_cables(self, house_dict, battery):
         self.cable_list = []
         # set starting point to the location of the house
         location_house_x = house_dict['location'][0]
@@ -19,7 +19,7 @@ class Search_Cables():
         y_loc = location_house_y
 
         # Add these start points to
-        house_dict['cables'].append(f'{int(x_loc)}, {int(y_loc)}')
+        house_dict['cables'].append(f'{x_loc}, {y_loc}')
 
         x_list = [x_loc]
         y_list = [y_loc]
@@ -135,7 +135,7 @@ class Search_Cables():
 
             x_list.append(x_loc)
             y_list.append(y_loc)
-            house_dict['cables'].append(f'{int(x_loc)}, {int(y_loc)}')
+            house_dict['cables'].append(f'{x_loc}, {y_loc}')
 
             # Add this cable part to the dictionary
             if cable_key not in self.existing_cable_dict:
@@ -143,7 +143,7 @@ class Search_Cables():
 
         plt.plot(x_list, y_list, 'k--')
 
-    def run_search(self, list_with_houses, list_with_batteries):
+    def run_further(self, list_with_houses, list_with_batteries):
         '''
         This function uses the previously defined cables function to connect
         to the houses. It adds in a new condition which ensures that if there is
@@ -156,7 +156,7 @@ class Search_Cables():
 
         for battery in list_with_batteries:
             for house_dict in battery.dict['houses']:
-                self.search_cables(house_dict, battery)
+                self.further_cables(house_dict, battery)
 
 
         return self.steps_count, self.cable_list, self.existing_cable_dict
