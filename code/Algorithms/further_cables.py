@@ -19,7 +19,7 @@ class Further_Cables():
         y_loc = location_house_y
 
         # Add these start points to
-        house_dict['cables'].append(f'{x_loc}, {y_loc}')
+        house_dict['cables'].append(f'{int(x_loc)}, {int(y_loc)}')
 
         x_list = [x_loc]
         y_list = [y_loc]
@@ -152,7 +152,7 @@ class Further_Cables():
 
             x_list.append(x_loc)
             y_list.append(y_loc)
-            house_dict['cables'].append(f'{x_loc}, {y_loc}')
+            house_dict['cables'].append(f'{int(x_loc)}, {int(y_loc)}')
 
             # Add this cable part to the dictionary
             if cable_key not in self.existing_cable_dict:

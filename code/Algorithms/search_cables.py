@@ -19,7 +19,7 @@ class Search_Cables():
         y_loc = location_house_y
 
         # Add these start points to
-        house_dict['cables'].append(f'{x_loc}, {y_loc}')
+        house_dict['cables'].append(f'{int(x_loc)}, {int(y_loc)}')
 
         x_list = [x_loc]
         y_list = [y_loc]
@@ -127,7 +127,6 @@ class Search_Cables():
             # Find the new distance which belongs with the highest score
             for index, distance in enumerate(self.step_score_list):
                 new_distance = self.distance_list[highest_index]
-            print(f'{x_loc}, {y_loc}')
             # Update the new distance
             distance = new_distance
 
@@ -136,7 +135,7 @@ class Search_Cables():
 
             x_list.append(x_loc)
             y_list.append(y_loc)
-            house_dict['cables'].append(f'{x_loc}, {y_loc}')
+            house_dict['cables'].append(f'{int(x_loc)}, {int(y_loc)}')
 
             # Add this cable part to the dictionary
             if cable_key not in self.existing_cable_dict:

@@ -1,4 +1,4 @@
-locationclass Batteries():
+class Batteries():
     def __init__(self, capacity, x, y):
         self.capacity = capacity
         self.x = x

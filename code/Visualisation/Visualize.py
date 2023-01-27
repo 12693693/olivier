@@ -36,6 +36,7 @@ def visualise():
     grid_color_list = ['m', 'c', 'g', 'tab:orange', 'tab:brown']
 
     i = 0
+    plt.clf()
 
     for battery in data_list[1:]:
         position_x_list.append(int(battery['location'].split(',')[0]))
@@ -52,12 +53,12 @@ def visualise():
 
             cables_x_list = []
             cables_y_list = []
-            for cable in house['grid']:
+            for cable in house['cables']:
                 cables_x_list.append(int(cable.split(',')[0]))
                 cables_y_list.append(int(cable.split(',')[1]))
             plt.plot(cables_x_list, cables_y_list, linestyle='dashed', color=color)
 
-    plt.clf()
-    plt.scatter(position_x_list, position_y_list, color=color_list, marker='s', s=40)
+
+    plt.scatter(position_x_list, position_y_list, color=color_list, marker='s', s=60)
     plt.show()
     plt.clf()
