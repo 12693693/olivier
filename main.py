@@ -512,46 +512,61 @@ if __name__ == "__main__":
 # plt.show()
 #------------------------- search cables --------------------------
 #
-# list_with_costs_greedy_random_try = []
-#
-# for i in range(100):
-#
-#     # create battery and houses list by making a deepcopy
-#     my_smartgrid.battery_list = copy.deepcopy(batteries)
-#     my_smartgrid.houses_list = copy.deepcopy(houses)
-#
-#     # connect houses to batteries using the greedy algorithm
-#     greedy_algo.assign_closest_battery(my_smartgrid.houses_list, my_smartgrid.battery_list)
-#
-#     # lay cables using the random try algorithm
-#     count = cable_random.search_cables(my_smartgrid.houses_list, my_smartgrid.battery_list)
-#
-#     # calculate costs
-#     my_smartgrid.costs_shared()
-#
-#     # create output
-#     my_smartgrid.create_district_dict()
-#     list = my_smartgrid.make_output()
-#
-#     # append cost to list with costs for this algorithm combination
-#     list_with_costs_greedy_random_try.append(list[0]['costs shared'])
-#
-#     print('costs', list[0]['costs shared'])
-#     print(f'{i}/500')
-#
-# # draw smartgrid for demonstration
-# my_smartgrid.draw_plot()
-#
-# # create series to plot later
-# series_with_costs_greedy_random_try = pd.Series(list_with_costs_greedy_random_try)
-# print(series_with_costs_greedy_random_try)
+list_with_costs_greedy_search = []
 
-# plot the distribution of costs for this algorithm combination
-# plt.clf()
-# plt.title('houses assigned with greedy, cables with random-try')
-# sns.histplot(data=series_with_costs_greedy_random_try)
-# plt.show()
+for i in range(1):
 
+    # create battery and houses list by making a deepcopy
+    my_smartgrid.battery_list = copy.deepcopy(batteries)
+    my_smartgrid.houses_list = copy.deepcopy(houses)
+
+    # connect houses to batteries using the greedy algorithm
+    greedy_algo.assign_closest_battery(my_smartgrid.houses_list, my_smartgrid.battery_list)
+
+    # lay cables using the random try algorithm
+    count = search_cables.run(my_smartgrid.houses_list, my_smartgrid.battery_list)
+
+    # calculate costs
+    my_smartgrid.costs_shared()
+
+    # create output
+    my_smartgrid.create_district_dict()
+    list = my_smartgrid.make_output()
+
+    # append cost to list with costs for this algorithm combination
+    list_with_costs_greedy_search.append(list[0]['costs shared'])
+
+    print('costs', list[0]['costs shared'])
+    print(f'{i}/500')
+
+# draw smartgrid for demonstration
+my_smartgrid.draw_plot()
+
+# create series to plot later
+series_with_costs_greedy_search = pd.Series(list_with_costs_greedy_search)
+print(series_with_costs_greedy_search)
+
+#plot the distribution of costs for this algorithm combination
+plt.clf()
+plt.title('houses assigned with greedy, cables with search')
+sns.histplot(data=series_with_costs_greedy_search)
+plt.show()
+
+# print(series_with_costs_greedy_90.describe())
+# print(series_with_costs_random_90.describe())
+# print(series_with_costs_hillclimber_90.describe())
+print(series_with_costs_greedy_search.describe())
+
+# mean_greedy_90 = series_with_costs_greedy_90.mean()
+# mean_random_90 = series_with_costs_random_90.mean()
+#mean_greedy_random_try = series_with_costs_greedy_random_try.mean()
+mean_greedy_search = series_with_costs_greedy_search.mean()
+
+dict_means = {'algorithm':['greedy, search cables'], 'means':[mean_greedy_search]}
+df_means = pd.DataFrame(dict_means)
+plt.clf()
+df_means.plot.bar(x='algorithm', y='means')
+plt.show()
 # #------------------------print lists of costs ------------------------
 # print(series_with_costs_greedy_90.describe())
 # print(series_with_costs_random_90.describe())
@@ -589,7 +604,7 @@ if __name__ == "__main__":
 # #     self.assign_house_random() # CHECK
 # self.make_cables()
 
-    #---------------- further cables ---------------------------------------------
+    #---------------- FURTHER CABLES ---------------------------------------------
 
         # random_algo = Randomize()
         # random_algo.assign_house_random(my_smartgrid.house_list, my_smartgrid.battery_list)
@@ -609,62 +624,68 @@ if __name__ == "__main__":
 
 # kan voor beide dus!
     # create list in which to keep track of the costs for this combination of algorithms
-    list_with_costs_further = []
+    # list_with_costs_further = []
+    #
+    # for i in range(200):
+    #
+    #     # create battery and houses list of the smartgrid, by making deepcopies
+    #     my_smartgrid.battery_list = copy.deepcopy(batteries)
+    #     my_smartgrid.houses_list = copy.deepcopy(houses)
+    #
+    #     # assign the houses with the greedy algorithm
+    #     greedy_algo.assign_closest_battery(my_smartgrid.houses_list, my_smartgrid.battery_list)
+    #
+    #     # lay the cables with the 90 degrees algorithm
+    #     step_count = further_cables.further_cables(my_smartgrid.houses_list, my_smartgrid.battery_list)
+    #
+    #     # calculate the costs
+    #     my_smartgrid.costs_shared()
+    #
+    #     # create output
+    #     my_smartgrid.create_district_dict()
+    #     list = my_smartgrid.make_output()
+    #
+    #     # append costs to the list of costs for this combination of algorithms
+    #     list_with_costs_further.append(list[0]['costs shared'])
+    #
+    #     print('costs', list[0]['costs shared'])
+    #     print(f'{i}/1000')
+    #
+    # # create plot of smartgrid for demonstration
+    # my_smartgrid.draw_plot()
+    #
+    # # make series to plot later
+    # series_with_costs_further = pd.Series(list_with_costs_further)
+    # print(series_with_costs_further)
+    #
+    # # plot the distribution of costs
+    # plt.clf()
+    # plt.title('houses assigned with greedy and further search algorithm')
+    # sns.histplot(data=series_with_costs_further)
+    # plt.show()
+    #
+    #
+    # # print(series_with_costs_greedy_90.describe())
+    # # print(series_with_costs_random_90.describe())
+    # # print(series_with_costs_hillclimber_90.describe())
+    # print(series_with_costs_further.describe())
+    #
+    # # mean_greedy_90 = series_with_costs_greedy_90.mean()
+    # # mean_random_90 = series_with_costs_random_90.mean()
+    # #mean_greedy_random_try = series_with_costs_greedy_random_try.mean()
+    # mean_greedy_further = series_with_costs_further.mean()
+    #
+    # dict_means = {'algorithm':['greedy, further cables'], 'means':[mean_greedy_further]}
+    # df_means = pd.DataFrame(dict_means)
+    # plt.clf()
+    # df_means.plot.bar(x='algorithm', y='means')
+    # plt.show()
+    #
+    #
+    #
+    #
 
-    for i in range(200):
 
-        # create battery and houses list of the smartgrid, by making deepcopies
-        my_smartgrid.battery_list = copy.deepcopy(batteries)
-        my_smartgrid.houses_list = copy.deepcopy(houses)
-
-        # assign the houses with the greedy algorithm
-        greedy_algo.assign_closest_battery(my_smartgrid.houses_list, my_smartgrid.battery_list)
-
-        # lay the cables with the 90 degrees algorithm
-        step_count = further_cables.further_cables(my_smartgrid.houses_list, my_smartgrid.battery_list)
-
-        # calculate the costs
-        my_smartgrid.costs_shared()
-
-        # create output
-        my_smartgrid.create_district_dict()
-        list = my_smartgrid.make_output()
-
-        # append costs to the list of costs for this combination of algorithms
-        list_with_costs_further.append(list[0]['costs shared'])
-
-        print('costs', list[0]['costs shared'])
-        print(f'{i}/1000')
-
-    # create plot of smartgrid for demonstration
-    my_smartgrid.draw_plot()
-
-    # make series to plot later
-    series_with_costs_further = pd.Series(list_with_costs_further)
-    print(series_with_costs_further)
-
-    # plot the distribution of costs
-    plt.clf()
-    plt.title('houses assigned with greedy and further search algorithm')
-    sns.histplot(data=series_with_costs_further)
-    plt.show()
-
-
-    # print(series_with_costs_greedy_90.describe())
-    # print(series_with_costs_random_90.describe())
-    # print(series_with_costs_hillclimber_90.describe())
-    print(series_with_costs_further.describe())
-
-    # mean_greedy_90 = series_with_costs_greedy_90.mean()
-    # mean_random_90 = series_with_costs_random_90.mean()
-    #mean_greedy_random_try = series_with_costs_greedy_random_try.mean()
-    mean_greedy_further = series_with_costs_further.mean()
-
-    dict_means = {'algorithm':['greedy, further cables'], 'means':[mean_greedy_further]}
-    df_means = pd.DataFrame(dict_means)
-    plt.clf()
-    df_means.plot.bar(x='algorithm', y='means')
-    plt.show()
     #---------------- hill climber ---------------------------------------------
 #     random_algo = Randomize()
 #     random_algo.assign_house_random(houses, batteries)
