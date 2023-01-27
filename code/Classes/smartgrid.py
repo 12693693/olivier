@@ -146,6 +146,7 @@ class Smartgrid():
         # plot all houses and batteries
         plt.scatter(pos_x_list, pos_y_list, color=color_list, marker='s', s=40)
         plt.show()
+        plt.clf()
 
     #
     # def assign_house(self):
@@ -277,6 +278,8 @@ class Smartgrid():
                         self.total_cost -= 9
                     else:
                         steps_set.add(step)
+
+        print(self.total_cost, 'shared costs')
 
 
 

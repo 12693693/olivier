@@ -130,7 +130,6 @@ class Cables():
         '''
 
         for battery in list_with_batteries:
-            # color =
             for house_dict in battery.dict['connected houses']:
 
                 # find x and y coordinates for the battery and connected house
