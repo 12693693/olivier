@@ -2,6 +2,7 @@ from .randomize import Randomize
 from .cable_90_degree import Cables_90
 from .random_try import Cables
 from .search_cables import Search_Cables
+from .further_cables import Further_Cables
 from ..Classes.smartgrid import Smartgrid
 import random
 import copy
@@ -9,6 +10,7 @@ import copy
 cable_90_degree = Cables_90()
 cable_random = Cables()
 search_cables = Search_Cables()
+cable_further = Further_Cables()
 
 
 class Hill_Climber():
@@ -21,7 +23,7 @@ class Hill_Climber():
 
     def fill_new_grid(self, house_dict, battery, function):
 
-        function_dict = {'cable_90_degree.make_90_degrees_cables(houses, batteries)': 'cable_90_degree.make_90_degrees_cable(house_dict, battery)', 'cable_random.random_try(houses, batteries)': 'cable_random.random_try(house_dict, battery)', 'search_cables.run_search(houses, batteries)' : 'search_cables.search_cables(house_dict, battery)'}
+        function_dict = {'cable_90_degree.make_90_degrees_cables(houses, batteries)': 'cable_90_degree.make_90_degrees_cable(house_dict, battery)', 'cable_random.random_try(houses, batteries)': 'cable_random.random_try(house_dict, battery)', 'search_cables.run_search(houses, batteries)' : 'search_cables.search_cables(house_dict, battery)', 'further_cables.run_further(houses, batteries)' : 'cable_further.further_cables(house_dict, battery)' }
         #print('function', function_dict[function])
         # fill the grid of the newly added houses
 
@@ -71,9 +73,7 @@ class Hill_Climber():
             self.battery_2.dict['houses'].remove(self.house_2)
 
 
-            # dit mag nog anders
-            self.new_costs = new_smartgrid.total_cost - (len(self.house_1['cables']) - 1) - (len(self.house_2['cables']) - 1)
-            #self.smartgrid.combined_list[0]['costs shared'] - (len(house_1['grid']) - 1) - (len(house_2['grid']) - 1)
+            #smartgrid.combined_list[0]['costs shared'] - (len(house_1['grid']) - 1) - (len(house_2['grid']) - 1)
 
             # reset the grid
             self.house_1['cables'] = []
@@ -120,6 +120,10 @@ class Hill_Climber():
 
             # Accept it if it is better
             self.check_solution(new_smartgrid)
+
+        return self.smartgrid
+
+        #my_smartgrid.make_output(args.district, shared_input)
 
 
 
