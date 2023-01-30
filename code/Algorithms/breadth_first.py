@@ -147,19 +147,10 @@ class Breadth_first():
                 lowest_distance = total_distance
                 house_dict['cables'] = best_grid
 
-        # previous_x = 0
-        # previous_y = 0
-        #
-        # x_list_scheef = []
-        # y_list_scheef = []
-
         for step in best_grid:
             x_loc = float(step.split(', ')[0])
             y_loc = float(step.split(', ')[1])
-
-            # if x_loc != previous_x and y_loc != previous_y and previous_x != 0 and previous_y != 0:
-            #     print('scheef')
-
+            
             x_list.append(x_loc)
             y_list.append(y_loc)
 
@@ -180,43 +171,19 @@ class Breadth_first():
                 list_distances_all_cables = self.distance_to_cable(possible_cables, battery)
                 x_list, y_list = self.choose_best_cable(list_distances_all_cables, possible_cables, house_dict, x_list, y_list)
 
-                    # print(x_list, y_list, battery.dict['battery location'])
-                    # print(step)
-
-                    # plt.plot(x_list, y_list, 'k--')
-
-
-                #     previous_x = x_loc
-                #     previous_y = y_loc
-                #     # plt.figure()
-                # #
-                # for (prev_x, prev_y), (next_x, next_y) in zip(zip(x_list[:-1], y_list[:-1]), zip(x_list[1:], y_list[1:])):
-                #     if abs(prev_x - next_x) + abs(prev_y - next_y) != 1:
-                #         print(" wtf", (prev_x, prev_y), (next_x, next_y))
-                #         print(x_list, y_list, house_dict['house location'])
-
                 plt.plot(x_list, y_list, 'k--')
-                    # plt.show()
-
-        # plt.show()
-
-                        # house_dict['cables'] = np.array(best_grid)
 
 
     def run(self, list_with_houses, list_with_batteries):
 
         self.breadth_first_5(list_with_houses, list_with_batteries)
 
-        # plt.show()
-
         for battery in list_with_batteries:
             for house_dict in battery.dict['houses'][5:]:
                 make_rest_of_cables.search_cables(house_dict, battery)
 
 
-        # plt.show()
 
-        # print(battery.dict['connected houses'])
 
 
 
