@@ -8,27 +8,31 @@ class Further_Cables():
     def further_cables(self, house_dict, battery):
         self.cable_list = []
         # set starting point to the location of the house
-        location_house_x = house_dict['location'][0]
-        location_house_y = house_dict['location'][1]
+        self.location_house_x = dictionary_of_house['location'][0]
+        self.location_house_y = dictionary_of_house['location'][1]
+        # location_house_x = house_dict['location'][0]
+        # location_house_y = house_dict['location'][1]
 
         # compute distance between the battery and the assigned house
-        distance = abs(battery.x - location_house_x) + abs(battery.y - location_house_y)
+        distance = abs(battery.x - self.location_house_x) + abs(battery.y - self.location_house_y)
 
         # set starting point to the location of the house
-        x_loc = location_house_x
-        y_loc = location_house_y
+        x_loc = self.location_house_x
+        y_loc = self.location_house_y
 
-        # Add these start points to
+        # Add these start points to the grid list.
         house_dict['cables'].append(f'{x_loc}, {y_loc}')
 
         x_list = [x_loc]
         y_list = [y_loc]
 
+        # Set condition to make sure it moves untill the battery and create lists.
         while distance != 0:
             self.step_score_list = []
             self.step_list = []
             self.distance_list = []
 
+            # Create the steps for each direction
             for choice in range(1,5):
                 if choice == 1:
                     step_score_1 = 0
@@ -38,11 +42,13 @@ class Further_Cables():
                     #compute the potential new distance with this stap
                     new_distance_1 = abs(battery.x - (x_loc - 1)) + abs(battery.y - y_loc)
 
+                    # Define the scores for each step.
                     if new_distance_1 < distance and step_1_hash in self.existing_cable_dict:
                         step_score_1 = 2
                     if new_distance_1 < distance and step_1_hash not in self.existing_cable_dict:
                         step_score_1 = 1
 
+                    # Update the lists with the information if this step
                     self.step_score_list.append(step_score_1)
                     self.step_list.append(step_1)
                     self.distance_list.append(new_distance_1)
@@ -55,11 +61,13 @@ class Further_Cables():
                     #compute the potential new distance with this stap
                     new_distance_2 = abs(battery.x - (x_loc + 1)) + abs(battery.y - y_loc)
 
+                    # Define and add score to each step based on it's characteristics
                     if new_distance_2 < distance and step_2_hash in self.existing_cable_dict:
                         step_score_2 = 2
                     if new_distance_2 < distance and step_2_hash not in self.existing_cable_dict:
                         step_score_2 = 1
 
+                    # Update the lists with the information if this step
                     self.step_score_list.append(step_score_2)
                     self.step_list.append(step_2)
                     self.distance_list.append(new_distance_2)
@@ -72,11 +80,13 @@ class Further_Cables():
                     #compute the potential new distance with this stap
                     new_distance_3 = abs(battery.x - x_loc) + abs(battery.y - (y_loc + 1))
 
+                    # Define and add score to each step based on it's characteristics
                     if new_distance_3 < distance and step_3_hash in self.existing_cable_dict:
                         step_score_3 = 2
                     if new_distance_3 < distance and step_3_hash not in self.existing_cable_dict:
                         step_score_3 = 1
 
+                    # Update the lists with the information if this step
                     self.step_score_list.append(step_score_3)
                     self.step_list.append(step_3)
                     self.distance_list.append(new_distance_3)
@@ -89,18 +99,19 @@ class Further_Cables():
                     #compute the potential new distance with this stap
                     new_distance_4 = abs(battery.x - x_loc) + abs(battery.y - (y_loc - 1))
 
-                    # Add score to each step based on it's characteristics
+                    # Define and add score to each step based on it's characteristics
                     if new_distance_4 < distance and step_4_hash in self.existing_cable_dict:
                         step_score_4 = 2
                     if new_distance_4 < distance and step_4_hash not in self.existing_cable_dict:
                         step_score_4 = 1
 
+                    # Update the lists with the information if this step
                     self.step_score_list.append(step_score_4)
                     self.step_list.append(step_4)
                     self.distance_list.append(new_distance_4)
 
 
-            # find step with highest score
+            # Find step with highest score
             if self.step_score_list.count(2) > 1:
                 list_index_2 = []
 
@@ -120,16 +131,18 @@ class Further_Cables():
             else:
                 highest_index = self.step_score_list.index(max(self.step_score_list))
 
-            # Find the step which belongs with the highest score
+            # Find the step which belongs with the highest score.
             for index, highest in enumerate(self.step_score_list):
                 cable_key = tuple(self.step_list[highest_index])
 
-            # Find the new distance which belongs with the highest score
+            # Find the new distance which belongs with the highest score.
             for index, distance in enumerate(self.step_score_list):
                 new_distance = self.distance_list[highest_index]
-            # Update the new distance
+
+            # Update the new distance.
             distance = new_distance
 
+            # Add the new location to the grid list.
             x_loc = cable_key[2]
             y_loc = cable_key[3]
 
@@ -137,7 +150,7 @@ class Further_Cables():
             y_list.append(y_loc)
             house_dict['cables'].append(f'{x_loc}, {y_loc}')
 
-            # Add this cable part to the dictionary
+            # Add this cable part to the cable dictionary
             if cable_key not in self.existing_cable_dict:
                 self.existing_cable_dict[cable_key] = 1
 
@@ -154,9 +167,9 @@ class Further_Cables():
 
         self.steps_count = 0
 
+
         for battery in list_with_batteries:
             for house_dict in battery.dict['houses']:
                 self.further_cables(house_dict, battery)
-
 
         return self.steps_count, self.cable_list, self.existing_cable_dict
