@@ -17,7 +17,7 @@ class Cables_90():
         # and add the starting point to the grid dictionary
         x_loc = self.location_house_x
         y_loc = self.location_house_y
-        dictionary_of_house['cables'].append(f'{x_loc}, {y_loc}')
+        dictionary_of_house['cables'].append(f'{int(x_loc)},{int(y_loc)}')
 
         # compute distance to use as a constraint for choosing which way
         # to move on the grid line
@@ -36,7 +36,7 @@ class Cables_90():
             step_count += 1
 
             # save the individual steps in the grid list in the dictionary of the house
-            dictionary_of_house['cables'].append(f'{x_loc}, {y_loc}')
+            dictionary_of_house['cables'].append(f'{int(x_loc)},{int(y_loc)}')
 
         # take steps until the correct y coordinate is reached
         # and keep track of the grid line
@@ -48,7 +48,7 @@ class Cables_90():
             step_count += 1
 
             # save the individual steps in the grid list in the dictionary of the house
-            dictionary_of_house['cables'].append(f'{x_loc}, {y_loc}')
+            dictionary_of_house['cables'].append(f'{int(x_loc)},{int(y_loc)}')
 
         return step_count
 

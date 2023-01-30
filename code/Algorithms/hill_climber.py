@@ -18,6 +18,8 @@ class Hill_Climber():
 
     def fill_new_grid(self, house_dict, battery, function):
 
+        function_dict = {'cable_90_degree.make_90_degrees_cables(houses, batteries)': f'cable_90_degree.make_90_degrees_cable({dictionary_of_house}, battery)'}
+
         # fill the grid of the newly added houses
         fill_string =f'{function}({house_dict}, {battery})'
         return fill_string
@@ -63,12 +65,12 @@ class Hill_Climber():
 
 
             # dit mag nog anders
-            self.new_costs = new_smartgrid.total_cost - (len(self.house_1['grid']) - 1) - (len(self.house_2['grid']) - 1)
+            self.new_costs = new_smartgrid.total_cost - (len(self.house_1['cables']) - 1) - (len(self.house_2['cables']) - 1)
             #self.smartgrid.combined_list[0]['costs shared'] - (len(house_1['grid']) - 1) - (len(house_2['grid']) - 1)
 
             # reset the grid
-            self.house_1['grid'] = []
-            self.house_2['grid'] = []
+            self.house_1['cables'] = []
+            self.house_2['cables'] = []
 
             # fill the grid of the houses
             string_function_1 = self.fill_new_grid(self.house_1, self.battery_2, function)

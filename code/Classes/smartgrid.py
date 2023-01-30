@@ -245,7 +245,7 @@ class Smartgrid():
         not shared.
         '''
 
-        battery_costs = len(self.battery_list) * 5000
+        self.battery_costs = len(self.battery_list) * 5000
         cable_costs = 0
 
         for battery in self.battery_list:
@@ -254,7 +254,7 @@ class Smartgrid():
 
         # cable_costs = steps_count * 9
 
-        self.total_cost = battery_costs + cable_costs
+        self.total_cost = self.battery_costs + cable_costs
         #print(self.total_cost, 'aangemaakte costs')
 
     def costs_shared(self):
@@ -263,21 +263,39 @@ class Smartgrid():
         shared.
         '''
         steps_set = set()
+        steps_list = []
 
         self.costs_own(10)
+        cable_costs = 0
+        print(self.total_cost)
 
         for battery in self.battery_list:
             for house_dict in battery.dict['houses']:
-                for i in range(len(house_dict['cables']) - 1):
-                    old_location = house_dict['cables'][i]
-                    new_location = house_dict['cables'][i + 1]
-                    step = f'{old_location}, {new_location}'
 
+                steps_list.extend(house_dict['cables'])
 
-                    if step in steps_set:
-                        self.total_cost -= 9
-                    else:
-                        steps_set.add(step)
+            steps_set = list(set(steps_list))
+                # for i in range(len(house_dict['cables'])):
+                #
+                #     steps_set.add(house_dict['cables'][i])
+                #     print(house_dict['cables'])
+                #     # old_location = house_dict['cables'][i]
+                #     # new_location = house_dict['cables'][i + 1]
+                #     # step_old_new = f'{old_location}, {new_location}'
+                #     # step_new_old = f'{new_location}, {old_location}'
+                #     #
+                #     #
+                #     #
+                #     # if step_old_new not in steps_set and step_new_old not in steps_set:
+                #     #     cable_costs += 9
+                #     #     steps_set.add(step_old_new)
+                #     #     steps_set.add(step_new_old)
+
+        print(len(steps_set))
+        print(self.battery_costs)
+
+        self.total_cost = self.battery_costs + (len(steps_set) * 9)
+
 
         print(self.total_cost, 'shared costs')
 

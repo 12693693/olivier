@@ -112,17 +112,12 @@ if __name__ == "__main__":
 
 
 
-        function = cables_dict[cables_input].split('(')[0]
-        print(function)
+
+        #random_hill_climber = Hill_Climber(my_smartgrid)
+        #random_sa = Simulated_Annealing(my_smartgrid, temperature=200)
 
 
-
-
-        random_hill_climber = Hill_Climber(my_smartgrid)
-        random_sa = Simulated_Annealing(my_smartgrid, temperature=200)
-
-
-        eval(connections_dict[connections_input]).run(2000, function)
+        eval(connections_dict[connections_input]).run(2000, cables_dict[cables_input])
 
 
         list = my_smartgrid.make_output(args.district, shared_input)
@@ -151,7 +146,11 @@ if __name__ == "__main__":
 
 
     else:
+
+        # assign the houses
         eval(connections_dict[connections_input])
+
+        # make the cables
         eval(cables_dict[cables_input])
 
         list = my_smartgrid.make_output(args.district, shared_input)

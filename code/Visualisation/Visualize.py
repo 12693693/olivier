@@ -28,7 +28,7 @@ def visualise():
 
     with open(cur_path + '/../../resultaten/output.json', 'r') as file:
         data_list = json.load(file)
-        print(data_list)
+        #print(data_list)
 
     position_x_list = []
     position_y_list = []
