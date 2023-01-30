@@ -328,6 +328,7 @@ class Smartgrid():
         # else:
         #     self.costs_own(10)
         costs = self.get_costs(shared)
+        print('costs in output', costs)
         self.create_district_dict(district, shared)
 
 
