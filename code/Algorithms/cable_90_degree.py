@@ -2,8 +2,10 @@ import matplotlib.pyplot as plt
 class Cables_90():
 
     def get_location(self, dictionary_of_house):
-        self.location_house_x = dictionary_of_house['location'][0]
-        self.location_house_y = dictionary_of_house['location'][1]
+        #print(dictionary_of_house['location'].split(',')[0])
+        #print(dictionary_of_house['location'])
+        self.location_house_x = float(dictionary_of_house['location'].split(',')[0])
+        self.location_house_y = float(dictionary_of_house['location'].split(',')[1])
 
     def plot_cable_90(self, loc_house_x, loc_house_y, battery):
         x_list = [loc_house_x, battery.x, battery.x]
@@ -15,6 +17,8 @@ class Cables_90():
 
         # create starting point for creating the grid line
         # and add the starting point to the grid dictionary
+        #print('dict', dictionary_of_house['location'])
+
         x_loc = self.location_house_x
         y_loc = self.location_house_y
         dictionary_of_house['cables'].append(f'{int(x_loc)},{int(y_loc)}')
@@ -23,6 +27,7 @@ class Cables_90():
         # to move on the grid line
 
         #print(self.location_house_x, battery.x)
+        #print(self.location_house_x)
         distance_x = self.location_house_x - battery.x
         distance_y = self.location_house_y - battery.y
 
