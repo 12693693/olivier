@@ -113,8 +113,8 @@ if __name__ == "__main__":
 
 
 
-        random_hill_climber = Hill_Climber(my_smartgrid)
-        random_sa = Simulated_Annealing(my_smartgrid, temperature=200)
+        random_hill_climber = Hill_Climber(my_smartgrid, shared_input)
+        random_sa = Simulated_Annealing(my_smartgrid, shared_input, temperature=200)
 
 
         eval(connections_dict[connections_input]).run(2000, cables_dict[cables_input])
