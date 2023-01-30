@@ -7,16 +7,16 @@ class Search_Cables():
 
     def search_cables(self, house_dict, battery):
         self.cable_list = []
-        # set starting point to the location of the house
-        location_house_x = house_dict['location'][0]
-        location_house_y = house_dict['location'][1]
 
+        # set starting point to the location of the house
+        self.location_house_x = float(dictionary_of_house['location'].split(',')[0])
+        self.location_house_y = float(dictionary_of_house['location'].split(',')[1])
         # compute distance between the battery and the assigned house
-        distance = abs(battery.x - location_house_x) + abs(battery.y - location_house_y)
+        distance = abs(battery.x - self.location_house_x) + abs(battery.y - self.location_house_y)
 
         # set starting point to the location of the house
-        x_loc = location_house_x
-        y_loc = location_house_y
+        x_loc = self.location_house_x
+        y_loc = self.location_house_y
 
         # Add these start points to
         house_dict['cables'].append(f'{int(x_loc)},{int(y_loc)}')

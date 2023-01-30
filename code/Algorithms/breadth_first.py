@@ -34,8 +34,8 @@ class Breadth_first():
         # steps_list = []
 
         # find x and y coordinates for the battery and connected house
-        x_loc = house_dict['location'][0]
-        y_loc = house_dict['location'][1]
+        x_loc = int(house_dict['location'].split(',')[0])
+        y_loc = int(house_dict['location'].split(',')[1])
 
         # save starting point for the grid line
         house_dict['cables'].append(f'{x_loc}, {y_loc}')
@@ -74,8 +74,8 @@ class Breadth_first():
             cables_list = []
 
             # set location back to starting point before creating new cable
-            x_loc = house_dict['location'][0]
-            y_loc = house_dict['location'][1]
+            x_loc = int(house_dict['location'].split(',')[0])
+            y_loc = int(house_dict['location'].split(',')[1])
 
             # take the random order of steps
             for step in steps_list:
@@ -111,8 +111,8 @@ class Breadth_first():
             # print(len(grid))
             # loop over house_dicts
             for house_dict_2 in battery.dict['houses']:
-                x_house = house_dict_2['location'][0]
-                y_house = house_dict_2['location'][1]
+                x_house = int(house_dict_2['location'].split(',')[0])
+                y_house = int(house_dict_2['location'].split(',')[1])
 
                 distance = 100
 
@@ -121,6 +121,7 @@ class Breadth_first():
                 for step in cable:
                     x_loc = float(step.split(', ')[0])
                     y_loc = float(step.split(', ')[1])
+
                     # print('for step in grid')
                     # calculate current_distance
                     current_distance = abs(x_house - x_loc) + abs(y_house - y_loc)
