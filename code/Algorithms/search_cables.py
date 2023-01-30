@@ -9,8 +9,8 @@ class Search_Cables():
         self.cable_list = []
 
         # set starting point to the location of the house
-        self.location_house_x = dictionary_of_house['location'][0]
-        self.location_house_y = dictionary_of_house['location'][1]
+        self.location_house_x = float(dictionary_of_house['location'].split(',')[0])
+        self.location_house_y = float(dictionary_of_house['location'].split(',')[1])
         # compute distance between the battery and the assigned house
         distance = abs(battery.x - self.location_house_x) + abs(battery.y - self.location_house_y)
 
