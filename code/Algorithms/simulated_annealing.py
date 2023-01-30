@@ -5,9 +5,9 @@ from .hill_climber import Hill_Climber
 
 class Simulated_Annealing(Hill_Climber):
 
-    def __init__(self, smartgrid_solution, temperature=1):
+    def __init__(self, smartgrid_solution, shared, temperature=1):
         # Use the init of the Hillclimber class
-        super().__init__(smartgrid_solution)
+        super().__init__(smartgrid_solution, shared)
 
         # Starting temperature and current temperature
         self.T0 = temperature

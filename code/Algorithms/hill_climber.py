@@ -12,13 +12,16 @@ search_cables = Search_Cables()
 
 
 class Hill_Climber():
-    def __init__(self, smartgrid_solution):
+    def __init__(self, smartgrid_solution, shared):
         self.smartgrid = copy.deepcopy(smartgrid_solution)
-        self.costs = self.smartgrid.total_cost
+        self.shared = shared
+
+        self.costs = self.smartgrid.get_costs(self.shared)
+
 
     def fill_new_grid(self, house_dict, battery, function):
 
-        function_dict = {'cable_90_degree.make_90_degrees_cables(houses, batteries)': 'cable_90_degree.make_90_degrees_cable(house_dict, battery)', 'search_cables.run_search(houses, batteries)' : 'search_cables.search_cables(house_dict, battery)'}
+        function_dict = {'cable_90_degree.make_90_degrees_cables(houses, batteries)': 'cable_90_degree.make_90_degrees_cable(house_dict, battery)', 'cable_random.random_try(houses, batteries)': 'cable_random.random_try(house_dict, battery)', 'search_cables.run_search(houses, batteries)' : 'search_cables.search_cables(house_dict, battery)'}
         #print('function', function_dict[function])
         # fill the grid of the newly added houses
 
@@ -92,7 +95,7 @@ class Hill_Climber():
 
     def check_solution(self, new_smartgrid):
         #print('oud zonder', self.new_costs)
-        self.new_costs += self.steps_house_1 + self.steps_house_2
+        self.new_costs = new_smartgrid.get_costs(self.shared)
         #print('nieuw', self.new_costs)
 
         if self.new_costs <= self.costs:
