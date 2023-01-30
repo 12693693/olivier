@@ -4,4 +4,4 @@ class Batteries():
         self.x = x
         self.y = y
         self.color = 'blue'
-        self.dict = {'location': [self.x, self.y], 'capacity': self.capacity, 'houses': []}
+        self.dict = {'location': f'{int(self.x)},{int(self.y)}', 'capacity': self.capacity, 'houses': []}

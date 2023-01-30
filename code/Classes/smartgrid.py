@@ -268,33 +268,36 @@ class Smartgrid():
         self.costs_own(10)
         cable_costs = 0
         print(self.total_cost)
+        cables_segments = []
 
         for battery in self.battery_list:
             for house_dict in battery.dict['houses']:
 
-                steps_list.extend(house_dict['cables'])
+                for cable_a, cable_b in zip(house["cables"][:-1], house["cables"][1:]):
+                    cable_segments.append((cable_a, cable_b, battery))
 
-            steps_set = list(set(steps_list))
-                # for i in range(len(house_dict['cables'])):
+
+
+                # # for i in range(len(house_dict['cables'])):
+                # #
+                # #     steps_set.add(house_dict['cables'][i])
+                # #     print(house_dict['cables'])
+                #     old_location = house_dict['cables'][i]
+                #     new_location = house_dict['cables'][i + 1]
+                #     step_old_new = f'{old_location}, {new_location}'
+                #     step_new_old = f'{new_location}, {old_location}'
                 #
-                #     steps_set.add(house_dict['cables'][i])
-                #     print(house_dict['cables'])
-                #     # old_location = house_dict['cables'][i]
-                #     # new_location = house_dict['cables'][i + 1]
-                #     # step_old_new = f'{old_location}, {new_location}'
-                #     # step_new_old = f'{new_location}, {old_location}'
-                #     #
-                #     #
-                #     #
-                #     # if step_old_new not in steps_set and step_new_old not in steps_set:
-                #     #     cable_costs += 9
-                #     #     steps_set.add(step_old_new)
-                #     #     steps_set.add(step_new_old)
+                #
+                #
+                #     if step_old_new not in steps_set and step_new_old not in steps_set:
+                #         cable_costs += 9
+                #         steps_set.add(step_old_new)
+                #         steps_set.add(step_new_old)
 
-        print(len(steps_set))
+        print('cables', len(steps_set))
         print(self.battery_costs)
 
-        self.total_cost = self.battery_costs + (len(steps_set) * 9)
+        self.total_cost = self.battery_costs + (cables * 9)
 
 
         print(self.total_cost, 'shared costs')
@@ -336,7 +339,7 @@ class Smartgrid():
         '''
 
 
-        self.make_f_string()
+        #self.make_f_string()
         if shared == 'yes':
             self.costs_shared()
         else:
