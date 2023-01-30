@@ -17,7 +17,6 @@ class Breadth_first():
         x_distance = int(x_battery) - int(x_loc)
         y_distance = int(y_battery) - int(y_loc)
 
-
         return x_distance, y_distance
 
     def set_locs(self, battery, i):
@@ -25,22 +24,21 @@ class Breadth_first():
         starting point of the cable, and appends this location in the cables
         dictionary. It also computes the distance on the x an '''
 
+        # initiate list in which to keep track of the x and y coordinates of the cables
         x_list = []
         y_list = []
+
+        # find the house dictionary
         house_dict = battery.dict['houses'][i]
 
-        # for house_dict in battery.dict['connected houses']:
-        # house_dict = battery.dict['connected houses'][0]
-        # steps_list = []
-
-        # find x and y coordinates for the battery and connected house
+        # find x and y coordinates of the starting point of the cable
         x_loc = int(house_dict['location'].split(',')[0])
         y_loc = int(house_dict['location'].split(',')[1])
 
-        # save starting point for the grid line
+        # save starting point for the cable
         house_dict['cables'].append(f'{x_loc}, {y_loc}')
 
-        # create list with x and y coordinates of the grid line
+        # append list with x and y coordinates of the cable starting point
         x_list.append(x_loc)
         y_list.append(y_loc)
 
@@ -50,6 +48,7 @@ class Breadth_first():
         ''' this function creates a list with the steps that should be taken
         to form the cable from the house to the battery. It also creates 10
         random cables and saves a list with each possible cable. '''
+
         steps_list = []
         # create steps list for the steps that should be taken
         if x_distance < 0:
@@ -150,7 +149,7 @@ class Breadth_first():
         for step in best_grid:
             x_loc = float(step.split(', ')[0])
             y_loc = float(step.split(', ')[1])
-            
+
             x_list.append(x_loc)
             y_list.append(y_loc)
 
