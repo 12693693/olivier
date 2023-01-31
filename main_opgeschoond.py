@@ -77,6 +77,7 @@ if __name__ == "__main__":
 
 
 
+
     cable_breadth = Breadth_first()
 
     # prompt the user to give the district number
@@ -90,7 +91,7 @@ if __name__ == "__main__":
 
 
     connections_dict = {'random': 'random_algo.assign_house_random(houses, batteries)', 'greedy' : 'greedy_algo.assign_closest_battery(houses, batteries)', 'hillclimber' : 'random_hill_climber', 'simulated annealing': 'random_sa'}
-    cables_dict = {'90 degrees': 'cable_90_degree.make_90_degrees_cables(houses, batteries)', 'random' : 'cable_random.random_try(houses, batteries)', 'search cables' : 'search_cables.run_search(houses, batteries)', 'further cables': 'further_cables.run_further(houses, batteries)', 'breadth first': 'cable_breadth.run(houses, batteries)'}
+    cables_dict = {'90 degrees': 'cable_90_degree.make_90_degrees_cables(houses, batteries)', 'random' : 'cable_random.random_try(houses, batteries)', 'search cables' : 'search_cables.run_search(houses, batteries)', 'further cables': 'further_cables.run_further(houses, batteries)', 'breadth first': 'cable_breadth.run(houses, batteries)', 'random try': 'cable_random.run(houses, batteries)'}
 
     # eval(connections_dict[connections_input])
     # eval(cables_dict[cables_input])

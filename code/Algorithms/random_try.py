@@ -101,7 +101,7 @@ class Cables():
                 if new_distance < distance:
                     distance = self.save_step(distance, new_distance, house_dict, x_loc, y_loc)
 
-                # if the new point is not closer to the battery location, 
+                # if the new point is not closer to the battery location,
                 # reset the step
                 else:
                     y_loc -= 1
@@ -123,8 +123,8 @@ class Cables():
 
     def random_try(self, house_dict, battery):
         # find x and y coordinates for the battery and connected house
-        x_loc = house_dict['location'][0]
-        y_loc = house_dict['location'][1]
+        x_loc = int(house_dict['location'].split(',')[0])
+        y_loc = int(house_dict['location'].split(',')[1])
 
         # save starting point for the grid line
         house_dict['cables'].append(f'{int(x_loc)},{int(y_loc)}')
@@ -133,7 +133,7 @@ class Cables():
         self.x_list = [x_loc]
         self.y_list = [y_loc]
 
-        distance = self.compute_distance(battery.x, battery.y, x_loc, y_loc)
+        distance = self.compute_distance(int(battery.x), int(battery.y), x_loc, y_loc)
 
         self.try_steps(battery.x, battery.y, x_loc, y_loc, distance, house_dict)
 
@@ -149,4 +149,4 @@ class Cables():
 
         for battery in list_with_batteries:
             for house_dict in battery.dict['houses']:
-                random_try(house_dict, battery)
+                self.random_try(house_dict, battery)
