@@ -77,7 +77,6 @@ if __name__ == "__main__":
 
 
 
-
     cable_breadth = Breadth_first()
 
     # prompt the user to give the district number
@@ -91,7 +90,7 @@ if __name__ == "__main__":
 
 
     connections_dict = {'random': 'random_algo.assign_house_random(houses, batteries)', 'greedy' : 'greedy_algo.assign_closest_battery(houses, batteries)', 'hillclimber' : 'random_hill_climber', 'simulated annealing': 'random_sa'}
-    cables_dict = {'90 degrees': 'cable_90_degree.make_90_degrees_cables(houses, batteries)', 'random' : 'cable_random.random_try(houses, batteries)', 'search cables' : 'search_cables.run_search(houses, batteries)', 'further cables': 'further_cables.run_further(houses, batteries)', 'breadth first': 'cable_breadth.run(houses, batteries)', 'random try': 'cable_random.run(houses, batteries)'}
+    cables_dict = {'90 degrees': 'cable_90_degree.make_90_degrees_cables(houses, batteries)', 'random' : 'cable_random.random_try(houses, batteries)', 'search cables' : 'search_cables.run_search(houses, batteries)', 'further cables': 'further_cables.run_further(houses, batteries)', 'breadth first': 'cable_breadth.run(houses, batteries)'}
 
     # eval(connections_dict[connections_input])
     # eval(cables_dict[cables_input])
@@ -111,16 +110,14 @@ if __name__ == "__main__":
         print(my_smartgrid.total_cost)
 
         random_hill_climber = Hill_Climber(my_smartgrid, shared_input)
-        random_sa = Simulated_Annealing(my_smartgrid, shared_input, temperature=50)
+        random_sa = Simulated_Annealing(my_smartgrid, shared_input, temperature=200)
 
 
-        new_smartgrid = eval(connections_dict[connections_input]).run(2000, cables_dict[cables_input])
+        eval(connections_dict[connections_input]).run(2000, cables_dict[cables_input])
 
 
-        list = new_smartgrid.make_output(args.district, shared_input)
-        #print(new_smartgrid.get_costs())
-
-        #vis.visualise()
+        list = my_smartgrid.make_output(args.district, shared_input)
+        print(my_smartgrid.total_cost)
 
 
 
@@ -169,7 +166,7 @@ if __name__ == "__main__":
     # list_with_costs_random_90 = []
     #
     # for i in range(100):
-    #
+    #m
     #     # create battery and houses list of the smartgrid, by making deepcopies
     #     my_smartgrid.battery_list = copy.deepcopy(batteries)
     #     my_smartgrid.houses_list = copy.deepcopy(houses)

@@ -56,13 +56,13 @@ class Further_Cables():
 
                     # determine the score for this step direction
                     if new_distance_1 < distance and step_1_hash in self.existing_cable_dict:
-                        step_score_1 = 2
+                        step_score_1 =+ 2
                     if new_distance_1 < distance and step_1_hash not in self.existing_cable_dict:
-                        step_score_1 = 1
+                        step_score_1 =+ 1
                     if new_distance_1 < distance and (step_1_hash[2] + 1) in self.existing_cable_dict:
-                        step_score_1 = 2
+                        step_score_1 =+ 2
                     if new_distance_1 < distance and (step_1_hash[2] + 2) in self.existing_cable_dict:
-                        step_score_1 = 2
+                        step_score_1 =+ 2
 
                     # Add this score, distance and step to the lists.
                     self.step_score_list.append(step_score_1)
@@ -79,13 +79,13 @@ class Further_Cables():
 
                     # determine the score for this step direction
                     if new_distance_2 < distance and step_2_hash in self.existing_cable_dict:
-                        step_score_2 = 2
+                        step_score_2 =+ 2
                     if new_distance_2 < distance and step_2_hash not in self.existing_cable_dict:
-                        step_score_2 = 1
+                        step_score_2 =+ 1
                     if new_distance_1 < distance and (step_2_hash[2] - 1) in self.existing_cable_dict:
-                        step_score_2 = 2
+                        step_score_2 =+ 2
                     if new_distance_1 < distance and (step_2_hash[2] - 2) in self.existing_cable_dict:
-                        step_score_2 = 2
+                        step_score_2 =+ 2
 
                     # Add this score, distance and step to the lists.
                     self.step_score_list.append(step_score_2)
@@ -102,13 +102,13 @@ class Further_Cables():
 
                     # determine the score for this step direction
                     if new_distance_3 < distance and step_3_hash in self.existing_cable_dict:
-                        step_score_3 = 2
+                        step_score_3 =+ 2
                     if new_distance_3 < distance and step_3_hash not in self.existing_cable_dict:
-                        step_score_3 = 1
+                        step_score_3 =+ 1
                     if new_distance_3 < distance and (step_3_hash[3] + 1) in self.existing_cable_dict:
-                        step_score_3 = 2
+                        step_score_3 =+ 2
                     if new_distance_3 < distance and (step_3_hash[3] + 2) in self.existing_cable_dict:
-                        step_score_3 = 2
+                        step_score_3 =+ 2
 
                     # Add this score, distance and step to the lists.
                     self.step_score_list.append(step_score_3)
@@ -125,13 +125,13 @@ class Further_Cables():
 
                     # determine the score for this step direction
                     if new_distance_4 < distance and step_4_hash in self.existing_cable_dict:
-                        step_score_4 = 2
+                        step_score_4 =+ 2
                     if new_distance_4 < distance and step_4_hash not in self.existing_cable_dict:
-                        step_score_4 = 1
+                        step_score_4 =+ 1
                     if new_distance_4 < distance and (step_4_hash[3] - 1) in self.existing_cable_dict:
-                        step_score_4 = 2
+                        step_score_4 =+ 2
                     if new_distance_4 < distance and (step_4_hash[3] - 2) in self.existing_cable_dict:
-                        step_score_4 = 2
+                        step_score_4 =+ 2
 
                     # Add this score, distance and step to the lists.
                     self.step_score_list.append(step_score_4)
