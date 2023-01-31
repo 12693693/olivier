@@ -16,7 +16,7 @@ from code.Algorithms.further_cables import Further_Cables
 from code.Visualisation import Visualize as vis
 from code.Algorithms.breadth_first import Breadth_first
 
-# dit moet eigenlijk in classmethod
+
 def load_df(houses_csv, batteries_csv):
     """
     This function loads the villages and saves them as dataframes
@@ -47,10 +47,6 @@ if __name__ == "__main__":
     # Set-up parsing command line arguments
     parser = argparse.ArgumentParser(description = "adding houses to batteries")
 
-    # Adding arguments
-    #parser.add_argument("output", help = "output file (csv)")
-    #parser.add_argument("input_houses", help="houses file")
-    #parser.add_argument("input_batteries", help="batteries_file")
     parser.add_argument("district", help = "district")
 
     # Read arguments from command line
@@ -74,10 +70,6 @@ if __name__ == "__main__":
     cable_random = Cables()
     search_cables = Search_Cables()
     further_cables = Further_Cables()
-
-
-
-
     cable_breadth = Breadth_first()
 
     # prompt the user to give the district number

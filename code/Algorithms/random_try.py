@@ -123,6 +123,7 @@ class Cables():
 
     def random_try(self, house_dict, battery):
         # find x and y coordinates for the battery and connected house
+        print(house_dict)
         x_loc = int(house_dict['location'].split(',')[0])
         y_loc = int(house_dict['location'].split(',')[1])
 
