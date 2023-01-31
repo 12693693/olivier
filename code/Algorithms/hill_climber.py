@@ -27,7 +27,7 @@ class Hill_Climber():
         """
 
         # make a dictionary of every possible algoritm that can be used
-        function_dict = {'cable_90_degree.make_90_degrees_cables(houses, batteries)': 'cable_90_degree.make_90_degrees_cable(house_dict, battery)', 'cable_random.random_try(houses, batteries)': 'cable_random.random_try(house_dict, battery)', 'search_cables.run_search(houses, batteries)' : 'search_cables.search_cables(house_dict, battery)', 'further_cables.run_further(houses, batteries)' : 'cable_further.further_cables(house_dict, battery)' }
+        function_dict = {'cable_90_degree.make_90_degrees_cables(houses_list, batteries_list)': 'cable_90_degree.make_90_degrees_cable(house_dict, battery)', 'cable_random.run(houses_list, batteries_list)': 'cable_random.random_try(house_dict, battery)', 'search_cables.run_search(houses_list, batteries_list)' : 'search_cables.search_cables(house_dict, battery)', 'further_cables.run_further(houses_list, batteries_list)' : 'cable_further.further_cables(house_dict, battery)' }
 
         return eval(function_dict[function])
 
@@ -91,8 +91,8 @@ class Hill_Climber():
             self.battery_2.dict['houses'].append(self.house_1)
 
             # make new paths of cables using the cable algorithm that you choose
-            self.steps_house_1 = self.fill_new_grid(self.house_1, self.battery_2, function)
-            self.steps_house_2 = self.fill_new_grid(self.house_2, self.battery_1, function)
+            self.fill_new_grid(self.house_1, self.battery_2, function)
+            self.fill_new_grid(self.house_2, self.battery_1, function)
 
 
 
