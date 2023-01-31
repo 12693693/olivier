@@ -189,8 +189,8 @@ class Breadth_first():
                 # fill the x and y list with the steps of the best cable
                 x_list, y_list = self.choose_best_cable(list_distances_all_cables, possible_cables, house_dict, x_list, y_list)
 
-                # make sure the result is plotted
-                plt.plot(x_list, y_list, 'k--')
+
+
 
     def run(self, list_with_houses, list_with_batteries):
         ''' this function runs the experiment: it chooses the best cables for the
