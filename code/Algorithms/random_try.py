@@ -137,7 +137,7 @@ class Cables():
 
         self.try_steps(battery.x, battery.y, x_loc, y_loc, distance, house_dict)
 
-        plt.plot(self.x_list, self.y_list, 'k--')
+        # plt.plot(self.x_list, self.y_list, 'k--')
 
 
     def run(self, list_with_houses, list_with_batteries):

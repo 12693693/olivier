@@ -180,7 +180,7 @@ class Further_Cables():
                     if cable_key not in self.existing_cable_dict:
                         self.existing_cable_dict[cable_key] = 1
 
-                plt.plot(x_list, y_list, 'k--')
+
 
             print(count)
 

@@ -10,7 +10,7 @@ class Cables_90():
     def plot_cable_90(self, loc_house_x, loc_house_y, battery):
         x_list = [loc_house_x, battery.x, battery.x]
         y_list = [loc_house_y, loc_house_y, battery.y]
-        plt.plot(x_list, y_list, 'k--')
+
 
     def make_lines_90(self, dictionary_of_house, battery):
         step_count = 0
