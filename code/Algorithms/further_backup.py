@@ -1,6 +1,6 @@
 import random
 import matplotlib.pyplot as plt
-
+# INCORRECT !!!!!!!!!!!!!!!!!!
 class Further_Cables():
     def further_cables(self, list_with_houses, list_with_batteries):
         '''
@@ -16,7 +16,7 @@ class Further_Cables():
         self.existing_cable_dict = {}
         self.steps_count = 0
 
-        # Loop over batteries and the matched houses. 
+        # Loop over batteries and the matched houses.
         for battery in list_with_batteries:
             for house_dict in battery.dict['houses']:
                 self.cable_list = []
