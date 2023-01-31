@@ -16,6 +16,8 @@ class Smartgrid():
         # self.battery_dict = {}
         self.district_cost_dict = {}
         self.combined_list = []
+        self.batteries_list = []
+        self.houses_list = []
         self.add_houses_and_batteries(houses_df, batteries_df)
         #self.add_batteries(batteries_df)
         #self.add_houses(houses_df)
