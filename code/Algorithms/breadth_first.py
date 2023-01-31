@@ -17,7 +17,6 @@ class Breadth_first():
         '''
         x_distance = int(x_battery) - int(x_loc)
         y_distance = int(y_battery) - int(y_loc)
-        # print(x_distance, y_distance)
 
         return x_distance, y_distance
 
@@ -29,11 +28,10 @@ class Breadth_first():
         connected houses to that battery '''
 
         for battery in list_with_batteries:
-            # print('battery')
+
             for i in range(5):
                 house_dict = battery.dict['connected houses'][i]
-            # for house_dict in battery.dict['connected houses']:
-            # house_dict = battery.dict['connected houses'][0]
+
                 steps_list = []
 
                 # find x and y coordinates for the battery and connected house
@@ -96,7 +94,6 @@ class Breadth_first():
                 # loop over grids
                 for grid in possible_grids:
                     distance_to_grid_list = []
-                    # print(len(grid))
                     # loop over house_dicts
                     for house_dict_2 in battery.dict['connected houses']:
                         x_house = house_dict_2['location'][0]
@@ -109,17 +106,14 @@ class Breadth_first():
                         for step in grid:
                             x_loc = step[0]
                             y_loc = step[1]
-                            # print('for step in grid')
+
                             # calculate current_distance
                             current_distance = abs(x_house - x_loc) + abs(y_house - y_loc)
-                            # print('current distance')
                             if current_distance < distance:
                                 distance = current_distance
 
                         distance_to_grid_list.append(distance)
-                        # print('list of distances for one grid')
                     list_distances_all_grids.append(distance_to_grid_list)
-                    # print('total list of distances all grids')
 
                 lowest_distance = math.inf
                 for index, grid_distance_list in enumerate(list_distances_all_grids):
@@ -128,15 +122,7 @@ class Breadth_first():
                         best_grid = possible_grids[index]
                         lowest_distance = total_distance
                         house_dict['cables'] = np.array(best_grid)
-                        # print(np.array(best_grid))
-                        # #y
-                        # print(np.array(best_grid)[:,1])
-                        # #x
-                        # print(np.array(best_grid)[:,0])
-                        # exit()
 
-            # print(house_dict['grid'])
-            # print("HELP", battery.dict['connected houses'])
 
     def run(self, list_with_houses, list_with_batteries):
 
@@ -147,20 +133,3 @@ class Breadth_first():
                 make_rest_of_cables.search_cables(house_dict, battery)
 
         print(battery.dict['connected houses'])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        # make list with corresponding number of -1 or 1,
