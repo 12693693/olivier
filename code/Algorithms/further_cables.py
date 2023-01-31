@@ -22,8 +22,8 @@ class Further_Cables():
         self.cable_list = []
 
         # Set starting point to the location of the house
-        self.location_house_x = float(dictionary_of_house['location'].split(',')[0])
-        self.location_house_y = float(dictionary_of_house['location'].split(',')[1])
+        self.location_house_x = float(house_dict['location'].split(',')[0])
+        self.location_house_y = float(house_dict['location'].split(',')[1])
 
         # Compute distance between the battery and the assigned house
         distance = abs(battery.x - self.location_house_x) + abs(battery.y - self.location_house_y)
