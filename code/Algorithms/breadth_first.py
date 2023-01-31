@@ -202,23 +202,3 @@ class Breadth_first():
         for battery in list_with_batteries:
             for house_dict in battery.dict['houses'][5:]:
                 make_rest_of_cables.search_cables(house_dict, battery)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        # make list with corresponding number of -1 or 1,

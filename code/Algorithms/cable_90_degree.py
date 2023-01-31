@@ -26,11 +26,8 @@ class Cables_90():
         # compute distance to use as a constraint for choosing which way
         # to move on the grid line
 
-<<<<<<< HEAD
         #print(self.location_house_x, battery.x)
         #print(self.location_house_x)
-=======
->>>>>>> 62722e883bb7f26dab76709ab57b7d5c552779c9
         distance_x = self.location_house_x - battery.x
         distance_y = self.location_house_y - battery.y
 
