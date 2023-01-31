@@ -36,7 +36,7 @@ import os
 import json
 import matplotlib.pyplot as plt
 
-def visualise():
+def visualise(algo_connections, algo_cables):
     cur_path = os.path.dirname(__file__)
 
     with open(cur_path + '/../../resultaten/output.json', 'r') as file:
@@ -73,5 +73,8 @@ def visualise():
 
 
     plt.scatter(position_x_list, position_y_list, color=color_list, marker='s', s=60)
+    plt.title(f'Connections made with {algo_connections} algorithm, cables made with {algo_cables} algorithm')
+    plt.tick_params(left = False, right = False , labelleft = False ,
+                labelbottom = False, bottom = False)
     plt.show()
     plt.clf()

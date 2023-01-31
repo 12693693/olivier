@@ -109,9 +109,6 @@ if __name__ == "__main__":
         list = my_smartgrid.make_output(args.district, shared_input)
         print(my_smartgrid.total_cost)
 
-
-
-
         random_hill_climber = Hill_Climber(my_smartgrid, shared_input)
         random_sa = Simulated_Annealing(my_smartgrid, shared_input, temperature=200)
 
@@ -155,7 +152,7 @@ if __name__ == "__main__":
         list = my_smartgrid.make_output(args.district, shared_input)
         print(my_smartgrid.total_cost)
 
-        vis.visualise()
+        vis.visualise(connections_input, cables_input)
 
 
 
