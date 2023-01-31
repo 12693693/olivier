@@ -8,7 +8,6 @@ make_rest_of_cables = Search_Cables()
 
 class Breadth_first():
 
-
     def compute_distance(self, x_battery, y_battery, x_loc, y_loc):
         '''
         this function computes the distance between the battery and the starting
