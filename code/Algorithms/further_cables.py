@@ -129,7 +129,7 @@ class Further_Cables():
                     if new_distance_4 < distance and step_4_hash not in self.existing_cable_dict:
                         step_score_4 =+ 1
                     if new_distance_4 < distance and (step_4_hash[3] - 1) in self.existing_cable_dict:
-                        step_score_4 =+ 2
+                        step_score_4 =+ mas2
                     if new_distance_4 < distance and (step_4_hash[3] - 2) in self.existing_cable_dict:
                         step_score_4 =+ 2
 
