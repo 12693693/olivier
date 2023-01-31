@@ -7,12 +7,10 @@ import matplotlib.pyplot as plt
 make_rest_of_cables = Search_Cables()
 
 class Breadth_first():
-
     def compute_distance(self, x_battery, y_battery, x_loc, y_loc):
-        '''
-        this function computes the distance between the battery and the starting
-        location on the x and y axis
-        '''
+        ''' this function computes the distance between the battery and the starting
+        location on the x and y axis '''
+
         x_distance = int(x_battery) - int(x_loc)
         y_distance = int(y_battery) - int(y_loc)
 
@@ -21,7 +19,7 @@ class Breadth_first():
     def set_locs(self, battery, i):
         ''' this function finds the house dictionary and the location of the
         starting point of the cable, and appends this location in the cables
-        dictionary. It also computes the distance on the x an '''
+        dictionary. It also fills the x and y list with the starting point '''
 
         # initiate list in which to keep track of the x and y coordinates of the cables
         x_list = []
@@ -30,7 +28,7 @@ class Breadth_first():
         # find the house dictionary
         house_dict = battery.dict['houses'][i]
 
-        # find x and y coordinates of the starting point of the cable
+        # find x and y coordinates of the starting point (house location) of the cable
         x_loc = int(house_dict['location'].split(',')[0])
         y_loc = int(house_dict['location'].split(',')[1])
 
@@ -49,6 +47,7 @@ class Breadth_first():
         random cables and saves a list with each possible cable. '''
 
         steps_list = []
+
         # create steps list for the steps that should be taken
         if x_distance < 0:
             for i in range(abs(x_distance)):
@@ -66,7 +65,9 @@ class Breadth_first():
 
         possible_cables = []
 
+        # create 10 cables
         for i in range(10):
+
             # shuffle the steps in the list randomly
             random.shuffle(steps_list)
             cables_list = []
@@ -86,13 +87,10 @@ class Breadth_first():
                 else:
                     y_loc += 1
 
-                # x_list.append(x_loc)
-                # y_list.append(y_loc)
-
-                # list containing steps for one grid
+                # fill list containing steps for one cable
                 cables_list.append(f'{x_loc}, {y_loc}')
 
-            # list containing each grids list of steps
+            # list containing each cable list of steps
             possible_cables.append(cables_list)
 
             return possible_cables, house_dict
@@ -100,19 +98,20 @@ class Breadth_first():
     def distance_to_cable(self, possible_cables, battery):
         ''' this function loops over all possible cables, calculates the distances
         between each house assinged to that battery and the cable. It saves a list
-        containing all the (shortest) distances from the houses to the cable '''
+        containing all the shortest distances from the houses to the cable '''
+
         list_distances_all_cables = []
 
-        # loop over grids
+        # loop over cables
         for cable in possible_cables:
             distance_to_cable_list = []
-            # print(len(grid))
+
             # loop over house_dicts
             for house_dict_2 in battery.dict['houses']:
                 x_house = int(house_dict_2['location'].split(',')[0])
                 y_house = int(house_dict_2['location'].split(',')[1])
 
-                distance = 100
+                distance = math.inf
 
                 # loop over each step in the grid, and calculate distance between
                 # the current house and the cable
@@ -120,32 +119,44 @@ class Breadth_first():
                     x_loc = float(step.split(', ')[0])
                     y_loc = float(step.split(', ')[1])
 
-                    # print('for step in grid')
                     # calculate current_distance
                     current_distance = abs(x_house - x_loc) + abs(y_house - y_loc)
-                    # print('current distance')
+
+                    # save the closest distance from the house to the cable
                     if current_distance < distance:
                         distance = current_distance
 
+                # keep track of the shortest distance to the cable
                 distance_to_cable_list.append(distance)
-                # print('list of distances for one grid')
+
+            # keep track of the distances for all the cables for one battery
             list_distances_all_cables.append(distance_to_cable_list)
-            # print('total list of distances all grids')
+
 
             return list_distances_all_cables
 
     def choose_best_cable(self, list_distances_all_cables, possible_cables, house_dict, x_list, y_list):
+        ''' this function calculates the total distance from the cable to the
+        houses that are connected to the same battery, and finds the smallest distance.
+        this cable is then chosen as the best cable. Then the steps of the best
+        cable are saved to the x and ylist.'''
 
         lowest_distance = math.inf
+
+        # loop over all possible cables
         for index, cable_distance_list in enumerate(list_distances_all_cables):
+
+            # compute the total distance from the cable to all the other houses
             total_distance = sum(cable_distance_list)
 
+            # when the distance is the smallest, define that cbale as the best cable
             if total_distance < lowest_distance:
-                best_grid = possible_cables[index]
+                best_cable = possible_cables[index]
                 lowest_distance = total_distance
-                house_dict['cables'] = best_grid
+                house_dict['cables'] = best_cable
 
-        for step in best_grid:
+        # save the seps of the best cable to the x and y list
+        for step in best_cable:
             x_loc = float(step.split(', ')[0])
             y_loc = float(step.split(', ')[1])
 
@@ -161,18 +172,30 @@ class Breadth_first():
         connected houses to that battery '''
 
         for battery in list_with_batteries:
-            # print('battery')
+
             for i in range(5):
+                # find the x_loc and y_loc and start the x and y list
                 house_dict, x_loc, y_loc, x_list, y_list = self.set_locs(battery, i)
+
+                # compute the distances on the x and y axes
                 x_distance, y_distance = self.compute_distance(battery.x, battery.y, x_loc, y_loc)
+
+                # create the 10 cables
                 possible_cables, house_dict = self.create_cables(x_distance, y_distance, house_dict)
+
+                # compute distances to the cables
                 list_distances_all_cables = self.distance_to_cable(possible_cables, battery)
+
+                # fill the x and y list with the steps of the best cable
                 x_list, y_list = self.choose_best_cable(list_distances_all_cables, possible_cables, house_dict, x_list, y_list)
 
+                # make sure the result is plotted
                 plt.plot(x_list, y_list, 'k--')
 
-
     def run(self, list_with_houses, list_with_batteries):
+        ''' this function runs the experiment: it chooses the best cables for the
+        first 5 houses per battery, and creates the rest of the cables using
+        the search cables algorithm. '''
 
         self.breadth_first_5(list_with_houses, list_with_batteries)
 
