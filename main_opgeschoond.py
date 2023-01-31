@@ -13,9 +13,8 @@ from code.Algorithms.search_cables import Search_Cables
 from code.Algorithms.hill_climber import Hill_Climber
 from code.Algorithms.simulated_annealing import Simulated_Annealing
 from code.Algorithms.further_cables import Further_Cables
-
 from code.Visualisation import Visualize as vis
-#from code.Algorithms.breadth_first import Breadth_first
+from code.Algorithms.breadth_first import Breadth_first
 
 # dit moet eigenlijk in classmethod
 def load_df(houses_csv, batteries_csv):
@@ -78,7 +77,7 @@ if __name__ == "__main__":
 
 
 
-    #cable_breadth = Breadth_first()
+    cable_breadth = Breadth_first()
 
     # prompt the user to give the district number
     #my_smartgrid.district_name()
@@ -91,7 +90,7 @@ if __name__ == "__main__":
 
 
     connections_dict = {'random': 'random_algo.assign_house_random(houses, batteries)', 'greedy' : 'greedy_algo.assign_closest_battery(houses, batteries)', 'hillclimber' : 'random_hill_climber', 'simulated annealing': 'random_sa'}
-    cables_dict = {'90 degrees': 'cable_90_degree.make_90_degrees_cables(houses, batteries)', 'random' : 'cable_random.random_try(houses, batteries)', 'search cables' : 'search_cables.run_search(houses, batteries)', 'further cables': 'further_cables.run_further(houses, batteries)'}
+    cables_dict = {'90 degrees': 'cable_90_degree.make_90_degrees_cables(houses, batteries)', 'random' : 'cable_random.random_try(houses, batteries)', 'search cables' : 'search_cables.run_search(houses, batteries)', 'further cables': 'further_cables.run_further(houses, batteries)', 'breadth first': 'cable_breadth.run(houses, batteries)'}
 
     # eval(connections_dict[connections_input])
     # eval(cables_dict[cables_input])
@@ -112,17 +111,12 @@ if __name__ == "__main__":
 
 
 
-        function = cables_dict[cables_input].split('(')[0]
-        print(function)
+
+        random_hill_climber = Hill_Climber(my_smartgrid, shared_input)
+        random_sa = Simulated_Annealing(my_smartgrid, shared_input, temperature=200)
 
 
-
-
-        random_hill_climber = Hill_Climber(my_smartgrid)
-        random_sa = Simulated_Annealing(my_smartgrid, temperature=200)
-
-
-        eval(connections_dict[connections_input]).run(2000, function)
+        eval(connections_dict[connections_input]).run(2000, cables_dict[cables_input])
 
 
         list = my_smartgrid.make_output(args.district, shared_input)
@@ -151,7 +145,11 @@ if __name__ == "__main__":
 
 
     else:
+
+        # assign the houses
         eval(connections_dict[connections_input])
+
+        # make the cables
         eval(cables_dict[cables_input])
 
         list = my_smartgrid.make_output(args.district, shared_input)

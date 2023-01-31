@@ -26,7 +26,7 @@ class Greedy():
                 #print(battery.capacity)
 
                 # calculate distance to each battery
-                distance = abs((battery.x - house.x) + (battery.y - house.y))
+                distance = abs(battery.x - house.x) + abs(battery.y - house.y)
 
                 # assign the house closest battery that still has enough capacity
                 if distance < closest_distance and house.maxoutput < battery.capacity:

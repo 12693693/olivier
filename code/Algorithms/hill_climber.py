@@ -12,15 +12,24 @@ search_cables = Search_Cables()
 
 
 class Hill_Climber():
-    def __init__(self, smartgrid_solution):
+    def __init__(self, smartgrid_solution, shared):
         self.smartgrid = copy.deepcopy(smartgrid_solution)
-        self.costs = self.smartgrid.total_cost
+        self.shared = shared
+
+        self.costs = self.smartgrid.get_costs(self.shared)
+
 
     def fill_new_grid(self, house_dict, battery, function):
 
+        function_dict = {'cable_90_degree.make_90_degrees_cables(houses, batteries)': 'cable_90_degree.make_90_degrees_cable(house_dict, battery)', 'cable_random.random_try(houses, batteries)': 'cable_random.random_try(house_dict, battery)', 'search_cables.run_search(houses, batteries)' : 'search_cables.search_cables(house_dict, battery)'}
+        #print('function', function_dict[function])
         # fill the grid of the newly added houses
-        fill_string =f'{function}({house_dict}, {battery})'
-        return fill_string
+
+        #print(house_dict, battery)
+
+        #print(eval(function_dict[function]))
+        #print(cable_90_degree.make_90_degrees_cable(house_dict, battery))
+        return eval(function_dict[function])
 
     def check_capacity(self, battery_1, battery_2, house_1, house_2):
         if battery_1.capacity + house_1['output'] - house_2['output'] >= 0 and battery_2.capacity + house_2['output'] - house_1['output'] >= 0:
@@ -63,18 +72,22 @@ class Hill_Climber():
 
 
             # dit mag nog anders
-            self.new_costs = new_smartgrid.total_cost - (len(self.house_1['grid']) - 1) - (len(self.house_2['grid']) - 1)
+            self.new_costs = new_smartgrid.total_cost - (len(self.house_1['cables']) - 1) - (len(self.house_2['cables']) - 1)
             #self.smartgrid.combined_list[0]['costs shared'] - (len(house_1['grid']) - 1) - (len(house_2['grid']) - 1)
 
             # reset the grid
-            self.house_1['grid'] = []
-            self.house_2['grid'] = []
+            self.house_1['cables'] = []
+            self.house_2['cables'] = []
 
             # fill the grid of the houses
-            string_function_1 = self.fill_new_grid(self.house_1, self.battery_2, function)
-            self.steps_house_1 = eval(string_function_1)
-            string_function_2 = self.fill_new_grid(self.house_2, self.battery_1, function)
-            self.steps_house_2 = eval(string_function_2)
+            # string_function_1 = f'{self.fill_new_grid(function)}({self.house_1}, {self.battery_2})'
+            # print('string', string_function_1)
+            # self.steps_house_1 = eval(string_function_1)
+            # string_function_2 = self.fill_new_grid(self.house_2, self.battery_1, function)
+            # self.steps_house_2 = eval(string_function_2)
+
+            self.steps_house_1 = self.fill_new_grid(self.house_1, self.battery_2, function)
+            self.steps_house_2 = self.fill_new_grid(self.house_2, self.battery_1, function)
 
             # switch the houses and add them to a new battery
             self.battery_1.dict['houses'].append(self.house_2)
@@ -82,7 +95,7 @@ class Hill_Climber():
 
     def check_solution(self, new_smartgrid):
         #print('oud zonder', self.new_costs)
-        self.new_costs += self.steps_house_1 + self.steps_house_2
+        self.new_costs = new_smartgrid.get_costs(self.shared)
         #print('nieuw', self.new_costs)
 
         if self.new_costs <= self.costs:
