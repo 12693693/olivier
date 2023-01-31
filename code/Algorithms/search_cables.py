@@ -9,8 +9,8 @@ class Search_Cables():
         self.cable_list = []
 
         # set starting point to the location of the house
-        self.location_house_x = float(dictionary_of_house['location'].split(',')[0])
-        self.location_house_y = float(dictionary_of_house['location'].split(',')[1])
+        self.location_house_x = float(house_dict['location'].split(',')[0])
+        self.location_house_y = float(house_dict['location'].split(',')[1])
         # compute distance between the battery and the assigned house
         distance = abs(battery.x - self.location_house_x) + abs(battery.y - self.location_house_y)
 
@@ -141,7 +141,6 @@ class Search_Cables():
             if cable_key not in self.existing_cable_dict:
                 self.existing_cable_dict[cable_key] = 1
 
-        plt.plot(x_list, y_list, 'k--')
 
     def run_search(self, list_with_houses, list_with_batteries):
         '''

@@ -2,7 +2,6 @@ def get_location():
     for battery in list_with_batteries:
         for house_dict in battery.dict['houses']:
 
-
             # find x and y coordinates for the battery and connected house
             location_house_x = house_dict['location'][0]
             location_house_y = house_dict['location'][1]

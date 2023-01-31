@@ -2,33 +2,49 @@ import random
 import matplotlib.pyplot as plt
 
 class Further_Cables():
+
     def __init__(self):
+
         self.existing_cable_dict = {}
 
     def further_cables(self, house_dict, battery):
-        self.cable_list = []
-        # set starting point to the location of the house
-        self.location_house_x = float(dictionary_of_house['location'].split(',')[0])
-        self.location_house_y = float(dictionary_of_house['location'].split(',')[1])
+        '''
+        This function uses the previously defined cables function to connect
+        to the houses. It adds in a new condition which ensures that if there is
+        a choice between cables with the same distance to the house that it choses
+        the path along the cable which is already there. In addition to the search cables
+        this one also looks at the cable may be two steps away.
+        This would optimize the distance as well as the cost for the cables.
+        '''
 
-        # compute distance between the battery and the assigned house
+        # Intiate the dictionary which will be used later.
+
+        self.cable_list = []
+
+        # Set starting point to the location of the house
+        self.location_house_x = float(house_dict['location'].split(',')[0])
+        self.location_house_y = float(house_dict['location'].split(',')[1])
+
+        # Compute distance between the battery and the assigned house
         distance = abs(battery.x - self.location_house_x) + abs(battery.y - self.location_house_y)
 
-        # set starting point to the location of the house
+        # Set starting point to the location of the house
         x_loc = self.location_house_x
         y_loc = self.location_house_y
 
-        # Add these start points to
+        # Add these start points to the grid list
         house_dict['cables'].append(f'{int(x_loc)}, {int(y_loc)}')
 
         x_list = [x_loc]
         y_list = [y_loc]
 
+        # Initiate and set condition for the while loop.
         while distance != 0:
             self.step_score_list = []
             self.step_list = []
             self.distance_list = []
 
+            # Loop over the choices for the steps direction.
             for choice in range(1,5):
                 if choice == 1:
                     step_score_1 = 0
@@ -38,6 +54,7 @@ class Further_Cables():
                     #compute the potential new distance with this stap
                     new_distance_1 = abs(battery.x - (x_loc - 1)) + abs(battery.y - y_loc)
 
+                    # determine the score for this step direction
                     if new_distance_1 < distance and step_1_hash in self.existing_cable_dict:
                         step_score_1 = 2
                     if new_distance_1 < distance and step_1_hash not in self.existing_cable_dict:
@@ -47,6 +64,7 @@ class Further_Cables():
                     if new_distance_1 < distance and (step_1_hash[2] + 2) in self.existing_cable_dict:
                         step_score_1 = 2
 
+                    # Add this score, distance and step to the lists.
                     self.step_score_list.append(step_score_1)
                     self.step_list.append(step_1)
                     self.distance_list.append(new_distance_1)
@@ -59,6 +77,7 @@ class Further_Cables():
                     #compute the potential new distance with this stap
                     new_distance_2 = abs(battery.x - (x_loc + 1)) + abs(battery.y - y_loc)
 
+                    # determine the score for this step direction
                     if new_distance_2 < distance and step_2_hash in self.existing_cable_dict:
                         step_score_2 = 2
                     if new_distance_2 < distance and step_2_hash not in self.existing_cable_dict:
@@ -68,6 +87,7 @@ class Further_Cables():
                     if new_distance_1 < distance and (step_2_hash[2] - 2) in self.existing_cable_dict:
                         step_score_2 = 2
 
+                    # Add this score, distance and step to the lists.
                     self.step_score_list.append(step_score_2)
                     self.step_list.append(step_2)
                     self.distance_list.append(new_distance_2)
@@ -80,6 +100,7 @@ class Further_Cables():
                     #compute the potential new distance with this stap
                     new_distance_3 = abs(battery.x - x_loc) + abs(battery.y - (y_loc + 1))
 
+                    # determine the score for this step direction
                     if new_distance_3 < distance and step_3_hash in self.existing_cable_dict:
                         step_score_3 = 2
                     if new_distance_3 < distance and step_3_hash not in self.existing_cable_dict:
@@ -89,7 +110,7 @@ class Further_Cables():
                     if new_distance_3 < distance and (step_3_hash[3] + 2) in self.existing_cable_dict:
                         step_score_3 = 2
 
-
+                    # Add this score, distance and step to the lists.
                     self.step_score_list.append(step_score_3)
                     self.step_list.append(step_3)
                     self.distance_list.append(new_distance_3)
@@ -102,7 +123,7 @@ class Further_Cables():
                     #compute the potential new distance with this stap
                     new_distance_4 = abs(battery.x - x_loc) + abs(battery.y - (y_loc - 1))
 
-                    # Add score to each step based on it's characteristics
+                    # determine the score for this step direction
                     if new_distance_4 < distance and step_4_hash in self.existing_cable_dict:
                         step_score_4 = 2
                     if new_distance_4 < distance and step_4_hash not in self.existing_cable_dict:
@@ -112,12 +133,13 @@ class Further_Cables():
                     if new_distance_4 < distance and (step_4_hash[3] - 2) in self.existing_cable_dict:
                         step_score_4 = 2
 
+                    # Add this score, distance and step to the lists.
                     self.step_score_list.append(step_score_4)
                     self.step_list.append(step_4)
                     self.distance_list.append(new_distance_4)
 
 
-            # find step with highest score
+            # find step with highest score. Chose this step.
             if self.step_score_list.count(2) > 1:
                 list_index_2 = []
 
@@ -144,12 +166,15 @@ class Further_Cables():
             # Find the new distance which belongs with the highest score
             for index, distance in enumerate(self.step_score_list):
                 new_distance = self.distance_list[highest_index]
-            # Update the new distance
+
+            # Update the distance for this new distance with the step added.
             distance = new_distance
 
+            # Find the x and y location from this cable list.
             x_loc = cable_key[2]
             y_loc = cable_key[3]
 
+            # Add these locations to the grid.
             x_list.append(x_loc)
             y_list.append(y_loc)
             house_dict['cables'].append(f'{int(x_loc)}, {int(y_loc)}')
@@ -158,15 +183,12 @@ class Further_Cables():
             if cable_key not in self.existing_cable_dict:
                 self.existing_cable_dict[cable_key] = 1
 
-        plt.plot(x_list, y_list, 'k--')
+
 
     def run_further(self, list_with_houses, list_with_batteries):
         '''
-        This function uses the previously defined cables function to connect
-        to the houses. It adds in a new condition which ensures that if there is
-        a choice between cables with the same distance to the house that it choses
-        the path along the cable which is already there. This would optimize the
-        distance as well as the cost for the cables.
+        This functions runs the Further_Cables function on this specific list
+        of houses and batteries with these combinations.
         '''
 
         self.steps_count = 0
