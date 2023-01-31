@@ -103,7 +103,7 @@ if __name__ == "__main__":
 
     # -------------------------------------------------------------------------------------
 
-    if connections_input == 'hillclimber' or connections_input == 'simulated annealing' and loop_input == 1:
+    if (connections_input == 'hillclimber' or connections_input == 'simulated annealing') and loop_input == 1:
         # for i in range(int(loop_input)):
         houses_list = houses
         batteries_list = batteries
@@ -129,15 +129,17 @@ if __name__ == "__main__":
         list_costs = []
         for i in range(int(loop_input)):
 
+            cable_algo = cables_dict[cables_input].split('(')[0] + '(my_smartgrid_filled.houses_list, my_smartgrid_filled.battery_list)'
+
             # create deepcopy to ensure that filling the grid lists is correct
             my_smartgrid_filled = copy.deepcopy(my_smartgrid)
             # create battery and houses list of the smartgrid, by making deepcopies
             my_smartgrid_filled.battery_list = copy.deepcopy(batteries)
             my_smartgrid_filled.houses_list = copy.deepcopy(houses)
 
-            random_algo.assign_house_random(my_smartgrid_filled.houses_list, my_smartgrid_filled.batteries_list)
+            random_algo.assign_house_random(my_smartgrid_filled.houses_list, my_smartgrid_filled.battery_list)
 
-            eval(cables_dict[cables_input])
+            eval(cable_algo)
 
             list = my_smartgrid.make_output(args.district, shared_input)
             print(my_smartgrid.total_cost)
