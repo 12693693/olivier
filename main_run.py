@@ -105,6 +105,8 @@ if __name__ == "__main__":
 
     if connections_input == 'hillclimber' or connections_input == 'simulated annealing' and loop_input == 1:
         # for i in range(int(loop_input)):
+        houses_list = houses
+        batteries_list = batteries
         random_algo.assign_house_random(houses, batteries)
 
         eval(cables_dict[cables_input])
@@ -225,6 +227,8 @@ if __name__ == "__main__":
 
         plt.clf()
         sns.histplot(data=list_costs, bins=20)
+        plt.title(f'connections made with {connections_input}, cables made with {cables_input}')
+        plt.xlabel('costs')
         plt.show()
 
 

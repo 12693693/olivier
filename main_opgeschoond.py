@@ -70,12 +70,9 @@ if __name__ == "__main__":
     cable_random = Cables()
     search_cables = Search_Cables()
     further_cables = Further_Cables()
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> 588caff35c0e2af18ee6f044d12d5701c0a31907
     cable_breadth = Breadth_first()
 
     # prompt the user to give the district number
