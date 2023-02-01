@@ -102,6 +102,12 @@ if __name__ == "__main__":
         random_sa = Simulated_Annealing(my_smartgrid, shared_input, temperature=200)
 
         eval(connections_dict[connections_input]).run(3000, cables_dict[cables_input])
+<<<<<<< HEAD
+=======
+=======
+        # Turns 'connections_dict' from string into a function.
+        eval(connections_dict[connections_input]).run(2000, cables_dict[cables_input])
+>>>>>>> a085a9495f02cdbbaf7cc92c58aa53ef02cfc368
 
         #Initializes the output for the connections.
         my_smartgrid.make_output(args.district, shared_input)
@@ -140,7 +146,10 @@ if __name__ == "__main__":
             random_sa = Simulated_Annealing(my_smartgrid_filled, shared_input, temperature=35)
 
             my_smartgrid_filled, list_costs = eval(connections_dict[connections_input]).run(3000, cables_dict[cables_input])
+<<<<<<< HEAD
 
+=======
+>>>>>>> a085a9495f02cdbbaf7cc92c58aa53ef02cfc368
             #Initializes the output for the connections.
             my_smartgrid_filled.make_output(args.district, shared_input)
 
