@@ -174,13 +174,8 @@ if __name__ == "__main__":
             # make the cables
             eval(cables_dict[cables_input])
 
-<<<<<<< HEAD
-            list = my_smartgrid.make_output(args.district, shared_input)
-
-=======
             my_smartgrid.make_output(args.district, shared_input)
             # print(list)
->>>>>>> 10477c50cba4de76524cb81722f6ee83c219530c
             print(my_smartgrid.total_cost)
 
             list_costs.append(my_smartgrid.total_cost)
