@@ -101,12 +101,10 @@ if __name__ == "__main__":
         random_hill_climber = Hill_Climber(my_smartgrid, shared_input)
         random_sa = Simulated_Annealing(my_smartgrid, shared_input, temperature=200)
 
-<<<<<<< HEAD
         eval(connections_dict[connections_input]).run(3000, cables_dict[cables_input])
 =======
         # Turns 'connections_dict' from string into a function.
         eval(connections_dict[connections_input]).run(2000, cables_dict[cables_input])
->>>>>>> b21f8b6e8595e2a8fb945de442f0997da1b786c1
 
         #Initializes the output for the connections.
         my_smartgrid.make_output(args.district, shared_input)
@@ -144,13 +142,7 @@ if __name__ == "__main__":
             random_hill_climber = Hill_Climber(my_smartgrid_filled, shared_input)
             random_sa = Simulated_Annealing(my_smartgrid_filled, shared_input, temperature=35)
 
-<<<<<<< HEAD
             my_smartgrid_filled, list_costs = eval(connections_dict[connections_input]).run(3000, cables_dict[cables_input])
-=======
-            # Turns the connections_dict into a function and calls this.
-            my_smartgrid_filled, list_costs = eval(connections_dict[connections_input]).run(2000, cables_dict[cables_input])
->>>>>>> b21f8b6e8595e2a8fb945de442f0997da1b786c1
-
             #Initializes the output for the connections.
             my_smartgrid_filled.make_output(args.district, shared_input)
 
@@ -165,15 +157,14 @@ if __name__ == "__main__":
         sns.lineplot(data=df.mean(axis=1))
         plt.show()
 
-<<<<<<< HEAD
         df_cost = pd.DataFrame(list_costs_total)
         df_cost.to_csv(f'cost {connections_input}, {cables_input}')
 
 
-=======
->>>>>>> b21f8b6e8595e2a8fb945de442f0997da1b786c1
         plt.clf()
-        sns.histplot(data=list_costs_total, bins=20)
+        sns.histplot(data=list_costs, bins=20)
+        plt.title(f'connections made with {connections_input}, cables made with {cables_input}')
+        plt.xlabel('costs')
         plt.show()
 
     # Run experiment for not Hill Climber or simulated annealing for 1 run.
