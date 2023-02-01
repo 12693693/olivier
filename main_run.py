@@ -191,6 +191,8 @@ if __name__ == "__main__":
             list_costs.append(my_smartgrid.total_cost)
 
         mean_cost = mean(list_costs)
+        df_cost = pd.DataFrame()
+        df_cost.to_csv(f'cost {connections_input}, {cables_input}')
 
         plt.clf()
         sns.histplot(data=list_costs, bins=20)
