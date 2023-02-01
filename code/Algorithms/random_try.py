@@ -16,20 +16,6 @@ class Cables():
 
         return distance
 
-    # def random_try(self, list_with_houses, list_with_batteries):
-    #     '''
-    #     This function is an algorithm that connects the houses to the batteries
-    #     by taking a random step, evaluating if this step is closer to the battery
-    #     and repeating the process
-    #     '''
-    #
-    #     for battery in list_with_batteries:
-    #         for house_dict in battery.dict['houses']:
-    #
-    #             # find x and y coordinates for the battery and connected house
-    #             x_loc = house_dict['location'][0]
-    #             y_loc = house_dict['location'][1]
-
     def save_step(self, old_distance, new_distance, house_dict, x_loc, y_loc):
         '''
         in this function a new distance is set, and the step is saved to the grid lists
