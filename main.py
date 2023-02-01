@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from code.Classes.smartgrid import Smartgrid
 from code.Algorithms.random_connection import Randomize
 from code.Algorithms.cable_90_degree import Cables_90
-from code.Algorithms.random_try import Cables
+from code.Algorithms.random_cables import Cables
 from code.Algorithms.greedy import Greedy
 from code.Algorithms.search_cables import Search_Cables
 from code.Algorithms.hill_climber import Hill_Climber
