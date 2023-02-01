@@ -176,4 +176,4 @@ class Smartgrid():
             outfile.write(json_list)
 
 
-        return self.combined_list
+        # return self.combined_list
