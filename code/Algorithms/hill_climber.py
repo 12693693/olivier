@@ -117,6 +117,8 @@ class Hill_Climber():
 
         for iteration in range(iterations):
             print(f'Iteration {iteration}/{iterations}, current value: {self.costs}')
+
+            # add the costs to cost_list
             cost_list.append(self.costs)
 
             # create a copy of the graph to simulate the change
@@ -126,5 +128,5 @@ class Hill_Climber():
 
             # accept it if it is better
             self.check_solution(new_smartgrid)
-            
+
         return self.smartgrid, cost_list

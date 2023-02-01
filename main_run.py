@@ -127,9 +127,9 @@ if __name__ == "__main__":
             my_smartgrid_filled.make_output(args.district, shared_input)
 
             random_hill_climber = Hill_Climber(my_smartgrid_filled, shared_input)
-            random_sa = Simulated_Annealing(my_smartgrid_filled, shared_input, temperature=200)
+            random_sa = Simulated_Annealing(my_smartgrid_filled, shared_input, temperature=35)
 
-            my_smartgrid_filled, list_costs = eval(connections_dict[connections_input]).run(2000, cables_dict[cables_input])
+            my_smartgrid_filled, list_costs = eval(connections_dict[connections_input]).run(3000, cables_dict[cables_input])
 
             my_smartgrid_filled.make_output(args.district, shared_input)
 
