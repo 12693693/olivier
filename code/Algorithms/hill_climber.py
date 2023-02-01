@@ -6,6 +6,7 @@ from .further_cables import Further_Cables
 from ..Classes.smartgrid import Smartgrid
 import random
 import copy
+import matplotlib.pyplot as plt
 
 cable_90_degree = Cables_90()
 cable_random = Cables()
@@ -112,9 +113,11 @@ class Hill_Climber():
         Runs the hillclimber algorithm for a specific amount of iterations.
         """
         self.iterations = iterations
+        cost_list = []
 
         for iteration in range(iterations):
             print(f'Iteration {iteration}/{iterations}, current value: {self.costs}')
+            cost_list.append(self.costs)
 
             # create a copy of the graph to simulate the change
             new_smartgrid = copy.deepcopy(self.smartgrid)
@@ -123,5 +126,5 @@ class Hill_Climber():
 
             # accept it if it is better
             self.check_solution(new_smartgrid)
-
-        return self.smartgrid
+            
+        return self.smartgrid, cost_list
