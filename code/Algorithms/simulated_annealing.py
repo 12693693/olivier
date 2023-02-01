@@ -26,7 +26,7 @@ class Simulated_Annealing(Hill_Climber):
         Also sometimes accepts solutions that are worse, depending on the current
         temperature.
         """
-        
+
         self.new_costs = new_smartgrid.get_costs(self.shared)
 
         # Calculate the probability of accepting this new smartgrid

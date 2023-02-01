@@ -23,18 +23,18 @@ class Smartgrid():
         This function creates a list with all battery instances as objects and
         adds them to a combined list of houses and batteries.
         """
-        # create list in which to store the batteries
+        # Create list in which to store the batteries
         self.battery_list = []
         self.house_list = []
 
-        # create battery instances and saves them in a battery list and in
+        # Create battery instances and saves them in a battery list and in
         # houses and batteries list
         for index, row in batteries_df.iterrows():
             battery = Batteries(row[0], row[1], row[2])
             self.houses_and_batteries.append(battery)
             self.battery_list.append(battery)
 
-        # add house instances to the batteries and houses list and in the
+        # Add house instances to the batteries and houses list and in the
         # houses list
         for index, row in houses_df.iterrows():
             house = Houses(row[0], row[1], row[2])
@@ -74,10 +74,10 @@ class Smartgrid():
         This function combines the district name and costs in one dictionary.
         '''
 
-        # add the district number to the dictionary
+        # Add the district number to the dictionary
         self.district_cost_dict['district'] = int(district)
 
-        # add the correct title and the total costs
+        # Add the correct title and the total costs
         if shared == 'yes':
             self.district_cost_dict['costs-shared'] = self.total_cost
         else:
@@ -85,21 +85,21 @@ class Smartgrid():
 
     def make_output(self, district, shared):
         '''
-        This function creates the final list with all information
+        This function creates the final list with all information.
         '''
 
-        # calculate the costs and create the first dictionary of the district
+        # Calculate the costs and create the first dictionary of the district
         costs = self.get_costs(shared)
         self.create_district_dict(district, shared)
 
         self.combined_list = []
         self.combined_list.append(self.district_cost_dict)
 
-        # add each battery list to the combined list
+        # Add each battery list to the combined list
         for battery in self.battery_list:
             self.combined_list.append(battery.dict)
 
-        # make a json file and add it to the output in the correct path
+        # Make a json file and add it to the output in the correct path
         json_list = json.dumps(self.combined_list)
         cur_path = os.path.dirname(__file__)
         with open(cur_path + '/../../resultaten/output.json', 'w') as outfile:

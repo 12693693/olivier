@@ -4,9 +4,9 @@ import copy
 
 def sort_houses(list_with_houses):
     """
-    This function sorts the houses based on the maximum output
+    This function sorts the houses based on the maximum output.
     """
-    
+
     new_list_with_houses = sorted(list_with_houses, key=lambda x:x.maxoutput, reverse=True)
 
     return new_list_with_houses

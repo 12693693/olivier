@@ -49,7 +49,7 @@ class Hill_Climber():
 
     def choose_battery_and_houses(self, list_with_batteries):
         """
-        This function chooses two houses that are going to be switched
+        This function chooses two houses that are going to be switched.
         """
 
         # Choose two random batteries
@@ -127,12 +127,10 @@ class Hill_Climber():
             # Create a copy of the smartgrid to simulate the change
             new_smartgrid = copy.deepcopy(self.smartgrid)
 
+            # Switch two houses
             self.switch_two_houses(new_smartgrid, function)
 
             # Accept it if it is better
             self.check_solution(new_smartgrid)
-
-            # for battery in self.smartgrid.battery_list:
-            #     print(battery.capacity)
 
         return self.smartgrid, cost_list

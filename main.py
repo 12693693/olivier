@@ -4,6 +4,8 @@ import random
 import copy
 import seaborn as sns
 import matplotlib.pyplot as plt
+from statistics import mean
+
 from code.Classes.smartgrid import Smartgrid
 from code.Algorithms.random_connection import Randomize
 from code.Algorithms.cable_90_degree import Cables_90
@@ -15,7 +17,6 @@ from code.Algorithms.simulated_annealing import Simulated_Annealing
 from code.Algorithms.further_cables import Further_Cables
 from code.Visualisation import Visualise as vis
 from code.Algorithms.closest_to_others import Closest_to_others
-from statistics import mean
 
 def load_df(houses_csv, batteries_csv):
     """

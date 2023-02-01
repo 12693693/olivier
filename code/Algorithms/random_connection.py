@@ -1,4 +1,3 @@
-#from .Classes.smartgrid import Smartgrid
 import random
 import copy
 
@@ -18,7 +17,7 @@ class Randomize():
         # Do this untill every house is assigned to a battery that has enough capacity
         while valid_option == False:
 
-            # reset the capacities and empty the houses
+            # Reset the capacities and empty the houses
             for i in range(len(list_with_batteries)):
                 list_with_batteries[i].capacity = batteries_copy[i].capacity
                 list_with_batteries[i].dict['houses'] = []
@@ -46,7 +45,7 @@ class Randomize():
                         # Choose another battery if there are any still availeble
                         assigned_battery = random.choice(remaining_batteries)
                     else:
-                        # if there are no batteries left that have capacity,
+                        # If there are no batteries left that have capacity,
                         # the solution is not valid
                         valid_option = False
                         break

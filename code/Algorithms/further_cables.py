@@ -14,7 +14,7 @@ class Further_Cables():
 
         step_score = 0
 
-        # determine the score for this step direction
+        # Determine the score for this step direction
         if new_distance < distance and step_hash in self.existing_cable_dict:
             step_score =+ 2
         if new_distance < distance and step_hash not in self.existing_cable_dict:
@@ -72,7 +72,7 @@ class Further_Cables():
         This would optimize the distance as well as the cost for the cables.
         '''
 
-        # Intiate the dictionary which will be used later.
+        # Intiate the dictionary which will be used later
         self.cable_list = []
 
         # Set starting point to the location of the house
@@ -92,7 +92,7 @@ class Further_Cables():
         x_list = [x_loc]
         y_list = [y_loc]
 
-        # Initiate and set condition for the while loop.
+        # Initiate and set condition for the while loop
         while distance != 0:
             self.step_score_list = []
             self.step_list = []
@@ -107,7 +107,7 @@ class Further_Cables():
                     next_step_1 = tuple([x_loc, y_loc, (x_loc - 2), y_loc])
                     next_next_step_1 = tuple([x_loc, y_loc, (x_loc - 3), y_loc])
 
-                    #compute the potential new distance with this stap
+                    # Compute the potential new distance with this step
                     new_distance_1 = abs(battery.x - (x_loc - 1)) + abs(battery.y - y_loc)
 
                     # Add this step to the lists with potential steps
@@ -120,7 +120,7 @@ class Further_Cables():
                     next_step_2 = tuple([x_loc, y_loc, (x_loc + 2), y_loc])
                     next_next_step_2 = tuple([x_loc, y_loc, (x_loc + 3), y_loc])
 
-                    #compute the potential new distance with this stap
+                    # Compute the potential new distance with this step
                     new_distance_2 = abs(battery.x - (x_loc + 1)) + abs(battery.y - y_loc)
 
                     # Add this step to the lists with potential steps
@@ -133,7 +133,7 @@ class Further_Cables():
                     next_step_3 = tuple([x_loc, y_loc, x_loc, (y_loc + 2)])
                     next_next_step_3 = tuple([x_loc, y_loc, x_loc, (y_loc + 3)])
 
-                    #compute the potential new distance with this stap
+                    # Compute the potential new distance with this step
                     new_distance_3 = abs(battery.x - x_loc) + abs(battery.y - (y_loc + 1))
 
                     # Add this step to the lists with potential steps
@@ -146,14 +146,14 @@ class Further_Cables():
                     next_step_4 = tuple([x_loc, y_loc, x_loc, (y_loc - 2)])
                     next_next_step_4 = tuple([x_loc, y_loc, x_loc, (y_loc - 3)])
 
-                    #compute the potential new distance with this stap
+                    # Compute the potential new distance with this step
                     new_distance_4 = abs(battery.x - x_loc) + abs(battery.y - (y_loc - 1))
 
                     # Add this step to the lists with potential steps
                     self.create_step_lists(new_distance_4, distance, step_4_hash, next_step_4, next_next_step_4, step_4)
 
 
-            # find step with highest score. Chose this step.
+            # Find step with highest score. Choose this step.
             highest_index = self.find_highest(self.step_score_list)
 
             # Find the step which belongs with the highest score

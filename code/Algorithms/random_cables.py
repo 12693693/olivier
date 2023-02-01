@@ -9,7 +9,7 @@ class Cables():
     def compute_distance(self, x_battery, y_battery, x_loc, y_loc):
         '''
         This function calculates the distance between location of the battery
-        and current location on grid line
+        and current location on grid line.
         '''
 
         distance = abs(x_battery - x_loc) + abs(y_battery - y_loc)
@@ -18,7 +18,7 @@ class Cables():
 
     def save_step(self, old_distance, new_distance, house_dict, x_loc, y_loc):
         '''
-        In this function a new distance is set, and the step is saved to the grid lists
+        In this function a new distance is set, and the step is saved to the grid lists.
         '''
 
         distance = new_distance
@@ -38,82 +38,81 @@ class Cables():
         the state. If so, the step is taken, if not, the step is reset.
         '''
 
-        # compute distance between the battery and the assigned house
-        # distance = self.compute_distance(x_battery, y_battery, x_loc, y_loc)
+        # Compute distance between the battery and the assigned house
         while distance != 0:
             choice = random.randint(1, 4)
 
-            # take a step left
+            # Take a step left
             if choice == 1:
                 x_loc -= 1
 
-                # compute new distance between the new point and the battery
+                # Compute new distance between the new point and the battery
                 new_distance = self.compute_distance(x_battery, y_battery, x_loc, y_loc)
 
-                # if the new point is closer to the battery location, take the step
+                # If the new point is closer to the battery location, take the step
                 if new_distance < distance:
                     distance = self.save_step(distance, new_distance, house_dict, x_loc, y_loc)
 
-                # if the new point is not closer to the battery location, reset the step
+                # If the new point is not closer to the battery location, reset the step
                 else:
                     x_loc += 1
 
-            # take a step right
+            # Take a step right
             elif choice == 2:
                 x_loc += 1
 
-                # compute new distance between the new point and the battery
+                # Compute new distance between the new point and the battery
                 new_distance = self.compute_distance(x_battery, y_battery, x_loc, y_loc)
 
-                # if the new point is closer to the battery location, take the step
+                # If the new point is closer to the battery location, take the step
                 if new_distance < distance:
                     distance = self.save_step(distance, new_distance, house_dict, x_loc, y_loc)
 
-                # if the new point is not closer to the battery location, reset the step
+                # If the new point is not closer to the battery location, reset the step
                 else:
                     x_loc -= 1
 
-            # take a step up
+            # Take a step up
             elif choice == 3:
                 y_loc += 1
 
-                # compute new distance between the new point and the battery
+                # Compute new distance between the new point and the battery
                 new_distance = self.compute_distance(x_battery, y_battery, x_loc, y_loc)
 
-                # if the new point is closer to the battery location, take the step
+                # If the new point is closer to the battery location, take the step
                 if new_distance < distance:
                     distance = self.save_step(distance, new_distance, house_dict, x_loc, y_loc)
 
-                # if the new point is not closer to the battery location,
-                # reset the step
+                # If the new point is not closer to the battery location,
+                # Reset the step
                 else:
                     y_loc -= 1
 
-            # take a step down
+            # Take a step down
             else:
                 y_loc -= 1
 
-                # compute new distance between the new point and the battery
+                # Compute new distance between the new point and the battery
                 new_distance = self.compute_distance(x_battery, y_battery, x_loc, y_loc)
-                # if the new point is closer to the battery location, take the step
+                # If the new point is closer to the battery location, take the step
                 if new_distance < distance:
                     distance = self.save_step(distance, new_distance, house_dict, x_loc, y_loc)
 
-                # if the new point is not closer to the battery location,
-                # reset the step
+                # If the new point is not closer to the battery location,
+                # Reset the step
                 else:
                     y_loc += 1
 
     def random_try(self, house_dict, battery):
 
-        # find x and y coordinates for the battery and connected house
+        # Find x and y coordinates for the battery and connected house
         x_loc = int(house_dict['location'].split(',')[0])
         y_loc = int(house_dict['location'].split(',')[1])
 
-        # save starting point for the grid line
+        # Save starting point for the grid line
         house_dict['cables'].append(f'{int(x_loc)},{int(y_loc)}')
 
-        # create list with x and y coordinates of the grid line
+        # Create list with x and y coordinates of the grid line
         self.x_list = [x_loc]
         self.y_list = [y_loc]
 
@@ -125,7 +124,7 @@ class Cables():
         '''
         This function is an algorithm that connects the houses to the batteries
         by taking a random step, evaluating if this step is closer to the battery
-        and repeating the process
+        and repeating the process.
         '''
 
         for battery in list_with_batteries:

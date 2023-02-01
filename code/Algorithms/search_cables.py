@@ -8,14 +8,14 @@ class Search_Cables():
     def search_cables(self, house_dict, battery):
         self.cable_list = []
 
-        # set starting point to the location of the house
+        # Set starting point to the location of the house
         self.location_house_x = float(house_dict['location'].split(',')[0])
         self.location_house_y = float(house_dict['location'].split(',')[1])
 
-        # compute distance between the battery and the assigned house
+        # Compute distance between the battery and the assigned house
         distance = abs(battery.x - self.location_house_x) + abs(battery.y - self.location_house_y)
 
-        # set starting point to the location of the house
+        # Set starting point to the location of the house
         x_loc = self.location_house_x
         y_loc = self.location_house_y
 
@@ -36,7 +36,7 @@ class Search_Cables():
                     step_1 = [x_loc, y_loc, (x_loc - 1), y_loc]
                     step_1_hash = tuple(step_1)
 
-                    #compute the potential new distance with this stap
+                    # Compute the potential new distance with this step
                     new_distance_1 = abs(battery.x - (x_loc - 1)) + abs(battery.y - y_loc)
 
                     if new_distance_1 < distance and step_1_hash in self.existing_cable_dict:
@@ -53,7 +53,7 @@ class Search_Cables():
                     step_2 = [x_loc, y_loc, (x_loc + 1), y_loc]
                     step_2_hash = tuple(step_2)
 
-                    #compute the potential new distance with this stap
+                    # Compute the potential new distance with this step
                     new_distance_2 = abs(battery.x - (x_loc + 1)) + abs(battery.y - y_loc)
 
                     if new_distance_2 < distance and step_2_hash in self.existing_cable_dict:
@@ -70,7 +70,7 @@ class Search_Cables():
                     step_3 = [x_loc, y_loc, x_loc, (y_loc + 1)]
                     step_3_hash = tuple(step_3)
 
-                    #compute the potential new distance with this stap
+                    # Compute the potential new distance with this step
                     new_distance_3 = abs(battery.x - x_loc) + abs(battery.y - (y_loc + 1))
 
                     if new_distance_3 < distance and step_3_hash in self.existing_cable_dict:
@@ -87,7 +87,7 @@ class Search_Cables():
                     step_4 = [x_loc, y_loc, x_loc, (y_loc - 1)]
                     step_4_hash = tuple(step_4)
 
-                    #compute the potential new distance with this stap
+                    # Compute the potential new distance with this step
                     new_distance_4 = abs(battery.x - x_loc) + abs(battery.y - (y_loc - 1))
 
                     # Add score to each step based on it's characteristics
@@ -100,7 +100,7 @@ class Search_Cables():
                     self.step_list.append(step_4)
                     self.distance_list.append(new_distance_4)
 
-            # find step with highest score
+            # Find step with highest score
             if self.step_score_list.count(2) > 1:
                 list_index_2 = []
 
@@ -151,11 +151,10 @@ class Search_Cables():
         distance as well as the cost for the cables.
         '''
 
-        self.steps_count = 0
 
         for battery in list_with_batteries:
             for house_dict in battery.dict['houses']:
                 self.search_cables(house_dict, battery)
 
 
-        return self.steps_count, self.cable_list, self.existing_cable_dict
+        return self.cable_list, self.existing_cable_dict

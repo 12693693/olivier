@@ -11,7 +11,7 @@ class Cables_90():
 
     def make_lines_90(self, dictionary_of_house, battery):
         """
-        This function fills the dictionary of the house with 90 degrees cables
+        This function fills the dictionary of the house with 90 degrees cables.
         """
 
         # Create starting point for creating the cables and add to the cables
@@ -20,8 +20,7 @@ class Cables_90():
         y_loc = self.location_house_y
         dictionary_of_house['cables'].append(f'{int(x_loc)},{int(y_loc)}')
 
-        # Compute distance to use as a constraint for choosing which way
-        # to move
+        # Compute distance to use as a constraint for choosing which way to move
         distance_x = self.location_house_x - battery.x
         distance_y = self.location_house_y - battery.y
 
