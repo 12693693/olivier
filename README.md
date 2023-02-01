@@ -7,32 +7,33 @@ In deze case moeten voor elk district alle 150 huizen aan een van de 5 beschikba
 ## Algoritmes
 ### Connecties
 Om de huizen aan de batterijen te verbinden zijn de volgende algoritmen geschreven:
-1. Random
+1. Random:
 Dit algoritme verbindt alle huizen aan een willekeurige batterij.
 
-2. Greedy
+2. Greedy:
 Dit algoritme verbindt de huizen aan de dichtst bijzijnde batterij.
 
-3. Hill Climber
+3. Hill Climber:
 Dit algoritme krijgt een gevulde smartgrid met alle huizen al verbonden aan een batterij, en wisselt willekeurig twee huizen om met als doel het verlagen van de kosten.
 
-4. Simulated Annealing
+4. Simulated Annealing:
+Dit algoritme maakt gebruik van de hill climber en wisselt ook telkens willekeurig twee huizen. Echter, dor gebruik te maken van temperatuur kan dit algoritme fouten toelaten, met als doel uiteindelijk een lagere kost te bereiken.
 ---
 
 Om de kabels tussen de huizen en de batterijen te leggen zijn de volgende algoritmes geschreven:
-1. 90 degrees
+1. 90 degrees:
 Dit algoritme verbindt de huizen met hun batterijen door eerst de afstand over de x-as te overbruggen, en daarna de afstand over de y-as.
 
-2. Random Try
+2. Random Try:
 Dit algoritme zet 1 willekeurige stap en berekent de nieuwe afstand tot de batterij. Indien de stap de kabel dichter bij de batterij heeft gebracht wordt de stap opgeslagen in de kabel lijst. Zo niet, wordt er een volgende willekeurige stap geprobeerd.
 
-3. Search Cables
+3. Search Cables:
 Dit algoritme loopt de 4 mogelijke richtingen af waar het naartoe kan en kent vervolgens aan deze richtingen aan score toe. Op basis van de scores die de stappen krijgen zal er een keuze worden gemaakt. Indien er meerdere hoge zijn zal hieruit een willekeurige keuze worden gemaakt.  
 
-4. Further Cables
+4. Further Cables:
 Dit algoritme is gebaseerd op het score systeem van Search Cables. Hierbij wordt echter ook gekeken naar een eventuele vervolg kabel die er ligt. Deze wordt dan ook meegenomen in de score. Deze score bestaat hier uit een optelling van de individuele toegekende scores van elke stap. Hierna wordt ook weer een willekeurige keuze gemaakt tussen stappen met dezelfde score.
 
-5. Closest to others
+5. Closest to others:
 Dit algoritme genereert voor de eerste 5 huizen 10 kabels en kiest voor die huizen de beste kabel op basis van de afstand tot andere huizen. Vervolgens worden de rest van de huizen met batterijen verbonden op basis van het search cables algoritme.
 
 

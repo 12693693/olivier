@@ -73,34 +73,34 @@ class Greedy():
         closest battery that still has capacity.
         """
 
-        # set valid_option to False so it will enter the while loop
+        # Set valid_option to False so it will enter the while loop
         valid_option = False
 
-        # make a copy of the list with batteries to save the capacities
+        # Make a copy of the list with batteries to save the capacities
         batteries_copy = copy.deepcopy(list_with_batteries)
 
-        # assign all of the houses to a battery
-        # do this untill every house is assigned to a battery that has enough capacity
+        # Assign all of the houses to a battery
+        # Do this untill every house is assigned to a battery that has enough capacity
         while valid_option == False:
 
-            # reset the capacities and empty the houses
+            # Reset the capacities and empty the houses
             for i in range(len(list_with_batteries)):
                 list_with_batteries[i].capacity = batteries_copy[i].capacity
                 list_with_batteries[i].dict['houses'] = []
 
-            # set valid_option to true so if all houses are assigned to a battery
+            # Set valid_option to true so if all houses are assigned to a battery
             # that has enough capacity it will leave the while loop
             valid_option = True
 
-            # sort the houses random
+            # Sort the houses random
             random.shuffle(list_with_houses)
 
             for house in list_with_houses:
 
-                # get the closest battery
+                # Get the closest battery
                 assigned_battery = self.get_closest_battery(house, list_with_batteries)
 
-                # if the assigned battery does not have enough capacity, set
+                # If the assigned battery does not have enough capacity, set
                 # valid option to False so it will run the loop again
                 if assigned_battery.capacity < 0:
                     valid_option = False
