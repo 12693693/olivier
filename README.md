@@ -74,10 +74,11 @@ conda install --file requirements.txt
 Hierbij een overzicht van de belangrijke mappen en hun inhoud:
 
 - **/code**: bevat alle code van dit project
-  - **/code/algorithms**: bevat de code voor algoritmes
-  - **/code/classes**: bevat de drie benodigde classes voor deze case
-  - **/code/visualisation**: bevat de code voor de visualisatie
-- **/data**: bevat de verschillende databestanden die nodig zijn om de graaf te vullen en te visualiseren
+  - **/code/Algorithms**: bevat de code voor algoritmes
+  - **/code/Classes**: bevat de drie benodigde classes voor deze case
+  - **/code/Visualisation**: bevat de code voor de visualisatie
+- **/data**: bevat de verschillende databestanden die nodig zijn om de smartgrid te vullen en te visualiseren
+- **/resultaten**: bevat de output en verschillende resultaten van het experiment
 - **main.py** staat los in de map Olivier, en moet gerund worden voor het uitvoeren van het experiment.
 
 ## Auteurs
