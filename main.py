@@ -95,17 +95,13 @@ if __name__ == "__main__":
 
         # Initiates the output function for the cables.
         my_smartgrid.make_output(args.district, shared_input)
-        print(my_smartgrid.total_cost)
 
         # Initiate the hill climber and simulated annealing.
         random_hill_climber = Hill_Climber(my_smartgrid, shared_input)
         random_sa = Simulated_Annealing(my_smartgrid, shared_input, temperature=200)
 
-        eval(connections_dict[connections_input]).run(3000, cables_dict[cables_input])
-
         # Turns 'connections_dict' from string into a function.
-        eval(connections_dict[connections_input]).run(2000, cables_dict[cables_input])
-
+        my_smartgrid, list_cost = eval(connections_dict[connections_input]).run(3000, cables_dict[cables_input])
 
         #Initializes the output for the connections.
         my_smartgrid.make_output(args.district, shared_input)

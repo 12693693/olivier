@@ -33,7 +33,7 @@ class Closest_to_others():
         y_loc = int(house_dict['location'].split(',')[1])
 
         # save starting point for the cable
-        house_dict['cables'].append(f'{x_loc}, {y_loc}')
+        house_dict['cables'].append(f'{x_loc},{y_loc}')
 
         # append list with x and y coordinates of the cable starting point
         x_list.append(x_loc)
@@ -88,7 +88,7 @@ class Closest_to_others():
                     y_loc += 1
 
                 # fill list containing steps for one cable
-                cables_list.append(f'{x_loc}, {y_loc}')
+                cables_list.append(f'{x_loc},{y_loc}')
 
             # list containing each cable list of steps
             possible_cables.append(cables_list)

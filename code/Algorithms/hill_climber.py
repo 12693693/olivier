@@ -78,24 +78,25 @@ class Hill_Climber():
         while self.check_capacity(self.battery_1, self.battery_2, self.house_1, self.house_2) == False:
             self.choose_battery_and_houses(list_with_batteries)
 
-        else:
+        # Change the capacities of the batteries
+        self.battery_1.capacity += (self.house_1['output'] - self.house_2['output'])
+        self.battery_2.capacity += (self.house_2['output'] - self.house_1['output'])
 
-            # Remove the houses from the batteries
-            self.battery_1.dict['houses'].remove(self.house_1)
-            self.battery_2.dict['houses'].remove(self.house_2)
+        # Remove the houses from the batteries
+        self.battery_1.dict['houses'].remove(self.house_1)
+        self.battery_2.dict['houses'].remove(self.house_2)
 
+        # Reset the cables
+        self.house_1['cables'] = []
+        self.house_2['cables'] = []
 
-            # Reset the cables
-            self.house_1['cables'] = []
-            self.house_2['cables'] = []
+        # Add the houses to the other battery
+        self.battery_1.dict['houses'].append(self.house_2)
+        self.battery_2.dict['houses'].append(self.house_1)
 
-            # Add the houses to the other battery
-            self.battery_1.dict['houses'].append(self.house_2)
-            self.battery_2.dict['houses'].append(self.house_1)
-
-            # Make new paths of cables using the cable algorithm that you choose
-            self.fill_new_grid(self.house_1, self.battery_2, function)
-            self.fill_new_grid(self.house_2, self.battery_1, function)
+        # Make new paths of cables using the cable algorithm that you choose
+        self.fill_new_grid(self.house_1, self.battery_2, function)
+        self.fill_new_grid(self.house_2, self.battery_1, function)
 
     def check_solution(self, new_smartgrid):
         """
@@ -113,7 +114,7 @@ class Hill_Climber():
         """
         Runs the hillclimber algorithm for a specific amount of iterations.
         """
-        
+
         self.iterations = iterations
         cost_list = []
 
@@ -130,5 +131,8 @@ class Hill_Climber():
 
             # Accept it if it is better
             self.check_solution(new_smartgrid)
+
+            # for battery in self.smartgrid.battery_list:
+            #     print(battery.capacity)
 
         return self.smartgrid, cost_list
