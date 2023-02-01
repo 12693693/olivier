@@ -15,6 +15,10 @@ cable_further = Further_Cables()
 
 
 class Hill_Climber():
+    """
+    The HillClimber class that switches a two random houses in the smartgrid.
+    Each improvement or equivalent solution is kept for the next iteration.
+    """
     def __init__(self, smartgrid_solution, shared):
         self.smartgrid = copy.deepcopy(smartgrid_solution)
         self.shared = shared
@@ -27,7 +31,7 @@ class Hill_Climber():
         This function returns the function that is used for the laying the cables.
         """
 
-        # make a dictionary of every possible algoritm that can be used
+        # Make a dictionary of every possible algoritm that can be used
         function_dict = {'cable_90_degree.make_90_degrees_cables(houses_list, batteries_list)': 'cable_90_degree.make_90_degrees_cable(house_dict, battery)', 'cable_random.run(houses_list, batteries_list)': 'cable_random.random_try(house_dict, battery)', 'search_cables.run_search(houses_list, batteries_list)' : 'search_cables.search_cables(house_dict, battery)', 'further_cables.run_further(houses_list, batteries_list)' : 'cable_further.further_cables(house_dict, battery)' }
 
         return eval(function_dict[function])
@@ -49,49 +53,49 @@ class Hill_Climber():
         This function chooses two houses that are going to be switched
         """
 
-        # choose two random batteries
+        # Choose two random batteries
         self.battery_1 = random.choice(list_with_batteries)
         self.battery_2 = random.choice(list_with_batteries)
 
-        # choose another battery if they are the same
+        # Choose another battery if they are the same
         while self.battery_1 == self.battery_2:
             self.battery_2 = random.choice(list_with_batteries)
 
-        # choose two houses that were assigned to the batteries
+        # Choose two houses that were assigned to the batteries
         self.house_1 = random.choice(self.battery_1.dict['houses'])
         self.house_2 = random.choice(self.battery_2.dict['houses'])
 
 
     def switch_two_houses(self, new_smartgrid, function):
         """
-        This function switches two houses and fills the lays the new cables.
+        This function switches two houses and lays the new cables.
         """
 
         list_with_batteries = new_smartgrid.battery_list
 
-        # choose houses that are going to be switched
+        # Choose houses that are going to be switched
         self.choose_battery_and_houses(list_with_batteries)
 
-        # choose other houses if switching them exceeds the battery capacity
+        # Choose other houses if switching them exceeds the battery capacity
         while self.check_capacity(self.battery_1, self.battery_2, self.house_1, self.house_2) == False:
             self.choose_battery_and_houses(list_with_batteries)
 
         else:
 
-            # remove the houses from the batteries
+            # Remove the houses from the batteries
             self.battery_1.dict['houses'].remove(self.house_1)
             self.battery_2.dict['houses'].remove(self.house_2)
 
 
-            # reset the cables
+            # Reset the cables
             self.house_1['cables'] = []
             self.house_2['cables'] = []
 
-            # add the houses to the other battery
+            # Add the houses to the other battery
             self.battery_1.dict['houses'].append(self.house_2)
             self.battery_2.dict['houses'].append(self.house_1)
 
-            # make new paths of cables using the cable algorithm that you choose
+            # Make new paths of cables using the cable algorithm that you choose
             self.fill_new_grid(self.house_1, self.battery_2, function)
             self.fill_new_grid(self.house_2, self.battery_1, function)
 
@@ -103,7 +107,7 @@ class Hill_Climber():
         """
         self.new_costs = new_smartgrid.get_costs(self.shared)
 
-        # accepts if the solution costs less
+        # Accepts if the solution costs less
         if self.new_costs <= self.costs:
             self.smartgrid = new_smartgrid
             self.costs = self.new_costs
@@ -118,15 +122,15 @@ class Hill_Climber():
         for iteration in range(iterations):
             print(f'Iteration {iteration}/{iterations}, current value: {self.costs}')
 
-            # add the costs to cost_list
+            # Add the costs to cost_list (to later make an average)
             cost_list.append(self.costs)
 
-            # create a copy of the graph to simulate the change
+            # Create a copy of the smartgrid to simulate the change
             new_smartgrid = copy.deepcopy(self.smartgrid)
 
             self.switch_two_houses(new_smartgrid, function)
 
-            # accept it if it is better
+            # Accept it if it is better
             self.check_solution(new_smartgrid)
 
         return self.smartgrid, cost_list
