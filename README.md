@@ -70,4 +70,3 @@ Hierbij een overzicht van de belangrijke mappen en hun inhoud:
 - Frédérique Mulder
 - Lisa Overbosch
 - Sam Eijpex
->>>>>>> 397d4330c14f27178798b6bc696015ce5930ac1c
