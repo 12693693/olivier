@@ -1,4 +1,4 @@
-# olivier
+# Olivier
 
 ## SmartGrid:
 
