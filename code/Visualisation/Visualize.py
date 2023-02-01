@@ -60,4 +60,3 @@ def visualise(algo_connections, algo_cables):
     plt.tick_params(left = False, right = False , labelleft = False ,
                 labelbottom = False, bottom = False)
     plt.show()
-    #plt.clf()

@@ -12,7 +12,6 @@ mean_greedy_90 = mean(df['0'])
 df_cables['greedy, 90 degrees']= df['0']
 df_connections['greedy, 90 degrees'] = df['0']
 
-
 df = pd.read_csv('cost greedy, random try')
 mean_greedy_random_try = mean(df['0'])
 
@@ -69,12 +68,12 @@ plt.show()
 # sns.barplot(data=df_mean)
 # plt.show()
 
-print(mean_greedy_90)
-# print(mean_random_90)
-# print(mean_greedy_search)
-# print(mean_greedy_further)
-# print(mean_greedy_random_try)
-# print(mean_greedy_closest_to_others)
-print(mean_random_90)
-print(mean_simulated_90)
-print(mean_hillclimber_90)
+print(f'greedy 90{mean_greedy_90}')
+print(f'random 90 {mean_random_90}')
+print(f'greedy search{mean_greedy_search}')
+print(f'greedy further {mean_greedy_further}')
+print(f'greedy random try{mean_greedy_random_try}')
+print(f'greedy closest {mean_greedy_closest_to_others}')
+print(f'random 90{mean_random_90}')
+print(f'simulated 90{mean_simulated_90}')
+print(f'hillclimber90{mean_hillclimber_90}')

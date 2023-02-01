@@ -1,4 +1,4 @@
-from .randomize import Randomize
+from .random_connection import Randomize
 from .cable_90_degree import Cables_90
 from .random_try import Cables
 from .search_cables import Search_Cables
@@ -13,18 +13,17 @@ cable_random = Cables()
 search_cables = Search_Cables()
 cable_further = Further_Cables()
 
-
 class Hill_Climber():
     """
     The HillClimber class that switches a two random houses in the smartgrid.
     Each improvement or equivalent solution is kept for the next iteration.
     """
+
     def __init__(self, smartgrid_solution, shared):
         self.smartgrid = copy.deepcopy(smartgrid_solution)
         self.shared = shared
 
         self.costs = self.smartgrid.get_costs(self.shared)
-
 
     def fill_new_grid(self, house_dict, battery, function):
         """
@@ -65,7 +64,6 @@ class Hill_Climber():
         self.house_1 = random.choice(self.battery_1.dict['houses'])
         self.house_2 = random.choice(self.battery_2.dict['houses'])
 
-
     def switch_two_houses(self, new_smartgrid, function):
         """
         This function switches two houses and lays the new cables.
@@ -99,12 +97,11 @@ class Hill_Climber():
             self.fill_new_grid(self.house_1, self.battery_2, function)
             self.fill_new_grid(self.house_2, self.battery_1, function)
 
-
-
     def check_solution(self, new_smartgrid):
         """
         Checks and accepts better solutions than the current solution.
         """
+
         self.new_costs = new_smartgrid.get_costs(self.shared)
 
         # Accepts if the solution costs less
@@ -116,6 +113,7 @@ class Hill_Climber():
         """
         Runs the hillclimber algorithm for a specific amount of iterations.
         """
+        
         self.iterations = iterations
         cost_list = []
 

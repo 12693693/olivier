@@ -5,7 +5,7 @@ import copy
 import seaborn as sns
 import matplotlib.pyplot as plt
 from code.Classes.smartgrid import Smartgrid
-from code.Algorithms.randomize import Randomize
+from code.Algorithms.random_connection import Randomize
 from code.Algorithms.cable_90_degree import Cables_90
 from code.Algorithms.random_try import Cables
 from code.Algorithms.greedy import Greedy
@@ -102,12 +102,10 @@ if __name__ == "__main__":
         random_sa = Simulated_Annealing(my_smartgrid, shared_input, temperature=200)
 
         eval(connections_dict[connections_input]).run(3000, cables_dict[cables_input])
-<<<<<<< HEAD
 
         # Turns 'connections_dict' from string into a function.
         eval(connections_dict[connections_input]).run(2000, cables_dict[cables_input])
-=======
->>>>>>> 8d874b44184f4a4c44270d4d1639ee390bd00e45
+
 
         #Initializes the output for the connections.
         my_smartgrid.make_output(args.district, shared_input)

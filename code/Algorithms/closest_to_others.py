@@ -132,7 +132,6 @@ class Closest_to_others():
             # keep track of the distances for all the cables for one battery
             list_distances_all_cables.append(distance_to_cable_list)
 
-
             return list_distances_all_cables
 
     def choose_best_cable(self, list_distances_all_cables, possible_cables, house_dict, x_list, y_list):
@@ -188,9 +187,6 @@ class Closest_to_others():
 
                 # fill the x and y list with the steps of the best cable
                 x_list, y_list = self.choose_best_cable(list_distances_all_cables, possible_cables, house_dict, x_list, y_list)
-
-
-
 
     def run(self, list_with_houses, list_with_batteries):
         ''' this function runs the experiment: it chooses the best cables for the

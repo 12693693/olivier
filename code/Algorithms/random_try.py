@@ -18,19 +18,18 @@ class Cables():
 
     def save_step(self, old_distance, new_distance, house_dict, x_loc, y_loc):
         '''
-        in this function a new distance is set, and the step is saved to the grid lists
+        In this function a new distance is set, and the step is saved to the grid lists
         '''
 
         distance = new_distance
 
-        # save the individual steps in the grid list in the dictionary of the house
+        # Save the individual steps in the grid list in the dictionary of the house
         house_dict['cables'].append(f'{int(x_loc)},{int(y_loc)}')
 
         self.x_list.append(x_loc)
         self.y_list.append(y_loc)
 
         return distance
-
 
     def try_steps(self, x_battery, y_battery, x_loc, y_loc, distance, house_dict):
         '''
@@ -55,8 +54,7 @@ class Cables():
                 if new_distance < distance:
                     distance = self.save_step(distance, new_distance, house_dict, x_loc, y_loc)
 
-                # if the new point is not closer to the battery location,
-                # reset the step
+                # if the new point is not closer to the battery location, reset the step
                 else:
                     x_loc += 1
 
@@ -71,8 +69,7 @@ class Cables():
                 if new_distance < distance:
                     distance = self.save_step(distance, new_distance, house_dict, x_loc, y_loc)
 
-                # if the new point is not closer to the battery location,
-                # reset the step
+                # if the new point is not closer to the battery location, reset the step
                 else:
                     x_loc -= 1
 
@@ -108,8 +105,8 @@ class Cables():
                     y_loc += 1
 
     def random_try(self, house_dict, battery):
-        # find x and y coordinates for the battery and connected house
 
+        # find x and y coordinates for the battery and connected house
         x_loc = int(house_dict['location'].split(',')[0])
         y_loc = int(house_dict['location'].split(',')[1])
 
@@ -123,7 +120,6 @@ class Cables():
         distance = self.compute_distance(int(battery.x), int(battery.y), x_loc, y_loc)
 
         self.try_steps(battery.x, battery.y, x_loc, y_loc, distance, house_dict)
-
 
     def run(self, list_with_houses, list_with_batteries):
         '''

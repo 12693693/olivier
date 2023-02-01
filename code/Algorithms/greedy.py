@@ -6,11 +6,10 @@ def sort_houses(list_with_houses):
     """
     This function sorts the houses based on the maximum output
     """
+    
     new_list_with_houses = sorted(list_with_houses, key=lambda x:x.maxoutput, reverse=True)
+
     return new_list_with_houses
-
-
-
 
 class Greedy():
     def get_closest_battery(self, house, list_with_batteries):
