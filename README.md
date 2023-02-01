@@ -83,4 +83,4 @@ Hierbij een overzicht van de belangrijke mappen en hun inhoud:
 ## Auteurs
 - Frédérique Mulder
 - Lisa Overbosch
-- Sam Eijpex
+- Sam Eijpe
