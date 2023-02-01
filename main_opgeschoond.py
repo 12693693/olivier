@@ -15,6 +15,7 @@ from code.Algorithms.simulated_annealing import Simulated_Annealing
 from code.Algorithms.further_cables import Further_Cables
 from code.Visualisation import Visualize as vis
 from code.Algorithms.breadth_first import Breadth_first
+#from code.Algorithms.SC import SearchC
 
 
 def load_df(houses_csv, batteries_csv):
@@ -70,13 +71,9 @@ if __name__ == "__main__":
     cable_random = Cables()
     search_cables = Search_Cables()
     further_cables = Further_Cables()
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> 10cd92b7767eaeb7294634854346e73f0a5600b6
     cable_breadth = Breadth_first()
+#    sc_try = SearchC()
 
     # prompt the user to give the district number
     #my_smartgrid.district_name()
