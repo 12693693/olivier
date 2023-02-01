@@ -55,10 +55,17 @@ Vul hier 1 in als je alleen een visualisatie wil en 1000 indien je de distributi
 
 ## Vereisten
 Deze code is geschreven in python versie 3.9.13. In onze code maken we gebruik van de volgende libraries:
-matplotlib.pyplot 3.5.3
-seaborn 0.12.0
-json5 0.9.10
+In requirements.txt staan alle benodigde packages om de code succesvol te draaien. Deze zijn gemakkelijk te installeren via pip dmv. de volgende instructie:
 
+```
+pip install -r requirements.txt
+```
+
+Of via conda:
+
+```
+conda install --file requirements.txt
+```
 ## Overzicht
 Hierbij een overzicht van de belangrijke mappen en hun inhoud:
 
