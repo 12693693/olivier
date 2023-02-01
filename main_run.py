@@ -131,7 +131,6 @@ if __name__ == "__main__":
 
             # append cost to the list with costs for this algorithm combination
             list_costs.append(my_smartgrid_filled.total_cost)
-        print(list_costs)
 
         plt.clf()
         sns.histplot(data=list_costs, bins=20)
