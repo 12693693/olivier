@@ -4,9 +4,6 @@
 
 In deze case moeten voor elk district alle 150 huizen aan een van de 5 beschikbare batterijen worden gekoppeld door middel van het leggen van kabels. De capaciteit van de batterij mag niet overschreden worden door de output van de huizen die eraan verbonden zijn. Daarnaast is het de bedoeling de kosten zo laag mogelijk te houden. Elke batterij kost 5000 en elk kabelsegment kost 9.
 
-<<<<<<< HEAD
-# Gebruik
-=======
 ## Algoritmes
 ### Connecties
 Om de huizen aan de batterijen te verbinden zijn de volgende algoritmen geschreven:
@@ -30,8 +27,10 @@ Dit algoritme verbindt de huizen met hun batterijen door eerst de afstand over d
 Dit algoritme zet 1 willekeurige stap en berekent de nieuwe afstand tot de batterij. Indien de stap de kabel dichter bij de batterij heeft gebracht wordt de stap opgeslagen in de kabel lijst. Zo niet, wordt er een volgende willekeurige stap geprobeerd.
 
 3. Search Cables
+Dit algoritme loopt de 4 mogelijke richtingen af waar het naartoe kan en kent vervolgens aan deze richtingen aan score toe. Op basis van de scores die de stappen krijgen zal er een keuze worden gemaakt. Indien er meerdere hoge zijn zal hieruit een willekeurige keuze worden gemaakt.  
 
 4. Further Cables
+Dit algoritme is gebaseerd op het score systeem van Search Cables. Hierbij wordt echter ook gekeken naar een eventuele vervolg kabel die er ligt. Deze wordt dan ook meegenomen in de score. Deze score bestaat hier uit een optelling van de individuele toegekende scores van elke stap. Hierna wordt ook weer een willekeurige keuze gemaakt tussen stappen met dezelfde score.
 
 5. Breadth First
 Dit algoritme genereert voor de eerste 5 huizen 10 kabels en kiest voor die huizen de beste kabel op basis van de afstand tot andere huizen. Vervolgens worden de rest van de huizen met batterijen verbonden op basis van het search cables algoritme.
@@ -39,7 +38,6 @@ Dit algoritme genereert voor de eerste 5 huizen 10 kabels en kiest voor die huiz
 
 
 ## Gebruik
->>>>>>> efb75cc63c546c9dd0c47a0b94df65a9d78c79c2
 Om de resultaten te reproduceren moet python main_run.py worden gerund, met daar achteraan een 1, 2 of 3, afhankelijk van welk district je wil gebruiken.
 Er zullen dan een aantal vragen worden gesteld:
 1. Op basis van welk algoritme wil je de connecties tussen huizen en batterijen maken?
