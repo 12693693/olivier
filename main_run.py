@@ -99,13 +99,16 @@ if __name__ == "__main__":
         eval(connections_dict[connections_input]).run(2000, cables_dict[cables_input])
 
         my_smartgrid.make_output(args.district, shared_input)
-        print(my_smartgrid.total_cost)
 
         vis.visualise(connections_input, cables_input)
 
 
     elif connections_input == 'hillclimber' or connections_input == 'simulated annealing' and loop_input != '1':
-        list_costs = []
+        list_costs_total = []
+        df = pd.DataFrame()
+
+
+
         for i in range(int(loop_input)):
             print(f'{i}/{loop_input}')
 
@@ -126,17 +129,24 @@ if __name__ == "__main__":
             random_hill_climber = Hill_Climber(my_smartgrid_filled, shared_input)
             random_sa = Simulated_Annealing(my_smartgrid_filled, shared_input, temperature=200)
 
-            my_smartgrid_filled = eval(connections_dict[connections_input]).run(500, cables_dict[cables_input])
+            my_smartgrid_filled, list_costs = eval(connections_dict[connections_input]).run(2000, cables_dict[cables_input])
 
             my_smartgrid_filled.make_output(args.district, shared_input)
 
             # append cost to the list with costs for this algorithm combination
-            list_costs.append(my_smartgrid_filled.total_cost)
+            list_costs_total.append(my_smartgrid_filled.total_cost)
 
-        mean_cost = mean(list_costs)
+
+            df[f'run {i}'] = pd.Series(list_costs)
+
+        mean_cost = mean(list_costs_total)
+
+        sns.lineplot(data=df.mean(axis=1))
+        plt.show()
+
 
         plt.clf()
-        sns.histplot(data=list_costs, bins=20)
+        sns.histplot(data=list_costs_total, bins=20)
         plt.show()
 
 
