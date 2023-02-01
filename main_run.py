@@ -102,7 +102,7 @@ if __name__ == "__main__":
         random_sa = Simulated_Annealing(my_smartgrid, shared_input, temperature=200)
 
         eval(connections_dict[connections_input]).run(3000, cables_dict[cables_input])
-=======
+
         # Turns 'connections_dict' from string into a function.
         eval(connections_dict[connections_input]).run(2000, cables_dict[cables_input])
 
