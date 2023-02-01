@@ -334,7 +334,7 @@ class Smartgrid():
         self.create_district_dict(district, shared)
 
 
-
+        self.combined_list = []
         self.combined_list.append(self.district_cost_dict)
 
         for battery in self.battery_list:

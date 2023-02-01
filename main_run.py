@@ -16,7 +16,7 @@ from code.Algorithms.further_cables import Further_Cables
 from code.Visualisation import Visualize as vis
 from code.Algorithms.breadth_first import Breadth_first
 
-
+# dit moet eigenlijk in classmethod
 def load_df(houses_csv, batteries_csv):
     """
     This function loads the villages and saves them as dataframes
@@ -47,6 +47,10 @@ if __name__ == "__main__":
     # Set-up parsing command line arguments
     parser = argparse.ArgumentParser(description = "adding houses to batteries")
 
+    # Adding arguments
+    #parser.add_argument("output", help = "output file (csv)")
+    #parser.add_argument("input_houses", help="houses file")
+    #parser.add_argument("input_batteries", help="batteries_file")
     parser.add_argument("district", help = "district")
 
     # Read arguments from command line
@@ -59,7 +63,7 @@ if __name__ == "__main__":
     #my_smartgrid = Smartgrid.from_file(args.input_houses, args.input_batteries)
 
     houses, batteries = my_smartgrid.add_houses_and_batteries(df_houses, df_batteries)
-    #print(houses, batteries)
+    # print(houses, batteries)
 
 
     # # ----------------- random houses and 90 degrees cables-----------------------
@@ -70,12 +74,10 @@ if __name__ == "__main__":
     cable_random = Cables()
     search_cables = Search_Cables()
     further_cables = Further_Cables()
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> 10cd92b7767eaeb7294634854346e73f0a5600b6
+
     cable_breadth = Breadth_first()
 
     # prompt the user to give the district number
@@ -86,10 +88,11 @@ if __name__ == "__main__":
     connections_input = input('What algorithm do you want to use for the connections?: ')
     cables_input = input('What algorithm do you want to use for the cables?: ')
     shared_input = input('Do you want to share the cables?: ')
+    loop_input = input('Do you want to loop?: ')
 
 
-    connections_dict = {'random': 'random_algo.assign_house_random(houses, batteries)', 'greedy' : 'greedy_algo.assign_closest_battery(houses, batteries)', 'hillclimber' : 'random_hill_climber', 'simulated annealing': 'random_sa'}
-    cables_dict = {'90 degrees': 'cable_90_degree.make_90_degrees_cables(houses, batteries)', 'random' : 'cable_random.random_try(houses, batteries)', 'search cables' : 'search_cables.run_search(houses, batteries)', 'further cables': 'further_cables.run_further(houses, batteries)', 'breadth first': 'cable_breadth.run(houses, batteries)'}
+    connections_dict = {'random': 'random_algo.assign_house_random(houses_list, batteries_list)', 'greedy' : 'greedy_algo.assign_closest_battery(houses_list, batteries_list)', 'hillclimber' : 'random_hill_climber', 'simulated annealing': 'random_sa'}
+    cables_dict = {'90 degrees': 'cable_90_degree.make_90_degrees_cables(houses_list, batteries_list)', 'search cables' : 'search_cables.run_search(houses_list, batteries_list)', 'further cables': 'further_cables.run_further(houses_list, batteries_list)', 'breadth first': 'cable_breadth.run(houses_list, batteries_list)', 'random try': 'cable_random.run(houses_list, batteries_list)'}
 
     # eval(connections_dict[connections_input])
     # eval(cables_dict[cables_input])
@@ -100,7 +103,10 @@ if __name__ == "__main__":
 
     # -------------------------------------------------------------------------------------
 
-    if connections_input == 'hillclimber' or connections_input == 'simulated annealing':
+    if (connections_input == 'hillclimber' or connections_input == 'simulated annealing') and loop_input == 1:
+        # for i in range(int(loop_input)):
+        houses_list = houses
+        batteries_list = batteries
         random_algo.assign_house_random(houses, batteries)
 
         eval(cables_dict[cables_input])
@@ -117,6 +123,43 @@ if __name__ == "__main__":
 
         list = my_smartgrid.make_output(args.district, shared_input)
         print(my_smartgrid.total_cost)
+
+    # loop input later naar 100 zetten
+    elif connections_input == 'hillclimber' or connections_input == 'simulated annealing' and loop_input == 100:
+        list_costs = []
+        for i in range(int(loop_input)):
+
+            cable_algo = cables_dict[cables_input].split('(')[0] + '(my_smartgrid_filled.houses_list, my_smartgrid_filled.battery_list)'
+
+            # create deepcopy to ensure that filling the grid lists is correct
+            my_smartgrid_filled = copy.deepcopy(my_smartgrid)
+            # create battery and houses list of the smartgrid, by making deepcopies
+            my_smartgrid_filled.battery_list = copy.deepcopy(batteries)
+            my_smartgrid_filled.houses_list = copy.deepcopy(houses)
+
+            random_algo.assign_house_random(my_smartgrid_filled.houses_list, my_smartgrid_filled.battery_list)
+
+            eval(cable_algo)
+
+            list = my_smartgrid.make_output(args.district, shared_input)
+            print(my_smartgrid.total_cost)
+
+            random_hill_climber = Hill_Climber(my_smartgrid_filled, shared_input)
+            random_sa = Simulated_Annealing(my_smartgrid_filled, shared_input, temperature=200)
+
+            eval(connections_dict[connections_input]).run(500, cables_dict[cables_input])
+
+            list = my_smartgrid.make_output(args.district, shared_input)
+            print(my_smartgrid.total_cost)
+
+            # append cost to the list with costs for this algorithm combination
+            list_costs.append(my_smartgrid.total_cost)
+
+        plt.clf()
+        sns.histplot(data=list_costs, bins=20)
+        plt.show()
+
+            # vis.visualise(connections_input, cables_input)
 
 
 
@@ -140,20 +183,58 @@ if __name__ == "__main__":
         #     random_hill_climber.run(2000)
 
 
-    else:
+    elif loop_input == 1 and connections_input != 'hillclimber' and connections_input != 'simulated annealing':
+            houses_list = houses
+            batteries_list = batteries
+            # assign the houses
+            eval(connections_dict[connections_input])
 
-        # assign the houses
-        eval(connections_dict[connections_input])
+            # make the cables
+            eval(cables_dict[cables_input])
 
-        # make the cables
-        eval(cables_dict[cables_input])
+            list = my_smartgrid.make_output(args.district, shared_input)
+            print(my_smartgrid.total_cost)
 
-        list = my_smartgrid.make_output(args.district, shared_input)
-        print(my_smartgrid.total_cost)
+            vis.visualise(connections_input, cables_input)
 
-        vis.visualise(connections_input, cables_input)
+    elif loop_input != 1 and connections_input != 'hillclimber' and connections_input != 'simulated annealing':
+        list_costs = []
 
 
+        for i in range(int(loop_input)):
+            my_smartgrid.battery_list = copy.deepcopy(batteries)
+            my_smartgrid.houses_list = copy.deepcopy(houses)
+            houses_list = my_smartgrid.houses_list
+            batteries_list = my_smartgrid.battery_list
+
+            # create battery and houses list of the smartgrid, by making deepcopies
+
+            # assign the houses to battery
+            # print(houses_list, batteries_list)
+            # print(connections_dict[connections_input])
+            eval(connections_dict[connections_input])
+
+            # for battery in my_smartgrid.batteries_list:
+            #     for houses_dict in battery.dict['houses']:
+            # # make the cables
+            #         print(cables_dict[cables_input])
+            #         # print(houses_list, batteries_list)
+            eval(cables_dict[cables_input])
+
+            list = my_smartgrid.make_output(args.district, shared_input)
+            # print(list)
+            print(my_smartgrid.total_cost)
+
+            list_costs.append(my_smartgrid.total_cost)
+
+        plt.clf()
+        sns.histplot(data=list_costs, bins=20)
+        plt.title(f'connections made with {connections_input}, cables made with {cables_input}')
+        plt.xlabel('costs')
+        plt.show()
+
+
+            # vis.visualise(connections_input, cables_input)
 
 
 
@@ -165,7 +246,7 @@ if __name__ == "__main__":
     # list_with_costs_random_90 = []
     #
     # for i in range(100):
-    #m
+    #
     #     # create battery and houses list of the smartgrid, by making deepcopies
     #     my_smartgrid.battery_list = copy.deepcopy(batteries)
     #     my_smartgrid.houses_list = copy.deepcopy(houses)
