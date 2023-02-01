@@ -78,7 +78,7 @@ Hierbij een overzicht van de belangrijke mappen en hun inhoud:
   - **/code/classes**: bevat de drie benodigde classes voor deze case
   - **/code/visualisation**: bevat de code voor de visualisatie
 - **/data**: bevat de verschillende databestanden die nodig zijn om de graaf te vullen en te visualiseren
-- **main_run.py** staat los in de map Olivier, en moet gerund worden voor het uitvoeren van het experiment.
+- **main.py** staat los in de map Olivier, en moet gerund worden voor het uitvoeren van het experiment.
 
 ## Auteurs
 - Frédérique Mulder
