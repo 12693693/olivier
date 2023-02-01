@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 make_rest_of_cables = Search_Cables()
 
-class Breadth_first():
+class Closest_to_others():
     def compute_distance(self, x_battery, y_battery, x_loc, y_loc):
         ''' this function computes the distance between the battery and the starting
         location on the x and y axis '''
@@ -165,7 +165,7 @@ class Breadth_first():
 
         return x_list, y_list
 
-    def breadth_first_5(self, list_with_houses, list_with_batteries):
+    def first_5(self, list_with_houses, list_with_batteries):
         ''' this function executes breadth first algorithm on the first 5 houses
         of each battery. It makes 10 random paths from each house to the battery,
         and then chooses the best path based on the distance from the rest of the
@@ -197,7 +197,7 @@ class Breadth_first():
         first 5 houses per battery, and creates the rest of the cables using
         the search cables algorithm. '''
 
-        self.breadth_first_5(list_with_houses, list_with_batteries)
+        self.first_5(list_with_houses, list_with_batteries)
 
         for battery in list_with_batteries:
             for house_dict in battery.dict['houses'][5:]:

@@ -32,7 +32,7 @@ Dit algoritme loopt de 4 mogelijke richtingen af waar het naartoe kan en kent ve
 4. Further Cables
 Dit algoritme is gebaseerd op het score systeem van Search Cables. Hierbij wordt echter ook gekeken naar een eventuele vervolg kabel die er ligt. Deze wordt dan ook meegenomen in de score. Deze score bestaat hier uit een optelling van de individuele toegekende scores van elke stap. Hierna wordt ook weer een willekeurige keuze gemaakt tussen stappen met dezelfde score.
 
-5. Breadth First
+5. Closest to others
 Dit algoritme genereert voor de eerste 5 huizen 10 kabels en kiest voor die huizen de beste kabel op basis van de afstand tot andere huizen. Vervolgens worden de rest van de huizen met batterijen verbonden op basis van het search cables algoritme.
 
 
@@ -44,7 +44,7 @@ Er zullen dan een aantal vragen worden gesteld:
 De opties hiervoor zijn: random, greedy, hillclimber, simulated annealing
 
 2. Op basis van welk algoritme wil je de kabels leggen?
-De opties hiervoor zijn: 90 degrees, random try, search cables,  further cables, breadth first
+De opties hiervoor zijn: 90 degrees, random try, search cables,  further cables, closest to others
 
 3. Wil je de kosten delen?
 Het antwoord moet hierop 'yes' zijn.

@@ -33,6 +33,7 @@ class Simulated_Annealing(Hill_Climber):
 
         # calculate the probability of accepting this new smartgrid
         delta = self.new_costs - self.costs
+        print(-delta / self.T)
         probability = math.exp(-delta / self.T)
 
 
