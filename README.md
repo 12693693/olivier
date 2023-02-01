@@ -77,7 +77,8 @@ Hierbij een overzicht van de belangrijke mappen en hun inhoud:
   - **/code/Algorithms**: bevat de code voor algoritmes
   - **/code/Classes**: bevat de drie benodigde classes voor deze case
   - **/code/Visualisation**: bevat de code voor de visualisatie
-- **/data**: bevat de verschillende databestanden die nodig zijn om de graaf te vullen en te visualiseren
+- **/data**: bevat de output en verschillende databestanden die nodig zijn om de smartgrid te vullen en te visualiseren
+- **/resultaten**: bevat verschillende resultaten van het experiment
 - **main.py** staat los in de map Olivier, en moet gerund worden voor het uitvoeren van het experiment.
 
 ## Auteurs
