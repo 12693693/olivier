@@ -89,7 +89,7 @@ if __name__ == "__main__":
 
         eval(cables_dict[cables_input])
 
-        list = my_smartgrid.make_output(args.district, shared_input)
+        my_smartgrid.make_output(args.district, shared_input)
         print(my_smartgrid.total_cost)
 
         random_hill_climber = Hill_Climber(my_smartgrid, shared_input)
@@ -97,7 +97,7 @@ if __name__ == "__main__":
 
         eval(connections_dict[connections_input]).run(2000, cables_dict[cables_input])
 
-        list = my_smartgrid.make_output(args.district, shared_input)
+        my_smartgrid.make_output(args.district, shared_input)
         print(my_smartgrid.total_cost)
 
         vis.visualise(connections_input, cables_input)
@@ -120,7 +120,7 @@ if __name__ == "__main__":
 
             eval(cable_algo)
 
-            list = my_smartgrid_filled.make_output(args.district, shared_input)
+            my_smartgrid_filled.make_output(args.district, shared_input)
 
             random_hill_climber = Hill_Climber(my_smartgrid_filled, shared_input)
             random_sa = Simulated_Annealing(my_smartgrid_filled, shared_input, temperature=200)
@@ -149,7 +149,7 @@ if __name__ == "__main__":
             # make the cables
             eval(cables_dict[cables_input])
 
-            list = my_smartgrid.make_output(args.district, shared_input)
+            my_smartgrid.make_output(args.district, shared_input)
             print(my_smartgrid.total_cost)
 
             vis.visualise(connections_input, cables_input)
@@ -178,7 +178,7 @@ if __name__ == "__main__":
             #         # print(houses_list, batteries_list)
             eval(cables_dict[cables_input])
 
-            list = my_smartgrid.make_output(args.district, shared_input)
+            my_smartgrid.make_output(args.district, shared_input)
             # print(list)
             print(my_smartgrid.total_cost)
 
