@@ -17,17 +17,12 @@ class Cables_90():
 
         # create starting point for creating the grid line
         # and add the starting point to the grid dictionary
-        #print('dict', dictionary_of_house['location'])
-
         x_loc = self.location_house_x
         y_loc = self.location_house_y
         dictionary_of_house['cables'].append(f'{int(x_loc)},{int(y_loc)}')
 
         # compute distance to use as a constraint for choosing which way
         # to move on the grid line
-
-        #print(self.location_house_x, battery.x)
-        #print(self.location_house_x)
         distance_x = self.location_house_x - battery.x
         distance_y = self.location_house_y - battery.y
 
