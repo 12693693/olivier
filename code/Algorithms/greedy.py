@@ -19,26 +19,26 @@ class Greedy():
         battery to that house.
         """
 
-        # set distance to infinity
+        # Set distance to infinity
         closest_distance = math.inf
 
-        # assign a random battery as closest
+        # Assign a random battery as closest
         assigned_battery = random.choice(list_with_batteries)
 
         for battery in list_with_batteries:
 
-            # calculate distance to each battery
+            # Calculate distance to each battery
             distance = abs(battery.x - house.x) + abs(battery.y - house.y)
 
-            # assign the house closest battery that still has enough capacity
+            # Assign the house closest battery that still has enough capacity
             if distance < closest_distance and house.maxoutput < battery.capacity:
                 closest_distance = distance
                 assigned_battery = battery
 
-        # adjust the capacity of the battery
+        # Adjust the capacity of the battery
         assigned_battery.capacity -= house.maxoutput
 
-        # save the dictionary of the house in the list of houses for that battery
+        # Save the dictionary of the house in the list of houses for that battery
         assigned_battery.dict['houses'].append(house.dict)
 
         return assigned_battery
@@ -50,19 +50,19 @@ class Greedy():
         capacity left.
         """
 
-        # sort the houses based on the maximum capacity
+        # Sort the houses based on the maximum capacity
         list_with_houses_sorted = sort_houses(list_with_houses)
 
-        # make a copy of the list with batteries to save the capacities (for
+        # Make a copy of the list with batteries to save the capacities (for
         # the random function)
         batteries_not_changed = copy.deepcopy(list_with_batteries)
 
         for house in list_with_houses_sorted:
 
-            # get the closest battery
+            # Get the closest battery
             assigned_battery = self.get_closest_battery(house, list_with_batteries)
 
-            # if the assigned battery does not have enough capacity, use the random
+            # If the assigned battery does not have enough capacity, use the random
             # greedy function
             if assigned_battery.capacity < 0:
                 self.random_greedy(list_with_houses, batteries_not_changed)

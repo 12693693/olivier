@@ -33,8 +33,13 @@ class Simulated_Annealing(Hill_Climber):
 
         # calculate the probability of accepting this new smartgrid
         delta = self.new_costs - self.costs
-        print(-delta / self.T)
-        probability = math.exp(-delta / self.T)
+
+        # sometimes you get an error if the (-delta / self.T) is too positive so
+        # if that happens make the possibility zero
+        try:
+            probability = math.exp(-delta / self.T)
+        except:
+            probability = 0
 
 
         # pull a random number between 0 and 1 and see if we accept the graph!
