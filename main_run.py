@@ -16,7 +16,6 @@ from code.Algorithms.further_cables import Further_Cables
 from code.Visualisation import Visualize as vis
 from code.Algorithms.breadth_first import Breadth_first
 
-# dit moet eigenlijk in classmethod
 def load_df(houses_csv, batteries_csv):
     """
     This function loads the villages and saves them as dataframes
@@ -47,10 +46,6 @@ if __name__ == "__main__":
     # Set-up parsing command line arguments
     parser = argparse.ArgumentParser(description = "adding houses to batteries")
 
-    # Adding arguments
-    #parser.add_argument("output", help = "output file (csv)")
-    #parser.add_argument("input_houses", help="houses file")
-    #parser.add_argument("input_batteries", help="batteries_file")
     parser.add_argument("district", help = "district")
 
     # Read arguments from command line
@@ -60,13 +55,8 @@ if __name__ == "__main__":
     df_houses, df_batteries = load_df(f'Huizen&Batterijen/district_{args.district}/district-{args.district}_houses.csv', f'Huizen&Batterijen/district_{args.district}/district-{args.district}_batteries.csv')
     my_smartgrid = Smartgrid(df_houses, df_batteries)
 
-    #my_smartgrid = Smartgrid.from_file(args.input_houses, args.input_batteries)
-
     houses, batteries = my_smartgrid.add_houses_and_batteries(df_houses, df_batteries)
-    # print(houses, batteries)
 
-
-    # # ----------------- random houses and 90 degrees cables-----------------------
     # create class objects to work with
     random_algo = Randomize()
     greedy_algo = Greedy()
@@ -74,37 +64,25 @@ if __name__ == "__main__":
     cable_random = Cables()
     search_cables = Search_Cables()
     further_cables = Further_Cables()
-
-
-
-
     cable_breadth = Breadth_first()
 
-    # prompt the user to give the district number
-    #my_smartgrid.district_name()
-
-    # -----------------------------------------------------------------------------------
-
+    # -------------------------------- User Inputs ------------------------------------
+    print('Algorithms for making connections: random, greedy, hillclimber, simulated annealing')
     connections_input = input('What algorithm do you want to use for the connections?: ')
+    print('Algorithms for making cables: 90 degrees, search cables, further cables, breadth first, random try')
     cables_input = input('What algorithm do you want to use for the cables?: ')
-    shared_input = input('Do you want to share the cables?: ')
-    loop_input = input('Do you want to loop?: ')
-
+    shared_input = input('Do you want to share the cables? (yes / no): ')
+    loop_input = input('How many times do you want to loop? (1 / 1000): ')
 
     connections_dict = {'random': 'random_algo.assign_house_random(houses_list, batteries_list)', 'greedy' : 'greedy_algo.assign_closest_battery(houses_list, batteries_list)', 'hillclimber' : 'random_hill_climber', 'simulated annealing': 'random_sa'}
     cables_dict = {'90 degrees': 'cable_90_degree.make_90_degrees_cables(houses_list, batteries_list)', 'search cables' : 'search_cables.run_search(houses_list, batteries_list)', 'further cables': 'further_cables.run_further(houses_list, batteries_list)', 'breadth first': 'cable_breadth.run(houses_list, batteries_list)', 'random try': 'cable_random.run(houses_list, batteries_list)'}
 
-    # eval(connections_dict[connections_input])
-    # eval(cables_dict[cables_input])
-    #
-    # list = my_smartgrid.make_output(args.district, shared_input)
-    # print(my_smartgrid.total_cost)
 
+    # ------------------------------- Experiment -----------------------------------------
 
-    # -------------------------------------------------------------------------------------
+    if (connections_input == 'hillclimber' or connections_input == 'simulated annealing') and loop_input == '1':
+        # list costs?
 
-    if (connections_input == 'hillclimber' or connections_input == 'simulated annealing') and loop_input == 1:
-        # for i in range(int(loop_input)):
         houses_list = houses
         batteries_list = batteries
         random_algo.assign_house_random(houses, batteries)
@@ -117,15 +95,15 @@ if __name__ == "__main__":
         random_hill_climber = Hill_Climber(my_smartgrid, shared_input)
         random_sa = Simulated_Annealing(my_smartgrid, shared_input, temperature=200)
 
-
         eval(connections_dict[connections_input]).run(2000, cables_dict[cables_input])
-
 
         list = my_smartgrid.make_output(args.district, shared_input)
         print(my_smartgrid.total_cost)
 
-    # loop input later naar 100 zetten
-    elif connections_input == 'hillclimber' or connections_input == 'simulated annealing' and loop_input == 100:
+        vis.visualise(connections_input, cables_input)
+
+
+    elif connections_input == 'hillclimber' or connections_input == 'simulated annealing' and loop_input != '1':
         list_costs = []
         for i in range(int(loop_input)):
 
@@ -159,31 +137,10 @@ if __name__ == "__main__":
         sns.histplot(data=list_costs, bins=20)
         plt.show()
 
-            # vis.visualise(connections_input, cables_input)
 
 
 
-
-
-
-        #
-        #     my_smartgrid.draw_plot()
-        #     my_smartgrid.costs_shared()
-        #     #my_smartgrid.district_name()
-        #     my_smartgrid.create_district_dict()
-        #     list = my_smartgrid.make_output()
-        #     #print(list)
-        # # print('costs', list[0]['costs shared'])
-        #     #print(existing_cable_dict)
-        #     #print(cable_list)
-        #
-        #
-        #
-        #     random_hill_climber = Hill_Climber(my_smartgrid)
-        #     random_hill_climber.run(2000)
-
-
-    elif loop_input == 1 and connections_input != 'hillclimber' and connections_input != 'simulated annealing':
+    elif loop_input == '1' and connections_input != 'hillclimber' and connections_input != 'simulated annealing':
             houses_list = houses
             batteries_list = batteries
             # assign the houses
@@ -197,7 +154,7 @@ if __name__ == "__main__":
 
             vis.visualise(connections_input, cables_input)
 
-    elif loop_input != 1 and connections_input != 'hillclimber' and connections_input != 'simulated annealing':
+    elif loop_input != '1' and connections_input != 'hillclimber' and connections_input != 'simulated annealing':
         list_costs = []
 
 
