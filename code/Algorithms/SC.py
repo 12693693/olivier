@@ -126,31 +126,31 @@ class SearchC():
 
 
     def set_step(self, highest_index):
-            # Find the step which belongs with the highest score
-            for index, highest in enumerate(self.step_score_list):
-                cable_key = tuple(self.step_list[highest_index])
+        # Find the step which belongs with the highest score
+        for index, highest in enumerate(self.step_score_list):
+            cable_key = tuple(self.step_list[highest_index])
 
-            # Find the new distance which belongs with the highest score
-            for index, distance in enumerate(self.step_score_list):
-                new_distance = self.distance_list[highest_index]
+        # Find the new distance which belongs with the highest score
+        for index, distance in enumerate(self.step_score_list):
+            new_distance = self.distance_list[highest_index]
 
-            # Update the new distance
-            distance = new_distance
+        # Update the new distance
+        distance = new_distance
 
-            x_loc = cable_key[2]
-            y_loc = cable_key[3]
+        x_loc = cable_key[2]
+        y_loc = cable_key[3]
 
-            x_list.append(x_loc)
-            y_list.append(y_loc)
-            house_dict['cables'].append(f'{int(x_loc)},{int(y_loc)}')
+        x_list.append(x_loc)
+        y_list.append(y_loc)
+        house_dict['cables'].append(f'{int(x_loc)},{int(y_loc)}')
 
-            # Add this cable part to the dictionary
-            if cable_key not in self.existing_cable_dict:
-                self.existing_cable_dict[cable_key] = 1
+        # Add this cable part to the dictionary
+        if cable_key not in self.existing_cable_dict:
+            self.existing_cable_dict[cable_key] = 1
 
         return self.existing_cable_dict
 
-        
+
     def run_search_2(self, list_with_houses, list_with_batteries):
         '''
         This function uses the previously defined cables function to connect
