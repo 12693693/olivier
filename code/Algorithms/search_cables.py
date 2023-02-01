@@ -11,6 +11,7 @@ class Search_Cables():
         # set starting point to the location of the house
         self.location_house_x = float(house_dict['location'].split(',')[0])
         self.location_house_y = float(house_dict['location'].split(',')[1])
+
         # compute distance between the battery and the assigned house
         distance = abs(battery.x - self.location_house_x) + abs(battery.y - self.location_house_y)
 
@@ -98,7 +99,6 @@ class Search_Cables():
                     self.step_score_list.append(step_score_4)
                     self.step_list.append(step_4)
                     self.distance_list.append(new_distance_4)
-
 
             # find step with highest score
             if self.step_score_list.count(2) > 1:

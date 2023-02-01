@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
-class Cables_90():
 
+class Cables_90():
     def get_location(self, dictionary_of_house):
         """
         This function finds the x and y location of the house.
@@ -8,7 +8,6 @@ class Cables_90():
 
         self.location_house_x = float(dictionary_of_house['location'].split(',')[0])
         self.location_house_y = float(dictionary_of_house['location'].split(',')[1])
-
 
     def make_lines_90(self, dictionary_of_house, battery):
         """
@@ -33,8 +32,7 @@ class Cables_90():
             else:
                 x_loc += 1
 
-            # Save the individual steps in the cable list in the dictionary of
-            # the house
+            # Save the individual steps in the cable list in the dictionary of the house
             dictionary_of_house['cables'].append(f'{int(x_loc)},{int(y_loc)}')
 
         # Take steps until the correct y coordinate is reached
@@ -44,10 +42,8 @@ class Cables_90():
             else:
                 y_loc += 1
 
-            # Save the individual steps in the grid list in the dictionary of
-            # the house
+            # Save the individual steps in the grid list in the dictionary of the house
             dictionary_of_house['cables'].append(f'{int(x_loc)},{int(y_loc)}')
-
 
     def make_90_degrees_cable(self, dictionary_of_house, battery):
         """
@@ -56,8 +52,6 @@ class Cables_90():
         """
         self.get_location(dictionary_of_house)
         self.make_lines_90(dictionary_of_house, battery)
-
-
 
     def make_90_degrees_cables(self, list_with_houses, list_with_batteries):
         """

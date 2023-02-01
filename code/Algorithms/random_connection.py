@@ -46,9 +46,8 @@ class Randomize():
                         # Choose another battery if there are any still availeble
                         assigned_battery = random.choice(remaining_batteries)
                     else:
-                        # Go further with the previous assigned battery that is
-                        # already full, but set the valid option to false so it
-                        # will run through the while loop again
+                        # if there are no batteries left that have capacity,
+                        # the solution is not valid
                         valid_option = False
                         break
 

@@ -5,7 +5,7 @@ import copy
 import seaborn as sns
 import matplotlib.pyplot as plt
 from code.Classes.smartgrid import Smartgrid
-from code.Algorithms.randomize import Randomize
+from code.Algorithms.random_connection import Randomize
 from code.Algorithms.cable_90_degree import Cables_90
 from code.Algorithms.random_try import Cables
 from code.Algorithms.greedy import Greedy
