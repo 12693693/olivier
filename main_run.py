@@ -90,7 +90,7 @@ if __name__ == "__main__":
 
         eval(cables_dict[cables_input])
 
-        list = my_smartgrid.make_output(args.district, shared_input)
+        my_smartgrid.make_output(args.district, shared_input)
         print(my_smartgrid.total_cost)
 
         random_hill_climber = Hill_Climber(my_smartgrid, shared_input)
@@ -98,7 +98,7 @@ if __name__ == "__main__":
 
         eval(connections_dict[connections_input]).run(2000, cables_dict[cables_input])
 
-        list = my_smartgrid.make_output(args.district, shared_input)
+        my_smartgrid.make_output(args.district, shared_input)
         print(my_smartgrid.total_cost)
 
         vis.visualise(connections_input, cables_input)
@@ -121,14 +121,14 @@ if __name__ == "__main__":
 
             eval(cable_algo)
 
-            list = my_smartgrid_filled.make_output(args.district, shared_input)
+            my_smartgrid_filled.make_output(args.district, shared_input)
 
             random_hill_climber = Hill_Climber(my_smartgrid_filled, shared_input)
             random_sa = Simulated_Annealing(my_smartgrid_filled, shared_input, temperature=200)
 
-            eval(connections_dict[connections_input]).run(500, cables_dict[cables_input])
+            my_smartgrid_filled = eval(connections_dict[connections_input]).run(500, cables_dict[cables_input])
 
-            list = my_smartgrid_filled.make_output(args.district, shared_input)
+            my_smartgrid_filled.make_output(args.district, shared_input)
 
             # append cost to the list with costs for this algorithm combination
             list_costs.append(my_smartgrid_filled.total_cost)
@@ -151,7 +151,7 @@ if __name__ == "__main__":
             # make the cables
             eval(cables_dict[cables_input])
 
-            list = my_smartgrid.make_output(args.district, shared_input)
+            my_smartgrid.make_output(args.district, shared_input)
             print(my_smartgrid.total_cost)
 
             vis.visualise(connections_input, cables_input)
@@ -174,8 +174,13 @@ if __name__ == "__main__":
             # make the cables
             eval(cables_dict[cables_input])
 
+<<<<<<< HEAD
             list = my_smartgrid.make_output(args.district, shared_input)
 
+=======
+            my_smartgrid.make_output(args.district, shared_input)
+            # print(list)
+>>>>>>> 10477c50cba4de76524cb81722f6ee83c219530c
             print(my_smartgrid.total_cost)
 
             list_costs.append(my_smartgrid.total_cost)
