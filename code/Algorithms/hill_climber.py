@@ -1,6 +1,6 @@
 from .random_connection import Randomize
 from .cable_90_degree import Cables_90
-from .random_try import Cables
+from .random_cables import Cables
 from .search_cables import Search_Cables
 from .further_cables import Further_Cables
 from ..Classes.smartgrid import Smartgrid

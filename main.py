@@ -13,7 +13,7 @@ from code.Algorithms.search_cables import Search_Cables
 from code.Algorithms.hill_climber import Hill_Climber
 from code.Algorithms.simulated_annealing import Simulated_Annealing
 from code.Algorithms.further_cables import Further_Cables
-from code.Visualisation import Visualize as vis
+from code.Visualisation import Visualise as vis
 from code.Algorithms.closest_to_others import Closest_to_others
 from statistics import mean
 
@@ -178,7 +178,7 @@ if __name__ == "__main__":
             my_smartgrid.make_output(args.district, shared_input)
             print(my_smartgrid.total_cost)
 
-            # Initialize the visualize
+            # Initialize the visualise
             vis.visualise(connections_input, cables_input)
 
 
