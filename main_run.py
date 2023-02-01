@@ -144,6 +144,9 @@ if __name__ == "__main__":
         sns.lineplot(data=df.mean(axis=1))
         plt.show()
 
+        df_cost = pd.DataFrame(list_costs_total)
+        df_cost.to_csv(f'cost {connections_input}, {cables_input}')
+
 
         plt.clf()
         sns.histplot(data=list_costs_total, bins=20)
