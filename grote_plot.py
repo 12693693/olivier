@@ -21,7 +21,7 @@ df_cables['greedy, further cables']= df['0']
 
 df = pd.read_csv('cost greedy, breadth first')
 # series = pd.Series(df)
-df_cables['greedy, breadth first']= df['0']
+df_cables['greedy, closest to others']= df['0']
 
 
 sns.histplot(data=df_cables, bins=30)
@@ -30,3 +30,6 @@ plt.xlabel('Costs')
 plt.show()
 
 df_connections = pd.DataFrame()
+
+df = pd.read_csv('cost random, 90 degrees')
+df_connections['random, 90 degrees'] = df['0']
