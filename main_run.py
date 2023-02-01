@@ -15,6 +15,7 @@ from code.Algorithms.simulated_annealing import Simulated_Annealing
 from code.Algorithms.further_cables import Further_Cables
 from code.Visualisation import Visualize as vis
 from code.Algorithms.breadth_first import Breadth_first
+from statistics import mean
 
 def load_df(houses_csv, batteries_csv):
     """
@@ -106,7 +107,7 @@ if __name__ == "__main__":
     elif connections_input == 'hillclimber' or connections_input == 'simulated annealing' and loop_input != '1':
         list_costs = []
         for i in range(int(loop_input)):
-            print(f'{i}/{loop_input})
+            print(f'{i}/{loop_input}')
 
             cable_algo = cables_dict[cables_input].split('(')[0] + '(my_smartgrid_filled.houses_list, my_smartgrid_filled.battery_list)'
 
@@ -131,6 +132,8 @@ if __name__ == "__main__":
 
             # append cost to the list with costs for this algorithm combination
             list_costs.append(my_smartgrid_filled.total_cost)
+
+        mean_cost = mean(list_costs)
 
         plt.clf()
         sns.histplot(data=list_costs, bins=20)
@@ -166,22 +169,18 @@ if __name__ == "__main__":
             # create battery and houses list of the smartgrid, by making deepcopies
 
             # assign the houses to battery
-            # print(houses_list, batteries_list)
-            # print(connections_dict[connections_input])
             eval(connections_dict[connections_input])
 
-            # for battery in my_smartgrid.batteries_list:
-            #     for houses_dict in battery.dict['houses']:
-            # # make the cables
-            #         print(cables_dict[cables_input])
-            #         # print(houses_list, batteries_list)
+            # make the cables
             eval(cables_dict[cables_input])
 
             list = my_smartgrid.make_output(args.district, shared_input)
-            # print(list)
+
             print(my_smartgrid.total_cost)
 
             list_costs.append(my_smartgrid.total_cost)
+
+        mean_cost = mean(list_costs)
 
         plt.clf()
         sns.histplot(data=list_costs, bins=20)
