@@ -1,4 +1,4 @@
-# olivier
+# Olivier
 
 ## SmartGrid:
 
@@ -39,7 +39,11 @@ Dit algoritme genereert voor de eerste 5 huizen 10 kabels en kiest voor die huiz
 
 
 ## Gebruik
-Om de resultaten te reproduceren moet python main_run.py worden gerund, met daar achteraan een 1, 2 of 3, afhankelijk van welk district je wil gebruiken.
+Om de resultaten te reproduceren moet 
+```
+python main.py
+```
+worden gerund, met daar achteraan een 1, 2 of 3, afhankelijk van welk district je wil gebruiken.
 Er zullen dan een aantal vragen worden gesteld:
 1. Op basis van welk algoritme wil je de connecties tussen huizen en batterijen maken?
 De opties hiervoor zijn: random, greedy, hillclimber, simulated annealing
@@ -55,10 +59,17 @@ Vul hier 1 in als je alleen een visualisatie wil en 1000 indien je de distributi
 
 ## Vereisten
 Deze code is geschreven in python versie 3.9.13. In onze code maken we gebruik van de volgende libraries:
-matplotlib.pyplot 3.5.3
-seaborn 0.12.0
-json5 0.9.10
+In requirements.txt staan alle benodigde packages om de code succesvol te draaien. Deze zijn gemakkelijk te installeren via pip dmv. de volgende instructie:
 
+```
+pip install -r requirements.txt
+```
+
+Of via conda:
+
+```
+conda install --file requirements.txt
+```
 ## Overzicht
 Hierbij een overzicht van de belangrijke mappen en hun inhoud:
 
@@ -67,9 +78,9 @@ Hierbij een overzicht van de belangrijke mappen en hun inhoud:
   - **/code/classes**: bevat de drie benodigde classes voor deze case
   - **/code/visualisation**: bevat de code voor de visualisatie
 - **/data**: bevat de verschillende databestanden die nodig zijn om de graaf te vullen en te visualiseren
-- **main_run.py** staat los in de map Olivier, en moet gerund worden voor het uitvoeren van het experiment.
+- **main.py** staat los in de map Olivier, en moet gerund worden voor het uitvoeren van het experiment.
 
 ## Auteurs
 - Frédérique Mulder
 - Lisa Overbosch
-- Sam Eijpex
+- Sam Eijpe
