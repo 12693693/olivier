@@ -39,7 +39,11 @@ Dit algoritme genereert voor de eerste 5 huizen 10 kabels en kiest voor die huiz
 
 
 ## Gebruik
-Om de resultaten te reproduceren moet python main_run.py worden gerund, met daar achteraan een 1, 2 of 3, afhankelijk van welk district je wil gebruiken.
+Om de resultaten te reproduceren moet 
+```
+python main.py
+```
+worden gerund, met daar achteraan een 1, 2 of 3, afhankelijk van welk district je wil gebruiken.
 Er zullen dan een aantal vragen worden gesteld:
 1. Op basis van welk algoritme wil je de connecties tussen huizen en batterijen maken?
 De opties hiervoor zijn: random, greedy, hillclimber, simulated annealing
