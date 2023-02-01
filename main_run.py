@@ -14,7 +14,7 @@ from code.Algorithms.hill_climber import Hill_Climber
 from code.Algorithms.simulated_annealing import Simulated_Annealing
 from code.Algorithms.further_cables import Further_Cables
 from code.Visualisation import Visualize as vis
-from code.Algorithms.breadth_first import Breadth_first
+from code.Algorithms.closest_to_others import Closest_to_others
 from statistics import mean
 
 def load_df(houses_csv, batteries_csv):
@@ -65,18 +65,18 @@ if __name__ == "__main__":
     cable_random = Cables()
     search_cables = Search_Cables()
     further_cables = Further_Cables()
-    cable_breadth = Breadth_first()
+    cable_closest = Closest_to_others()
 
     # -------------------------------- User Inputs ------------------------------------
     print('Algorithms for making connections: random, greedy, hillclimber, simulated annealing')
     connections_input = input('What algorithm do you want to use for the connections?: ')
-    print('Algorithms for making cables: 90 degrees, search cables, further cables, breadth first, random try')
+    print('Algorithms for making cables: 90 degrees, search cables, further cables, closest to others, random try')
     cables_input = input('What algorithm do you want to use for the cables?: ')
     shared_input = input('Do you want to share the cables? (yes / no): ')
     loop_input = input('How many times do you want to loop? (1 / 1000): ')
 
     connections_dict = {'random': 'random_algo.assign_house_random(houses_list, batteries_list)', 'greedy' : 'greedy_algo.assign_closest_battery(houses_list, batteries_list)', 'hillclimber' : 'random_hill_climber', 'simulated annealing': 'random_sa'}
-    cables_dict = {'90 degrees': 'cable_90_degree.make_90_degrees_cables(houses_list, batteries_list)', 'search cables' : 'search_cables.run_search(houses_list, batteries_list)', 'further cables': 'further_cables.run_further(houses_list, batteries_list)', 'breadth first': 'cable_breadth.run(houses_list, batteries_list)', 'random try': 'cable_random.run(houses_list, batteries_list)'}
+    cables_dict = {'90 degrees': 'cable_90_degree.make_90_degrees_cables(houses_list, batteries_list)', 'search cables' : 'search_cables.run_search(houses_list, batteries_list)', 'further cables': 'further_cables.run_further(houses_list, batteries_list)', 'closest to others': 'cable_closest.run(houses_list, batteries_list)', 'random try': 'cable_random.run(houses_list, batteries_list)'}
 
 
     # ------------------------------- Experiment -----------------------------------------
