@@ -26,7 +26,7 @@ def load_df(houses_csv, batteries_csv):
     df_houses = pd.read_csv(houses_csv)
     df_batteries = pd.read_csv(batteries_csv)
 
-    # create and fill lists of seperate coordinates for the batteries
+    # Create and fill lists of seperate coordinates for the batteries
     x_list = []
     y_list = []
 
@@ -59,7 +59,7 @@ if __name__ == "__main__":
 
     houses, batteries = my_smartgrid.add_houses_and_batteries(df_houses, df_batteries)
 
-    # create class objects to work with
+    # Create class objects to work with
     random_algo = Randomize()
     greedy_algo = Greedy()
     cable_90_degree = Cables_90()
@@ -102,12 +102,6 @@ if __name__ == "__main__":
         random_sa = Simulated_Annealing(my_smartgrid, shared_input, temperature=200)
 
         eval(connections_dict[connections_input]).run(3000, cables_dict[cables_input])
-<<<<<<< HEAD
-=======
-=======
-        # Turns 'connections_dict' from string into a function.
-        eval(connections_dict[connections_input]).run(2000, cables_dict[cables_input])
->>>>>>> a085a9495f02cdbbaf7cc92c58aa53ef02cfc368
 
         #Initializes the output for the connections.
         my_smartgrid.make_output(args.district, shared_input)
@@ -146,10 +140,6 @@ if __name__ == "__main__":
             random_sa = Simulated_Annealing(my_smartgrid_filled, shared_input, temperature=35)
 
             my_smartgrid_filled, list_costs = eval(connections_dict[connections_input]).run(3000, cables_dict[cables_input])
-<<<<<<< HEAD
-
-=======
->>>>>>> a085a9495f02cdbbaf7cc92c58aa53ef02cfc368
             #Initializes the output for the connections.
             my_smartgrid_filled.make_output(args.district, shared_input)
 
@@ -160,16 +150,16 @@ if __name__ == "__main__":
 
         mean_cost = mean(list_costs_total)
 
-        # Plot the histogram.
+        # Plot the lineplot with the mean of all the iterations.
         sns.lineplot(data=df.mean(axis=1))
         plt.show()
 
         df_cost = pd.DataFrame(list_costs_total)
         df_cost.to_csv(f'cost {connections_input}, {cables_input}')
 
-
+        # Plot the histogram
         plt.clf()
-        sns.histplot(data=list_costs, bins=20)
+        sns.histplot(data=list_costs_total, bins=20)
         plt.title(f'connections made with {connections_input}, cables made with {cables_input}')
         plt.xlabel('costs')
         plt.show()
