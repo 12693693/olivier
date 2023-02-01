@@ -106,7 +106,7 @@ if __name__ == "__main__":
     elif connections_input == 'hillclimber' or connections_input == 'simulated annealing' and loop_input != '1':
         list_costs = []
         for i in range(int(loop_input)):
-            print(f'{i}/{loop_input})
+            print(f'{i}/{loop_input}')
 
             cable_algo = cables_dict[cables_input].split('(')[0] + '(my_smartgrid_filled.houses_list, my_smartgrid_filled.battery_list)'
 
@@ -125,12 +125,13 @@ if __name__ == "__main__":
             random_hill_climber = Hill_Climber(my_smartgrid_filled, shared_input)
             random_sa = Simulated_Annealing(my_smartgrid_filled, shared_input, temperature=200)
 
-            eval(connections_dict[connections_input]).run(500, cables_dict[cables_input])
+            my_smartgrid_filled = eval(connections_dict[connections_input]).run(500, cables_dict[cables_input])
 
-            list = my_smartgrid_filled.make_output(args.district, shared_input)
+            my_smartgrid_filled.make_output(args.district, shared_input)
 
             # append cost to the list with costs for this algorithm combination
             list_costs.append(my_smartgrid_filled.total_cost)
+        print(list_costs)
 
         plt.clf()
         sns.histplot(data=list_costs, bins=20)
